@@ -7,6 +7,6 @@ Object.defineProperty(exports, "__esModule", {
 exports["default"] = void 0;
 var _MntnWoController = _interopRequireDefault(require("../controllers/Mntn-WoController"));
 var _default = function _default(app) {
-  app.get('/api/MntWo', _MntnWoController["default"].getWo);
+  app.post('/api/MntWo', _MntnWoController["default"].getWo);
 };
 exports["default"] = _default;

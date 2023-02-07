@@ -1,12 +1,23 @@
-import { Op } from 'sequelize'
+import { Op, Sequelize } from 'sequelize'
 import { MntnWoModel } from '../models/Mntn-WoModel'
 
 export default {
   async getWo(req, res) {
     try {
-      const wo = await MntnWoModel.findOne({
+      const wo = await MntnWoModel.findAll({
         where: {
-          sheet_no: 'AP-23020047',
+          [Op.and]: [
+            Sequelize.where(
+              Sequelize.fn('date', Sequelize.col('ymd')),
+              '>',
+              '2023-02-01',
+            ),
+            {
+              sts_wa: {
+                [Op.eq]: 'N',
+              },
+            },
+          ],
         },
       })
       return res.status(201).json(wo)

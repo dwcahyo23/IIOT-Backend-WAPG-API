@@ -1,0 +1,47 @@
+{
+  "ConfigSettings": {
+    "Settings": {
+      "default": {
+        "interval": 1000,
+        "unit": "ms"
+      },
+      "Custom": {
+        "interval": 1,
+        "unit": [
+          "min",
+          "hour"
+        ]
+      }
+    },
+    "SettingSet": {
+      "interval": 1,
+      "unit": "min"
+    }
+  },
+  "ConfigUsers": {
+    "UserList": [
+      {
+        "name": "yusuf",
+        "number": "082124610363",
+        "set": [
+          "mn",
+          "qc"
+        ]
+      },
+      {
+        "name": "aa",
+        "number": "083",
+        "set": [
+          "qc"
+        ]
+      },
+      {
+        "name": "bb",
+        "number": "083",
+        "set": [
+          "qc"
+        ]
+      }
+    ]
+  }
+}

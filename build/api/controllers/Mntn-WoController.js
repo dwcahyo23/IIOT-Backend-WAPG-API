@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = void 0;
 var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
+var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
 var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
 var _sequelize = require("sequelize");
 var _MntnWoModel = require("../models/Mntn-WoModel");
@@ -18,10 +19,10 @@ var _default = {
           case 0:
             _context.prev = 0;
             _context.next = 3;
-            return _MntnWoModel.MntnWoModel.findOne({
-              where: {
-                sheet_no: 'AP-23020047'
-              }
+            return _MntnWoModel.MntnWoModel.findAll({
+              where: (0, _defineProperty2["default"])({}, _sequelize.Op.and, [_sequelize.Sequelize.where(_sequelize.Sequelize.fn('date', _sequelize.Sequelize.col('ymd')), '>', '2023-02-01'), {
+                sts_wa: (0, _defineProperty2["default"])({}, _sequelize.Op.eq, 'N')
+              }])
             });
           case 3:
             wo = _context.sent;
