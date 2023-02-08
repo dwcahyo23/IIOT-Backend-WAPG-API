@@ -1,21 +1,8 @@
 {
   "ConfigSettings": {
-    "Settings": {
-      "default": {
-        "interval": 1000,
-        "unit": "ms"
-      },
-      "Custom": {
-        "interval": 1,
-        "unit": [
-          "min",
-          "hour"
-        ]
-      }
-    },
-    "SettingSet": {
-      "interval": 1,
-      "unit": "min"
+    "Setting": {
+      "interval": 15000,
+      "unit": "ms"
     }
   },
   "ConfigUsers": {
@@ -24,15 +11,14 @@
         "name": "yusuf",
         "number": "082124610363",
         "set": [
-          "mn",
           "qc"
         ]
       },
       {
-        "name": "aa",
-        "number": "083",
+        "name": "Bot",
+        "number": "082113450491",
         "set": [
-          "qc"
+          "mn"
         ]
       },
       {

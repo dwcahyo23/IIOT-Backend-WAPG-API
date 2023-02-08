@@ -5,6 +5,7 @@ import cors from 'cors'
 import logger from 'morgan'
 import routes from './api/routes'
 import MntnWo from './apps/Mntn-Wo'
+import config from 'config'
 
 dotenv.config()
 
@@ -25,7 +26,13 @@ app.get('/', (req, res) => {
   res.render('index', { title: 'Home' })
 })
 
-MntnWo.getUpdate().then((res) => console.log(res))
+const interval = config.get('ConfigSettings.Setting.interval')
+console.log(interval)
+
+setInterval(() => {
+  MntnWo.getOpen().then((res) => console.log(res))
+  // MntnWo.getClose().then((res) => console.log(res))
+}, interval)
 
 app.listen(process.env.PORT_APP, () =>
   console.log(`Server up & running in ${process.env.PORT_APP}`),
