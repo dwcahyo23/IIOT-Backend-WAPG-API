@@ -9,6 +9,7 @@ var _cors = _interopRequireDefault(require("cors"));
 var _morgan = _interopRequireDefault(require("morgan"));
 var _routes = _interopRequireDefault(require("./api/routes"));
 var _MntnWo = _interopRequireDefault(require("./apps/Mntn-Wo"));
+var _config = _interopRequireDefault(require("config"));
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { "default": obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj["default"] = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 dotenv.config();
@@ -29,9 +30,14 @@ app.get('/', function (req, res) {
     title: 'Home'
   });
 });
-_MntnWo["default"].getUpdate().then(function (res) {
-  return console.log(res);
-});
+var interval = _config["default"].get('ConfigSettings.Setting.interval');
+console.log(interval);
+setInterval(function () {
+  _MntnWo["default"].getOpen().then(function (res) {
+    return console.log(res);
+  });
+  // MntnWo.getClose().then((res) => console.log(res))
+}, interval);
 app.listen(process.env.PORT_APP, function () {
   return console.log("Server up & running in ".concat(process.env.PORT_APP));
 });

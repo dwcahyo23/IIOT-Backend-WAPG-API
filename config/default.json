@@ -1,29 +1,36 @@
 {
-  "ConfigSettings": {
-    "Setting": {
-      "interval": 15000,
-      "unit": "ms"
-    }
-  },
   "ConfigUsers": {
     "UserList": [
       {
-        "name": "yusuf",
+        "gender": "Mr",
+        "name": "Yusuf",
         "number": "082124610363",
         "set": [
           "qc"
         ]
       },
       {
+        "gender": "Mr",
         "name": "Bot",
         "number": "082113450491",
         "set": [
-          "mn"
+          "mn",
+          "pr",
+          "qc"
         ]
       },
       {
+        "gender": "Mr",
+        "name": "Ariep",
+        "number": "081299315221",
+        "set": [
+          "xx"
+        ]
+      },
+      {
+        "gender": "Mrs",
         "name": "bb",
-        "number": "083",
+        "number": "082113450491",
         "set": [
           "qc"
         ]
