@@ -5,14 +5,21 @@
         "gender": "Mr",
         "name": "Yusuf",
         "number": "082124610363",
+        "plant": [
+          "01"
+        ],
         "set": [
-          "qc"
+          "mn"
         ]
       },
       {
         "gender": "Mr",
         "name": "Bot",
         "number": "082113450491",
+        "plant": [
+          "01",
+          "02"
+        ],
         "set": [
           "mn",
           "pr",
@@ -23,6 +30,7 @@
         "gender": "Mr",
         "name": "Ariep",
         "number": "081299315221",
+        "plant": "01",
         "set": [
           "xx"
         ]
@@ -31,8 +39,9 @@
         "gender": "Mrs",
         "name": "bb",
         "number": "082113450491",
+        "plant": "01",
         "set": [
-          "qc"
+          "xx"
         ]
       }
     ]

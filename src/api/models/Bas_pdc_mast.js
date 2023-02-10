@@ -1,6 +1,7 @@
 import { Sequelize } from 'sequelize'
 import db from '../config/db'
 const { DataTypes } = Sequelize
+
 export const Bas_pdc_mast = db.define(
   'bas_pdc_mast',
   {
@@ -8,7 +9,7 @@ export const Bas_pdc_mast = db.define(
     pdc_2: DataTypes.CHAR(8),
     pdc_3: DataTypes.CHAR(8),
     pdc_4: DataTypes.CHAR(4),
-    pdc_code: DataTypes.CHAR(30),
+    pdc_code: { type: DataTypes.CHAR(30), primaryKey: true },
     pdc_con: DataTypes.CHAR(15),
     pdc_size: DataTypes.CHAR(30),
     pdc_name: DataTypes.CHAR(80),

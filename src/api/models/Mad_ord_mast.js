@@ -48,6 +48,7 @@ export const Mad_ord_mast = db.define(
     print_mk: DataTypes.TEXT,
     pdf_mk: DataTypes.TEXT,
     mes_mk: DataTypes.TEXT,
+    amt: DataTypes.INTEGER,
   },
   { freezeTableName: true, timestamps: false },
 )

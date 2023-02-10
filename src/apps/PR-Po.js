@@ -44,6 +44,17 @@ export default {
       })
     }
 
+    const sendMsg = async (params) => {
+      await axios({
+        method: 'post',
+        url: 'http://localhost:5010/send-message',
+        data: {
+          number: params.number,
+          message: params.msg,
+        },
+      })
+    }
+
     if (error.length === 0) {
       _.forEach(User, (field) => {
         let message = `*Halo  ${field.gender}. ${field.name}* \n\n`
@@ -52,23 +63,24 @@ export default {
           \nBerikut PO Outstandng yang perlu diaudit:`
         } else {
           message += `Walau sudah siang, kita harus tetap semangat!
-          \nBerikut ini ada tambahan PO Outstanding yang perlu diaudit: `
+          \nBerikut ini ada tambahan PO Outstanding yang perlu diaudit:\n`
         }
+        message += `\n┌──────────────────┐`
+        message += `\n│No   PPU                      Curr       Amount    │`
+        message += `\n├─┬───────┬──┬─────┤`
         _.forEach(Pu, (record, i) => {
-          message += `\n ${i + 1}. ${record.sheet_no} | Amount ${
-            record.mny_no
-          } `
+          message += `\n│${i + 1}. │${record.sheet_no}│${record.mny_no}  │${(
+            record.amt * 1
+          ).toLocaleString()}${
+            Pu.length - 1 == i
+              ? '\n└─┴───────┴──┴─────┘'
+              : '\n├─┼───────┼──┼─────┤'
+          }`
         })
         message += `\n\nMohon dilakukan verifikasinya ya ${field.gender}. ${field.name},\napabila ada pertanyaan lebih lanjut bisa menghubungi tim purchasing secara langsung.
         \nThank you and have a nice day! 😊`
-        axios({
-          method: 'post',
-          url: 'http://localhost:5010/send-message',
-          data: {
-            number: field.number,
-            message,
-          },
-        })
+
+        sendMsg({ number: field.number, msg: message })
       })
       return { type: 'succes', message: 'message sended successfully' }
     }

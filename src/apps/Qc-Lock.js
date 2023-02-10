@@ -1,4 +1,5 @@
-import { Op, Sequelize } from 'sequelize'
+import db from '../api/config/db'
+import { QueryTypes } from 'sequelize'
 import { Mad_qap_locm } from '../api/models/Mad_qap_locm'
 import config from 'config'
 import _ from 'lodash'
@@ -12,23 +13,20 @@ export default {
       _.includes(el.set, 'qc'),
     )
 
-    const Lock = Mad_qap_locm.findAll({
-      where: {
-        [Op.and]: [
-          Sequelize.where(
-            Sequelize.fn('date', Sequelize.col('ymd')),
-            '>=',
-            '2023-02-08',
-          ),
-          {
-            sts_wa: {
-              [Op.eq]: 'N',
-            },
-          },
-        ],
-      },
-      order: [['ymd', 'ASC']],
-    })
+    const Lock = await db.query(
+      `SELECT 
+      sch_ot.mad_qap_locm.*, 
+      sch_ot.bas_pdc_mast.pdc_name 
+    FROM 
+      sch_ot.mad_qap_locm 
+      join sch_ot.bas_pdc_mast on sch_ot.mad_qap_locm.pdc_code = sch_ot.bas_pdc_mast.pdc_code 
+    where 
+      date(sch_ot.mad_qap_locm.ymd) = CURRENT_DATE 
+      and sts_wa = 'N' 
+    order by 
+      sch_ot.mad_qap_locm.ymd asc`,
+      { type: QueryTypes.SELECT },
+    )
 
     if (User.length < 1) {
       error.push({
@@ -45,19 +43,19 @@ export default {
     }
 
     if (error.length === 0) {
-      _.forEach(User, (field) => {
+      _.forEach(User, async (field) => {
+        let msg = `*Good day! ${field.gender} ${field.name}*\n`
+        msg += `\nBerikut info QC-Lock saat ini:\n\n-----------------------------------------------------------------`
         _.forEach(Lock, async (record, i) => {
-          let msg = `*Halo ${field.gender} ${field.name}*\n`
-          msg += `Good day!\n Berikut info QC-Lock saat ini:\n`
-          msg += `${i + 1}. ${sheet_no} |`
-          await axios({
-            method: 'post',
-            url: 'http://localhost:5010/send-message',
-            data: {
-              number: field.number,
-              message: msg,
-            },
-          })
+          msg += `\n*${i + 1}. Sheet_no:* ${record.sheet_no}\nProduct: ${
+            record.pdc_name
+          }\nTravel Card: ${record.bat_card}\nFragment: ${
+            record.bat_card_2
+          } | ${record.stk_no_2}\n\nProblem: ${record.problem}\nStandard: ${
+            record.standard
+          }\nResult: ${
+            record.result
+          }\n-----------------------------------------------------------------`
 
           await Mad_qap_locm.update(
             { sts_wa: 'Y' },
@@ -68,11 +66,19 @@ export default {
             },
           )
         })
+        msg += `\n\nThank you and have a nice day! 😊`
+        await axios({
+          method: 'post',
+          url: 'http://localhost:5010/send-message',
+          data: {
+            number: field.number,
+            message: msg,
+          },
+        })
       })
 
       return { type: 'succes', message: 'message sended successfully' }
     }
-
     return error
   },
 }
