@@ -14,7 +14,8 @@ var db = new _sequelize.Sequelize(process.env.TABLE_DB, process.env.USER_DB, pro
   host: process.env.HOST_DB,
   port: process.env.PORT_DB,
   dialect: 'postgres',
-  schema: 'sch_ot'
+  schema: 'sch_ot',
+  logging: false
 });
 var _default = db;
 exports["default"] = _default;

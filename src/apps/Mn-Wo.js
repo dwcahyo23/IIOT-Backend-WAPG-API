@@ -18,17 +18,28 @@ export default {
           Sequelize.where(
             Sequelize.fn('date', Sequelize.col('ymd')),
             '>=',
-            '2023-02-10',
+            '2023-02-26',
           ),
           {
             sts_wa: {
-              [Op.eq]: 'Y',
+              [Op.eq]: 'N',
             },
           },
         ],
       },
       order: [['ymd', 'ASC']],
     })
+
+    const upStsWa = async (params) => {
+      await MntnWoModel.update(
+        { sts_wa: 'Y' },
+        {
+          where: {
+            sheet_no: params.id,
+          },
+        },
+      )
+    }
 
     if (User.length < 1) {
       error.push({
@@ -47,7 +58,7 @@ export default {
     const sendMsg = async (params) => {
       await axios({
         method: 'post',
-        url: 'http://localhost:5010/send-message',
+        url: 'http://192.168.192.7:5010/send-message',
         data: {
           number: params.number,
           message: params.msg,
@@ -58,15 +69,16 @@ export default {
     if (error.length === 0) {
       _.forEach(Wo, async (record) => {
         _.forEach(User, (field) => {
-          if (_.includes(field.plant, record.com_no)) {
-            let msg = `Good day! ${field.gender} ${field.name}\n`
-            msg += `\nBerikut info Wo-Open saat ini:\n------------------------------------------------------------------`
-            msg += `\nSheet_no: ${
-              record.sheet_no
-            } (Open)❌\n\nStoptime: ${format(
+          if (
+            _.includes(field.plant, record.com_no) &&
+            _.includes(field.dep_no, record.dep_no)
+          ) {
+            let msg = `Sheet_no: ${record.sheet_no} (Open)❌`
+            msg += `\n\nGood day! ${field.gender} ${field.name}, berikut info Wo-Open saat ini:`
+            msg += `\n\nStoptime: ${format(
               new Date(record.ymd),
               'dd MMM yyyy HH:mm',
-            )}\n\nMachine: ${record.mch_no} | ${record.dep_no} | ${
+            )}\nMachine: ${record.mch_no} | ${record.dep_no} | ${
               record.com_no == '01'
                 ? 'GM1'
                 : record.com_no == '02'
@@ -74,9 +86,7 @@ export default {
                 : record.com_no == '03'
                 ? 'GM3'
                 : 'GM5'
-            }\n\nProblem: ${record.s_memo}\n\nRemarks: ${
-              record.memo
-            }\n\nReason: ${
+            }\nProblem: ${record.s_memo}\nRemarks: ${record.memo}\nReason: ${
               record.rsn_no == '00'
                 ? 'Stoptime'
                 : record.rsn_no == '01'
@@ -90,6 +100,8 @@ export default {
                 : 'Lain-lain'
             } `
             sendMsg({ number: field.number, msg: msg })
+            upStsWa({ id: record.sheet_no })
+            // console.log(JSON.stringify(User))
           }
         })
       })
@@ -141,7 +153,7 @@ export default {
     const sendMsg = async (params) => {
       await axios({
         method: 'post',
-        url: 'http://localhost:5010/send-message',
+        url: 'http://192.168.192.7:5010/send-message',
         data: {
           number: params.number,
           message: params.msg,
@@ -159,7 +171,7 @@ export default {
               record.sheet_no
             } (Closed) ✅\n\nStoptime: ${format(
               new Date(record.ymd),
-              'dd MMM yyyy HH:mm',
+              'dd M                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    MM yyyy HH:mm',
             )}\n\nMachine: ${record.mch_no} | ${record.dep_no} | ${
               record.com_no == '01'
                 ? 'GM1'

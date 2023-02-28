@@ -14,19 +14,30 @@ export default {
     )
 
     const Lock = await db.query(
+      //where +: date(sch_ot.mad_qap_locm.ymd) = CURRENT_DATE and
       `SELECT 
       sch_ot.mad_qap_locm.*, 
       sch_ot.bas_pdc_mast.pdc_name 
     FROM 
       sch_ot.mad_qap_locm 
       join sch_ot.bas_pdc_mast on sch_ot.mad_qap_locm.pdc_code = sch_ot.bas_pdc_mast.pdc_code 
-    where 
-      date(sch_ot.mad_qap_locm.ymd) = CURRENT_DATE 
-      and sts_wa = 'N' 
+    where       
+      sts_wa = 'N' 
     order by 
       sch_ot.mad_qap_locm.ymd asc`,
       { type: QueryTypes.SELECT },
     )
+
+    const upStsLock = async (params) => {
+      await Mad_qap_locm.update(
+        { sts_wa: 'Y' },
+        {
+          where: {
+            sheet_no: params.id,
+          },
+        },
+      )
+    }
 
     if (User.length < 1) {
       error.push({
@@ -38,7 +49,18 @@ export default {
     if (Lock.length < 1) {
       error.push({
         type: 'error',
-        message: 'Data mntn-wo open not found',
+        message: 'Data qc-lock not found',
+      })
+    }
+
+    const sendMsg = async (params) => {
+      await axios({
+        method: 'post',
+        url: 'http://192.168.192.7:5010/send-message',
+        data: {
+          number: params.number,
+          message: params.msg,
+        },
       })
     }
 
@@ -56,25 +78,10 @@ export default {
           }\nResult: ${
             record.result
           }\n-----------------------------------------------------------------`
-
-          await Mad_qap_locm.update(
-            { sts_wa: 'Y' },
-            {
-              where: {
-                sheet_no: record.sheet_no,
-              },
-            },
-          )
+          upStsLock({ id: record.sheet_no })
         })
         msg += `\n\nThank you and have a nice day! 😊`
-        await axios({
-          method: 'post',
-          url: 'http://localhost:5010/send-message',
-          data: {
-            number: field.number,
-            message: msg,
-          },
-        })
+        sendMsg({ number: field.number, msg: msg })
       })
 
       return { type: 'succes', message: 'message sended successfully' }

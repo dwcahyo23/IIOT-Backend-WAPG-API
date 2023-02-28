@@ -2,8 +2,7 @@ import { Op, Sequelize } from 'sequelize'
 import { Mad_ord_mast } from '../api/models/Mad_ord_mast'
 import config from 'config'
 import _ from 'lodash'
-import axios, { Axios } from 'axios'
-import { isAfter, set } from 'date-fns'
+import axios from 'axios'
 
 export default {
   async getPPU(params) {
@@ -47,7 +46,7 @@ export default {
     const sendMsg = async (params) => {
       await axios({
         method: 'post',
-        url: 'http://localhost:5010/send-message',
+        url: 'http://192.168.192.7:5010/send-message',
         data: {
           number: params.number,
           message: params.msg,
@@ -60,25 +59,18 @@ export default {
         let message = `*Halo  ${field.gender}. ${field.name}* \n\n`
         if (params.isTime == 'morning') {
           message += `Semangat Pagi!
-          \nBerikut PO Outstandng yang perlu diaudit:`
+            \nBerikut PO Outstandng yang perlu diaudit:`
         } else {
           message += `Walau sudah siang, kita harus tetap semangat!
-          \nBerikut ini ada tambahan PO Outstanding yang perlu diaudit:\n`
+            \nBerikut ini ada tambahan PO Outstanding yang perlu diaudit:\n`
         }
-        message += `\n┌──────────────────┐`
-        message += `\n│No   PPU                      Curr       Amount    │`
-        message += `\n├─┬───────┬──┬─────┤`
         _.forEach(Pu, (record, i) => {
-          message += `\n│${i + 1}. │${record.sheet_no}│${record.mny_no}  │${(
-            record.amt * 1
-          ).toLocaleString()}${
-            Pu.length - 1 == i
-              ? '\n└─┴───────┴──┴─────┘'
-              : '\n├─┼───────┼──┼─────┤'
-          }`
+          message += `\n${i + 1}. ${record.sheet_no}│Amount: ${
+            record.mny_no
+          } ${(record.amt * 1).toLocaleString()}`
         })
         message += `\n\nMohon dilakukan verifikasinya ya ${field.gender}. ${field.name},\napabila ada pertanyaan lebih lanjut bisa menghubungi tim purchasing secara langsung.
-        \nThank you and have a nice day! 😊`
+          \nThank you and have a nice day! 😊`
 
         sendMsg({ number: field.number, msg: message })
       })
