@@ -69,13 +69,13 @@ export default {
         let msg = `*Good day! ${field.gender} ${field.name}*\n`
         msg += `\nBerikut info QC-Lock saat ini:\n\n-----------------------------------------------------------------`
         _.forEach(Lock, async (record, i) => {
-          msg += `\n*${i + 1}. Sheet_no:* ${record.sheet_no}\nProduct: ${
+          msg += `\n*${i + 1}. Sheet_no:* ${record.sheet_no}\n*Product:* ${
             record.pdc_name
-          }\nTravel Card: ${record.bat_card}\nFragment: ${
+          }\n*Travel Card:* ${record.bat_card}\n*Fragment:* ${
             record.bat_card_2
-          } | ${record.stk_no_2}\n\nProblem: ${record.problem}\nStandard: ${
+          } | ${record.stk_no_2}\n\n*Problem:* ${record.problem}\n*Standard:* ${
             record.standard
-          }\nResult: ${
+          }\n*Result:* ${
             record.result
           }\n-----------------------------------------------------------------`
           upStsLock({ id: record.sheet_no })

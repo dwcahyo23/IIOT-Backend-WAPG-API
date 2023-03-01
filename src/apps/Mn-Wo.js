@@ -73,12 +73,12 @@ export default {
             _.includes(field.plant, record.com_no) &&
             _.includes(field.dep_no, record.dep_no)
           ) {
-            let msg = `Sheet_no: ${record.sheet_no} (Open)❌`
+            let msg = `*Sheet_no:* ${record.sheet_no} (Open)❌`
             msg += `\n\nGood day! ${field.gender} ${field.name}, berikut info Wo-Open saat ini:`
-            msg += `\n\nStoptime: ${format(
+            msg += `\n\n*Stoptime:* ${format(
               new Date(record.ymd),
               'dd MMM yyyy HH:mm',
-            )}\nMachine: ${record.mch_no} | ${record.dep_no} | ${
+            )}\n*Machine:* ${record.mch_no} | ${record.dep_no} | ${
               record.com_no == '01'
                 ? 'GM1'
                 : record.com_no == '02'
@@ -86,7 +86,17 @@ export default {
                 : record.com_no == '03'
                 ? 'GM3'
                 : 'GM5'
-            }\nProblem: ${record.s_memo}\nRemarks: ${record.memo}\nReason: ${
+            }\n*Priority:* ${
+              record.pri_no == '01'
+                ? 'Breakdown time'
+                : record.pri_no == '02'
+                ? 'Mesin tetap beroperasi'
+                : record.pri_no == '03'
+                ? 'Prev & Pred'
+                : 'Workshop'
+            }\n*Problem:* ${record.s_memo}\n*Remarks:* ${
+              record.memo
+            }\n*Reason:* ${
               record.rsn_no == '00'
                 ? 'Stoptime'
                 : record.rsn_no == '01'
@@ -130,11 +140,25 @@ export default {
             chk_mark: {
               [Op.eq]: 'Y',
             },
+            sts_wa: {
+              [Op.eq]: 'n',
+            },
           },
         ],
       },
       order: [['ymd', 'ASC']],
     })
+
+    const upStsWa = async (params) => {
+      await MntnWoModel.update(
+        { sts_wa2: 'Y' },
+        {
+          where: {
+            sheet_no: params.id,
+          },
+        },
+      )
+    }
 
     if (User.length < 1) {
       error.push({
@@ -166,13 +190,16 @@ export default {
         let msg = `Good day! ${field.gender} ${field.name}\n`
         msg += `\nBerikut info Wo-Close saat ini:\n\n-----------------------------------------------------------------`
         _.forEach(Wo, async (record, i) => {
-          if (_.includes(field.plant, record.com_no)) {
+          if (
+            _.includes(field.plant, record.com_no) &&
+            _.includes(field.dep_no, record.dep_no)
+          ) {
             msg += `\n${i + 1}. Sheet: ${
               record.sheet_no
             } (Closed) ✅\n\nStoptime: ${format(
               new Date(record.ymd),
               'dd M                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    MM yyyy HH:mm',
-            )}\n\nMachine: ${record.mch_no} | ${record.dep_no} | ${
+            )}\nMachine: ${record.mch_no} | ${record.dep_no} | ${
               record.com_no == '01'
                 ? 'GM1'
                 : record.com_no == '02'
@@ -180,10 +207,16 @@ export default {
                 : record.com_no == '03'
                 ? 'GM3'
                 : 'GM5'
+            }\n*Priority:*${
+              record.pri_no == '01'
+                ? 'Breakdown time'
+                : record.pri_no == '02'
+                ? 'Mesin tetap beroperasi'
+                : record.pri_no == '03'
+                ? 'Prev & Pred'
+                : 'Workshop'
             }
-            \n\nProblem: ${record.s_memo}\n\nRemarks: ${
-              record.memo
-            }\\nnReason: ${
+            \nProblem: ${record.s_memo}\nRemarks: ${record.memo}\nReason: ${
               record.rsn_no == '00'
                 ? 'Stoptime'
                 : record.rsn_no == '01'
@@ -197,6 +230,7 @@ export default {
                 : 'Lain-lain'
             }\n----------------------------------------------------------------- `
           }
+          sts_wa2({ id: record.sheet_no })
         })
         msg += `\n\nThank you and have a nice day! 😊`
         sendMsg({ number: field.number, msg: msg })
