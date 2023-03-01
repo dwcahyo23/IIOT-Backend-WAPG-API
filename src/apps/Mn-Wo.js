@@ -18,7 +18,7 @@ export default {
           Sequelize.where(
             Sequelize.fn('date', Sequelize.col('ymd')),
             '>=',
-            '2023-02-26',
+            format(new Date(), 'yyyy-MM-dd'),
           ),
           {
             sts_wa: {
@@ -74,7 +74,7 @@ export default {
             _.includes(field.dep_no, record.dep_no)
           ) {
             let msg = `*Sheet_no:* ${record.sheet_no} (Open)❌`
-            msg += `\n\nGood day! ${field.gender} ${field.name}, berikut info Wo-Open saat ini:`
+            msg += `\n\nGood day! ${field.gender} ${field.name}, berikut info Wo open saat ini:`
             msg += `\n\n*Stoptime:* ${format(
               new Date(record.ymd),
               'dd MMM yyyy HH:mm',
@@ -134,13 +134,13 @@ export default {
           Sequelize.where(
             Sequelize.fn('date', Sequelize.col('ymd')),
             '>=',
-            '2023-02-09',
+            format(new Date(), 'yyyy-MM-dd'),
           ),
           {
             chk_mark: {
               [Op.eq]: 'Y',
             },
-            sts_wa: {
+            sts_wa2: {
               [Op.eq]: 'n',
             },
           },
@@ -188,7 +188,7 @@ export default {
     if (error.length === 0) {
       _.forEach(User, async (field) => {
         let msg = `Good day! ${field.gender} ${field.name}\n`
-        msg += `\nBerikut info Wo-Close saat ini:\n\n-----------------------------------------------------------------`
+        msg += `\nBerikut info Wo close saat ini:`
         _.forEach(Wo, async (record, i) => {
           if (
             _.includes(field.plant, record.com_no) &&
@@ -196,9 +196,9 @@ export default {
           ) {
             msg += `\n${i + 1}. Sheet: ${
               record.sheet_no
-            } (Closed) ✅\n\nStoptime: ${format(
+            } (Closed) ✅\nStoptime: ${format(
               new Date(record.ymd),
-              'dd M                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    MM yyyy HH:mm',
+              'dd MMM yyyy HH:mm',
             )}\nMachine: ${record.mch_no} | ${record.dep_no} | ${
               record.com_no == '01'
                 ? 'GM1'
@@ -207,7 +207,7 @@ export default {
                 : record.com_no == '03'
                 ? 'GM3'
                 : 'GM5'
-            }\n*Priority:*${
+            }\n*Priority:* ${
               record.pri_no == '01'
                 ? 'Breakdown time'
                 : record.pri_no == '02'
@@ -215,8 +215,7 @@ export default {
                 : record.pri_no == '03'
                 ? 'Prev & Pred'
                 : 'Workshop'
-            }
-            \nProblem: ${record.s_memo}\nRemarks: ${record.memo}\nReason: ${
+            }\nProblem: ${record.s_memo}\nRemarks: ${record.memo}\nReason: ${
               record.rsn_no == '00'
                 ? 'Stoptime'
                 : record.rsn_no == '01'
@@ -228,11 +227,15 @@ export default {
                 : record.rsn_no == '04'
                 ? 'Lalai'
                 : 'Lain-lain'
-            }\n----------------------------------------------------------------- `
+            }${
+              Wo.length - 1 == i
+                ? '\n'
+                : '\n-----------------------------------------------------------------'
+            }`
           }
-          sts_wa2({ id: record.sheet_no })
+          upStsWa({ id: record.sheet_no })
         })
-        msg += `\n\nThank you and have a nice day! 😊`
+        msg += `\nThank you and have a nice day! 😊`
         sendMsg({ number: field.number, msg: msg })
       })
 

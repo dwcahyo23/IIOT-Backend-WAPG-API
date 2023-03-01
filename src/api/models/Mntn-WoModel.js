@@ -35,6 +35,7 @@ export const MntnWoModel = db.define(
     appe_user: DataTypes.TEXT,
     appe_time: DataTypes.DATE(6),
     sts_wa: DataTypes.CHAR(1),
+    sts_wa2: DataTypes.CHAR(1),
   },
   { freezeTableName: true, timestamps: false },
 )

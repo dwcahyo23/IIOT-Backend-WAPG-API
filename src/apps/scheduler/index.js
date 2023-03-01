@@ -16,7 +16,7 @@ export default {
       //   .catch((err) => console.log(err))
 
       MnWo.getOpen().then((res) => console.log(res))
-      // MnWo.getClose().then((res) => console.log(res))
+      MnWo.getClose().then((res) => console.log(res))
       QcLock.getLock().then((res) => console.log(res))
       // PRPo.getPPU({ isTime: 'evening' }).then((res) => console.log(res))
     })
