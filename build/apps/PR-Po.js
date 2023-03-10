@@ -1,7 +1,6 @@
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-var _typeof = require("@babel/runtime/helpers/typeof");
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -13,10 +12,7 @@ var _sequelize = require("sequelize");
 var _Mad_ord_mast = require("../api/models/Mad_ord_mast");
 var _config = _interopRequireDefault(require("config"));
 var _lodash = _interopRequireDefault(require("lodash"));
-var _axios = _interopRequireWildcard(require("axios"));
-var _table = require("table");
-function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
-function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { "default": obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj["default"] = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+var _axios = _interopRequireDefault(require("axios"));
 var _default = {
   getPPU: function getPPU(params) {
     return (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee2() {
@@ -57,7 +53,7 @@ var _default = {
                       _context.next = 2;
                       return (0, _axios["default"])({
                         method: 'post',
-                        url: 'http://localhost:5010/send-message',
+                        url: 'http://192.168.192.7:5010/send-message',
                         data: {
                           number: params.number,
                           message: params.msg
@@ -80,21 +76,14 @@ var _default = {
             _lodash["default"].forEach(User, function (field) {
               var message = "*Halo  ".concat(field.gender, ". ").concat(field.name, "* \n\n");
               if (params.isTime == 'morning') {
-                message += "Semangat Pagi!\n          \nBerikut PO Outstandng yang perlu diaudit:";
+                message += "Semangat Pagi!\n            \nBerikut PO Outstandng yang perlu diaudit:";
               } else {
-                message += "Walau sudah siang, kita harus tetap semangat!\n          \nBerikut ini ada tambahan PO Outstanding yang perlu diaudit:\n";
+                message += "Walau sudah siang, kita harus tetap semangat!\n            \nBerikut ini ada tambahan PO Outstanding yang perlu diaudit:\n";
               }
-              var data = Pu.map(function (o) {
-                return [o.sheet_no, o.mny_no, o.amt];
+              _lodash["default"].forEach(Pu, function (record, i) {
+                message += "\n".concat(i + 1, ". ").concat(record.sheet_no, "\u2502Amount: ").concat(record.mny_no, " ").concat((record.amt * 1).toLocaleString());
               });
-              var config = {
-                columns: [{
-                  width: 20
-                }],
-                border: (0, _table.getBorderCharacters)("norc")
-              };
-              message += "\n".concat((0, _table.table)(data, config), "\n");
-              message += "\n\nMohon dilakukan verifikasinya ya ".concat(field.gender, ". ").concat(field.name, ",\napabila ada pertanyaan lebih lanjut bisa menghubungi tim purchasing secara langsung.\n        \nThank you and have a nice day! \uD83D\uDE0A");
+              message += "\n\nMohon dilakukan verifikasinya ya ".concat(field.gender, ". ").concat(field.name, ",\napabila ada pertanyaan lebih lanjut bisa menghubungi tim purchasing secara langsung.\n          \nThank you and have a nice day! \uD83D\uDE0A");
               sendMsg({
                 number: field.number,
                 msg: message

@@ -1,5 +1,6 @@
 import { Op, Sequelize } from 'sequelize'
 import { Mad_ord_mast } from '../api/models/Mad_ord_mast'
+import { Bas_man_mast } from '../api/models/Bas_man_mast'
 import config from 'config'
 import _ from 'lodash'
 import axios from 'axios'
@@ -23,10 +24,13 @@ export default {
             check_mark: {
               [Op.eq]: 'N',
             },
+            chk_mark: {
+              [Op.eq]: 'Y',
+            },
           },
         ],
       },
-      order: [['ymd', 'ASC']],
+      order: [['sheet_no', 'ASC']],
     })
 
     if (User.length < 1) {
@@ -56,23 +60,29 @@ export default {
 
     if (error.length === 0) {
       _.forEach(User, (field) => {
-        let message = `*Halo  ${field.gender}. ${field.name}* \n\n`
-        if (params.isTime == 'morning') {
-          message += `Semangat Pagi!
-            \nBerikut PO Outstandng yang perlu diaudit:`
-        } else {
-          message += `Walau sudah siang, kita harus tetap semangat!
-            \nBerikut ini ada tambahan PO Outstanding yang perlu diaudit:\n`
-        }
         _.forEach(Pu, (record, i) => {
-          message += `\n${i + 1}. ${record.sheet_no}│Amount: ${
-            record.mny_no
-          } ${(record.amt * 1).toLocaleString()}`
-        })
-        message += `\n\nMohon dilakukan verifikasinya ya ${field.gender}. ${field.name},\napabila ada pertanyaan lebih lanjut bisa menghubungi tim purchasing secara langsung.
+          if (_.includes(field.nik, record.check_man)) {
+            let message = `*Hello  ${field.gender}. ${field.name}* \n\n`
+            if (params.isTime == 'morning') {
+              message += `Semangat Pagi!
+            \nBerikut PO Outstanding yang perlu diaudit:\n`
+            } else {
+              message += `Walau sudah siang, kita harus tetap semangat!
+            \nBerikut ini ada tambahan PO Outstanding yang perlu diaudit:\n`
+            }
+            _.forEach(Pu, (record, i) => {
+              if (_.includes(field.nik, record.check_man)) {
+                message += `\n${i + 1}. ${record.sheet_no} │ ${
+                  record.mny_no
+                } ${(record.amt * 1).toLocaleString()}`
+              }
+            })
+            message += `\n\nMohon dilakukan verifikasinya ya ${field.gender}. ${field.name},\napabila ada pertanyaan lebih lanjut bisa menghubungi tim purchasing secara langsung.
           \nThank you and have a nice day! 😊`
 
-        sendMsg({ number: field.number, msg: message })
+            sendMsg({ number: field.number, msg: message })
+          }
+        })
       })
       return { type: 'succes', message: 'message sended successfully' }
     }

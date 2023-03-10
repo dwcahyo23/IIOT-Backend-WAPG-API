@@ -3,6 +3,9 @@
     "UserList": [
       {
         "gender": "Mr",
+        "nik": [
+          "201902064"
+        ],
         "name": "Yusuf",
         "number": "082124610363",
         "plant": [
@@ -11,7 +14,8 @@
         ],
         "set": [
           "mn",
-          "qc"
+          "qc",
+          "pr"
         ],
         "dep_no": [
           "PDHD1",
@@ -32,6 +36,9 @@
       },
       {
         "gender": "Mr",
+        "nik": [
+          "01"
+        ],
         "name": "Edy Wijaya",
         "number": "08170891399",
         "plant": [
@@ -60,6 +67,9 @@
       },
       {
         "gender": "Mr",
+        "nik": [
+          "01"
+        ],
         "name": "Suryadi",
         "number": "081280540525",
         "plant": [
@@ -88,6 +98,9 @@
       },
       {
         "gender": "Mr",
+        "nik": [
+          "01"
+        ],
         "name": "Benyamin",
         "number": "081382466660",
         "plant": [
@@ -115,6 +128,9 @@
       },
       {
         "gender": "Mr",
+        "nik": [
+          "01"
+        ],
         "name": "Sadri",
         "number": "085284431999",
         "plant": [
@@ -142,6 +158,9 @@
       },
       {
         "gender": "Mr",
+        "nik": [
+          "01"
+        ],
         "name": "Sutaryo",
         "number": "08128284903",
         "plant": [
@@ -169,6 +188,9 @@
       },
       {
         "gender": "Mr",
+        "nik": [
+          "01"
+        ],
         "name": "Eko Hadi S",
         "number": "085311459121",
         "plant": [
@@ -196,6 +218,9 @@
       },
       {
         "gender": "Mr",
+        "nik": [
+          "01"
+        ],
         "name": "Ahri Sohari",
         "number": "087888194994",
         "plant": [
@@ -211,6 +236,9 @@
       },
       {
         "gender": "Mr",
+        "nik": [
+          "01"
+        ],
         "name": "Didi",
         "number": "08999196819",
         "plant": [
@@ -227,6 +255,9 @@
       },
       {
         "gender": "Mr",
+        "nik": [
+          "01"
+        ],
         "name": "Citro Adi",
         "number": "081381159279",
         "plant": [
@@ -239,6 +270,9 @@
       },
       {
         "gender": "Mr",
+        "nik": [
+          "01"
+        ],
         "name": "Aries Andevi",
         "number": "081280660209",
         "plant": [
@@ -251,8 +285,41 @@
       },
       {
         "gender": "Mr",
-        "name": "Hendrawa",
+        "nik": [
+          "01"
+        ],
+        "name": "Hendrawan",
         "number": "081807999193",
+        "plant": [
+          "01"
+        ],
+        "set": [
+          "pr"
+        ],
+        "dep_no": []
+      },
+      {
+        "gender": "Ms",
+        "nik": [
+          "200204061"
+        ],
+        "name": "Emily",
+        "number": "08170003349",
+        "plant": [
+          "01"
+        ],
+        "set": [
+          "pr"
+        ],
+        "dep_no": []
+      },
+      {
+        "gender": "Mr",
+        "nik": [
+          "201107327"
+        ],
+        "name": "Anthony",
+        "number": "0816833759",
         "plant": [
           "01"
         ],

@@ -37,7 +37,8 @@ var MntnWoModel = _db["default"].define('mow_mtn_appm', {
   modi_time: DataTypes.DATE(6),
   appe_user: DataTypes.TEXT,
   appe_time: DataTypes.DATE(6),
-  sts_wa: DataTypes.CHAR(1)
+  sts_wa: DataTypes.CHAR(1),
+  sts_wa2: DataTypes.CHAR(1)
 }, {
   freezeTableName: true,
   timestamps: false
