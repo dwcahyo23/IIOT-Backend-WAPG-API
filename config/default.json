@@ -248,6 +248,18 @@
           "qc"
         ],
         "dep_no": []
+      },
+      {
+        "gender": "Mr",
+        "name": "Hendrawa",
+        "number": "081807999193",
+        "plant": [
+          "01"
+        ],
+        "set": [
+          "pr"
+        ],
+        "dep_no": []
       }
     ]
   }
