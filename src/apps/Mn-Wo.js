@@ -74,7 +74,7 @@ export default {
             _.includes(field.dep_no, record.dep_no)
           ) {
             let msg = `*Sheet_no:* ${record.sheet_no} (Open)❌`
-            msg += `\n\nGood day! ${field.gender} ${field.name}, berikut info Wo open saat ini:`
+            msg += `\n\nHello ${field.gender} ${field.name}, Below is the current info of WO Open:`
             msg += `\n\n*Stoptime:* ${format(
               new Date(record.ymd),
               'dd MMM yyyy HH:mm',
@@ -187,8 +187,8 @@ export default {
 
     if (error.length === 0) {
       _.forEach(User, async (field) => {
-        let msg = `Good day! ${field.gender} ${field.name}\n`
-        msg += `\nBerikut info Wo close saat ini:`
+        let msg = `Hello ${field.gender} ${field.name}\n`
+        msg += `\nBelow is the current info of WO Close:`
         _.forEach(Wo, async (record, i) => {
           if (
             _.includes(field.plant, record.com_no) &&
@@ -230,7 +230,7 @@ export default {
             }${
               Wo.length - 1 == i
                 ? '\n'
-                : '\n-----------------------------------------------------------------'
+                : '\n--------------------------------------------'
             }`
           }
           upStsWa({ id: record.sheet_no })
