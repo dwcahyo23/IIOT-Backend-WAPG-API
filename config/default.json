@@ -70,6 +70,37 @@
         "nik": [
           "01"
         ],
+        "name": "Triono",
+        "number": "081387503504",
+        "plant": [
+          "01",
+          "02"
+        ],
+        "set": [
+          "mn"
+        ],
+        "dep_no": [
+          "PDHD1",
+          "PDHD2",
+          "PDHD3",
+          "PDHD4",
+          "PDRL1",
+          "PDRL2",
+          "PDMC1",
+          "PDMC3",
+          "PDMR1",
+          "PDNC1",
+          "PDNT1",
+          "PDHB1",
+          "PDTR1",
+          "PDPU1"
+        ]
+      },
+      {
+        "gender": "Mr",
+        "nik": [
+          "01"
+        ],
         "name": "Suryadi",
         "number": "081280540525",
         "plant": [
