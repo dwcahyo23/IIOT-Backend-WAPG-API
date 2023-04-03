@@ -73,6 +73,7 @@ export default {
         data: {
           name: params.name,
           message: params.msg,
+          id: '',
         },
       })
     }
@@ -207,6 +208,7 @@ export default {
         data: {
           name: params.name,
           message: params.msg,
+          id: '',
         },
       })
     }
