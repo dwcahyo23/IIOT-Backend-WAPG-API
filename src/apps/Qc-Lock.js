@@ -64,18 +64,6 @@ export default {
       })
     }
 
-    const sendMsgGroup = async (params) => {
-      await axios({
-        method: 'post',
-        url: 'http://192.168.192.7:5010/send-message-group',
-        data: {
-          name: params.name,
-          message: params.msg,
-          id: '',
-        },
-      })
-    }
-
     if (error.length === 0) {
       _.forEach(User, async (field) => {
         let msg = `*Hello ${field.gender} ${field.name}*\n`
@@ -91,11 +79,7 @@ export default {
           upStsLock({ id: record.sheet_no })
         })
         msg += `\n\nThank you and have a nice day!`
-        if (field.gender == 'Group') {
-          sendMsgGroup({ name: field.name, msg: msg })
-        } else {
-          sendMsg({ number: field.number, msg: msg })
-        }
+        sendMsg({ number: field.number, msg: msg })
       })
 
       return { type: 'succes', message: 'message sended successfully' }

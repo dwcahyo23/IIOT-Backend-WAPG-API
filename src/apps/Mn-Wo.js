@@ -43,14 +43,12 @@ export default {
 
     if (User.length < 1) {
       error.push({
-        type: 'error',
         message: 'User not found',
       })
     }
 
     if (Wo.length < 1) {
       error.push({
-        type: 'error',
         message: 'Data mntn-wo open not found',
       })
     }
@@ -62,18 +60,6 @@ export default {
         data: {
           number: params.number,
           message: params.msg,
-        },
-      })
-    }
-
-    const sendMsgGroup = async (params) => {
-      await axios({
-        method: 'post',
-        url: 'http://192.168.192.7:5010/send-message-group',
-        data: {
-          name: params.name,
-          message: params.msg,
-          id: '',
         },
       })
     }
@@ -121,11 +107,7 @@ export default {
                 ? 'Lalai'
                 : 'Lain-lain'
             } `
-            if (field.gender == 'Group') {
-              sendMsgGroup({ name: field.name, msg: msg })
-            } else {
-              sendMsg({ number: field.number, msg: msg })
-            }
+            sendMsg({ number: field.number, msg: msg })
             upStsWa({ id: record.sheet_no })
             // console.log(JSON.stringify(User))
           }
@@ -178,14 +160,12 @@ export default {
 
     if (User.length < 1) {
       error.push({
-        type: 'error',
         message: 'User not found',
       })
     }
 
     if (Wo.length < 1) {
       error.push({
-        type: 'error',
         message: 'Data mntn-wo closed not found',
       })
     }
@@ -264,11 +244,8 @@ export default {
           upStsWa({ id: record.sheet_no })
         })
         msg += `\nThank you and have a nice day! 😊`
-        if (field.gender == 'Group') {
-          sendMsgGroup({ name: field.name, msg: msg })
-        } else {
-          sendMsg({ number: field.number, msg: msg })
-        }
+
+        sendMsg({ number: field.number, msg: msg })
       })
 
       return { type: 'succes', message: 'message sended successfully' }
