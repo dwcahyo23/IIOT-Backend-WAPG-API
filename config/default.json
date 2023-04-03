@@ -3,20 +3,11 @@
     "UserList": [
       {
         "gender": "Mr",
-        "nik": [
-          "201902064"
-        ],
+        "nik": ["201902064"],
         "name": "Yusuf",
         "number": "082124610363",
-        "plant": [
-          "01",
-          "02"
-        ],
-        "set": [
-          "mn",
-          "qc",
-          "pr"
-        ],
+        "plant": ["01", "02"],
+        "set": ["mn", "qc", "pr"],
         "dep_no": [
           "PDHD1",
           "PDHD2",
@@ -36,19 +27,11 @@
       },
       {
         "gender": "Mr",
-        "nik": [
-          "01"
-        ],
+        "nik": ["01"],
         "name": "Edy Wijaya",
         "number": "08170891399",
-        "plant": [
-          "01",
-          "02"
-        ],
-        "set": [
-          "mn",
-          "qc"
-        ],
+        "plant": ["01", "02"],
+        "set": ["mn", "qc"],
         "dep_no": [
           "PDHD1",
           "PDHD2",
@@ -68,19 +51,11 @@
       },
       {
         "gender": "Mr",
-        "nik": [
-          "01"
-        ],
-        "name": "Triono",
+        "nik": ["01"],
+        "name": "Triyono",
         "number": "081387503504",
-        "plant": [
-          "01",
-          "02"
-        ],
-        "set": [
-          "mn",
-          "qc"
-        ],
+        "plant": ["01", "02"],
+        "set": ["mn", "qc"],
         "dep_no": [
           "PDHD1",
           "PDHD2",
@@ -100,18 +75,11 @@
       },
       {
         "gender": "Mr",
-        "nik": [
-          "01"
-        ],
+        "nik": ["01"],
         "name": "Suryadi",
         "number": "081280540525",
-        "plant": [
-          "01",
-          "02"
-        ],
-        "set": [
-          "mn"
-        ],
+        "plant": ["01", "02"],
+        "set": ["mn"],
         "dep_no": [
           "PDHD1",
           "PDHD2",
@@ -131,17 +99,11 @@
       },
       {
         "gender": "Mr",
-        "nik": [
-          "01"
-        ],
+        "nik": ["01"],
         "name": "Benyamin",
         "number": "081382466660",
-        "plant": [
-          "01"
-        ],
-        "set": [
-          "mn"
-        ],
+        "plant": ["01"],
+        "set": ["mn"],
         "dep_no": [
           "PDHD1",
           "PDHD2",
@@ -161,17 +123,11 @@
       },
       {
         "gender": "Mr",
-        "nik": [
-          "01"
-        ],
+        "nik": ["01"],
         "name": "Sadri",
         "number": "085284431999",
-        "plant": [
-          "02"
-        ],
-        "set": [
-          "mn"
-        ],
+        "plant": ["02"],
+        "set": ["mn"],
         "dep_no": [
           "PDHD1",
           "PDHD2",
@@ -191,17 +147,11 @@
       },
       {
         "gender": "Mr",
-        "nik": [
-          "01"
-        ],
+        "nik": ["01"],
         "name": "Sutaryo",
         "number": "08128284903",
-        "plant": [
-          "01"
-        ],
-        "set": [
-          "mn"
-        ],
+        "plant": ["01"],
+        "set": ["mn"],
         "dep_no": [
           "PDHD1",
           "PDHD2",
@@ -221,17 +171,11 @@
       },
       {
         "gender": "Mr",
-        "nik": [
-          "01"
-        ],
+        "nik": ["01"],
         "name": "Eko Hadi S",
         "number": "085311459121",
-        "plant": [
-          "01"
-        ],
-        "set": [
-          "mn"
-        ],
+        "plant": ["01"],
+        "set": ["mn"],
         "dep_no": [
           "PDHD1",
           "PDHD2",
@@ -251,114 +195,65 @@
       },
       {
         "gender": "Mr",
-        "nik": [
-          "01"
-        ],
+        "nik": ["01"],
         "name": "Ahri Sohari",
         "number": "087888194994",
-        "plant": [
-          "01"
-        ],
-        "set": [
-          "mn"
-        ],
-        "dep_no": [
-          "PDPU1",
-          "PDTR1"
-        ]
+        "plant": ["01"],
+        "set": ["mn"],
+        "dep_no": ["PDPU1", "PDTR1"]
       },
       {
         "gender": "Mr",
-        "nik": [
-          "01"
-        ],
+        "nik": ["01"],
         "name": "Didi",
         "number": "08999196819",
-        "plant": [
-          "01"
-        ],
-        "set": [
-          "mn"
-        ],
-        "dep_no": [
-          "PDMC1",
-          "PDNC1",
-          "PDHB1"
-        ]
+        "plant": ["01"],
+        "set": ["mn"],
+        "dep_no": ["PDMC1", "PDNC1", "PDHB1"]
       },
       {
         "gender": "Mr",
-        "nik": [
-          "01"
-        ],
+        "nik": ["01"],
         "name": "Citro Adi",
         "number": "081381159279",
-        "plant": [
-          "01"
-        ],
-        "set": [
-          "qc"
-        ],
+        "plant": ["01"],
+        "set": ["qc"],
         "dep_no": []
       },
       {
         "gender": "Mr",
-        "nik": [
-          "01"
-        ],
+        "nik": ["01"],
         "name": "Aries Andevi",
         "number": "081280660209",
-        "plant": [
-          "01"
-        ],
-        "set": [
-          "qc"
-        ],
+        "plant": ["01"],
+        "set": ["qc"],
         "dep_no": []
       },
       {
         "gender": "Mr",
-        "nik": [
-          "01"
-        ],
+        "nik": ["01"],
         "name": "Hendrawan",
         "number": "081807999193",
-        "plant": [
-          "01"
-        ],
-        "set": [
-          "pr"
-        ],
+        "plant": ["01"],
+        "set": ["pr"],
         "dep_no": []
       },
       {
         "gender": "Ms",
-        "nik": [
-          "200204061"
-        ],
+        "nik": ["200204061"],
         "name": "Emily",
         "number": "08170003349",
-        "plant": [
-          "01"
-        ],
-        "set": [
-          "pr"
-        ],
+        "plant": ["01"],
+        "set": ["pr"],
         "dep_no": []
       },
       {
         "gender": "Mr",
-        "nik": [
-          "201107327"
-        ],
+        "nik": ["201107327"],
         "name": "Anthony",
         "number": "0816833759",
-        "plant": [
-          "01"
-        ],
-        "set": [
-          "pr"
-        ],
+        "plant": ["01"],
+        "set": ["pr"],
         "dep_no": []
       }
     ]
