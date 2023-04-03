@@ -66,6 +66,17 @@ export default {
       })
     }
 
+    const sendMsgGroup = async (params) => {
+      await axios({
+        method: 'post',
+        url: 'http://192.168.192.7:5010/send-message-group',
+        data: {
+          name: params.name,
+          message: params.msg,
+        },
+      })
+    }
+
     if (error.length === 0) {
       _.forEach(Wo, async (record) => {
         _.forEach(User, (field) => {
@@ -109,7 +120,11 @@ export default {
                 ? 'Lalai'
                 : 'Lain-lain'
             } `
-            sendMsg({ number: field.number, msg: msg })
+            if (field.gender == 'Group') {
+              sendMsgGroup({ name: field.name, msg: msg })
+            } else {
+              sendMsg({ number: field.number, msg: msg })
+            }
             upStsWa({ id: record.sheet_no })
             // console.log(JSON.stringify(User))
           }
