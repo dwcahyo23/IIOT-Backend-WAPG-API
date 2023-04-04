@@ -257,5 +257,13 @@
         "dep_no": []
       }
     ]
+  },
+  "ConfigGroups": {
+    "GroupList": [
+      {
+        "name": "GALINDO TEST",
+        "set": ["mn"]
+      }
+    ]
   }
 }

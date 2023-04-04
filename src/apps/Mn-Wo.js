@@ -5,6 +5,29 @@ import _ from 'lodash'
 import axios from 'axios'
 import { format } from 'date-fns'
 
+const sendMsg = async (params) => {
+  await axios({
+    method: 'post',
+    url: 'http://192.168.192.7:5010/send-message',
+    data: {
+      number: params.number,
+      message: params.msg,
+    },
+  })
+}
+
+const sendMsgGroup = async (params) => {
+  await axios({
+    method: 'post',
+    url: 'http://192.168.192.7:5010/send-message-group',
+    data: {
+      name: params.number,
+      message: params.msg,
+      id: '',
+    },
+  })
+}
+
 export default {
   async getOpen() {
     const error = []
@@ -50,17 +73,6 @@ export default {
     if (Wo.length < 1) {
       error.push({
         message: 'Data mntn-wo open not found',
-      })
-    }
-
-    const sendMsg = async (params) => {
-      await axios({
-        method: 'post',
-        url: 'http://192.168.192.7:5010/send-message',
-        data: {
-          number: params.number,
-          message: params.msg,
-        },
       })
     }
 
@@ -126,6 +138,10 @@ export default {
       _.includes(el.set, 'mn'),
     )
 
+    const Group = _.filter(config.get('ConfigGroups.GroupList'), (el) =>
+      _.includes(el.set, 'mn'),
+    )
+
     const Wo = await MntnWoModel.findAll({
       where: {
         [Op.and]: [
@@ -170,20 +186,62 @@ export default {
       })
     }
 
-    const sendMsg = async (params) => {
-      await axios({
-        method: 'post',
-        url: 'http://192.168.192.7:5010/send-message',
-        data: {
-          number: params.number,
-          message: params.msg,
-        },
-      })
-    }
-
     if (error.length === 0) {
-      _.forEach(User, async (field) => {
-        let msg = `Hello ${field.gender} ${field.name}\n`
+      // _.forEach(User, async (field) => {
+      //   let msg = `Hello ${field.gender} ${field.name}\n`
+      //   msg += `\nBelow is the current info of WO Close:`
+      //   _.forEach(Wo, async (record, i) => {
+      //     if (
+      //       _.includes(field.plant, record.com_no) &&
+      //       _.includes(field.dep_no, record.dep_no)
+      //     ) {
+      //       msg += `\n${i + 1}. Sheet: ${
+      //         record.sheet_no
+      //       } (Closed) ✅\nStoptime: ${format(
+      //         new Date(record.ymd),
+      //         'dd MMM yyyy HH:mm',
+      //       )}\nMachine: ${record.mch_no} | ${record.dep_no} | ${
+      //         record.com_no == '01'
+      //           ? 'GM1'
+      //           : record.com_no == '02'
+      //           ? 'GM2'
+      //           : record.com_no == '03'
+      //           ? 'GM3'
+      //           : 'GM5'
+      //       }\n*Priority:* ${
+      //         record.pri_no == '01'
+      //           ? 'Breakdown time'
+      //           : record.pri_no == '02'
+      //           ? 'Mesin tetap beroperasi'
+      //           : record.pri_no == '03'
+      //           ? 'Prev & Pred'
+      //           : 'Workshop'
+      //       }\nProblem: ${record.s_memo}\nRemarks: ${record.memo}\nReason: ${
+      //         record.rsn_no == '00'
+      //           ? 'Stoptime'
+      //           : record.rsn_no == '01'
+      //           ? 'Aus&Retak'
+      //           : record.rsn_no == '02'
+      //           ? 'Kecelakaan'
+      //           : record.rsn_no == '03'
+      //           ? 'Salah Operasi'
+      //           : record.rsn_no == '04'
+      //           ? 'Lalai'
+      //           : 'Lain-lain'
+      //       }${
+      //         Wo.length - 1 == i
+      //           ? '\n'
+      //           : '\n--------------------------------------------'
+      //       }`
+      //     }
+      //     upStsWa({ id: record.sheet_no })
+      //   })
+      //   msg += `\nThank you and have a nice day! 😊`
+      //   sendMsg({ number: field.number, msg: msg })
+      // })
+
+      _.forEach(Group, async (field) => {
+        let msg = `Hello Group ${field.name}\n`
         msg += `\nBelow is the current info of WO Close:`
         _.forEach(Wo, async (record, i) => {
           if (
@@ -232,8 +290,7 @@ export default {
           upStsWa({ id: record.sheet_no })
         })
         msg += `\nThank you and have a nice day! 😊`
-
-        sendMsg({ number: field.number, msg: msg })
+        sendMsg({ name: field.name, msg: msg })
       })
 
       return { type: 'succes', message: 'message sended successfully' }
