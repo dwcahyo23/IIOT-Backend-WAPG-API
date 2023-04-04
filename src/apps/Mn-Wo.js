@@ -290,7 +290,7 @@ export default {
           upStsWa({ id: record.sheet_no })
         })
         msg += `\nThank you and have a nice day! 😊`
-        sendMsg({ name: field.name, msg: msg })
+        sendMsgGroup({ name: field.name, msg: msg })
       })
 
       return { type: 'succes', message: 'message sended successfully' }
