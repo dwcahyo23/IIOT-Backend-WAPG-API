@@ -96,7 +96,7 @@ export default {
         sendMsg({ number: field.number, msg: msg })
       })
 
-      _.forEach(User, async (field) => {
+      _.forEach(Group, async (field) => {
         let msg = `*Hello Group ${field.name}*\n`
         msg += `\nBelow is the current info of QC-Lock:\n\n`
         _.forEach(Lock, async (record, i) => {
@@ -109,7 +109,7 @@ export default {
           }\n*Result:* ${record.result}\n`
         })
         msg += `\n\nThank you and have a nice day!`
-        sendMsg({ name: field.name, msg: msg })
+        sendMsg({ name: field.name, msg: msg, type: 'group' })
       })
 
       return { type: 'succes', message: 'message sended successfully' }
