@@ -6,8 +6,8 @@
         "nik": ["201902064"],
         "name": "Yusuf",
         "number": "082124610363",
-        "plant": ["01", "02"],
-        "set": ["mn", "qc", "pr"],
+        "plant": ["01"],
+        "set": ["mn"],
         "dep_no": [
           "PDHD1",
           "PDHD2",
@@ -263,6 +263,10 @@
       {
         "name": "GALINDO TEST",
         "set": ["mn"]
+      },
+      {
+        "name": "AQUA",
+        "set": ["qc"]
       }
     ]
   }
