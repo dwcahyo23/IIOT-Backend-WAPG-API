@@ -36,7 +36,7 @@ export default {
     )
 
     const Group = _.filter(config.get('ConfigGroups.GroupList'), (el) =>
-      _.includes(el.set, 'mn'),
+      _.includes(el.set, 'qc'),
     )
 
     const Lock = await db.query(
