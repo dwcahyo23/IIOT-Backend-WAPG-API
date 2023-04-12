@@ -31,7 +31,7 @@
         "name": "Edy Wijaya",
         "number": "08170891399",
         "plant": ["01", "02"],
-        "set": ["mn", "qc"],
+        "set": ["mn"],
         "dep_no": [
           "PDHD1",
           "PDHD2",
@@ -55,7 +55,7 @@
         "name": "Triyono",
         "number": "081387503504",
         "plant": ["01", "02"],
-        "set": ["mn", "qc"],
+        "set": ["mn"],
         "dep_no": [
           "PDHD1",
           "PDHD2",
@@ -217,7 +217,7 @@
         "name": "Citro Adi",
         "number": "081381159279",
         "plant": ["01"],
-        "set": ["qc"],
+        "set": [],
         "dep_no": []
       },
       {
@@ -226,7 +226,7 @@
         "name": "Aries Andevi",
         "number": "081280660209",
         "plant": ["01"],
-        "set": ["qc"],
+        "set": [],
         "dep_no": []
       },
       {
