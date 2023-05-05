@@ -6,7 +6,7 @@
         "nik": ["201902064"],
         "name": "Yusuf",
         "number": "082124610363",
-        "plant": ["01"],
+        "plant": ["01", "06"],
         "set": ["mn"],
         "dep_no": [
           "PDHD1",
@@ -22,7 +22,8 @@
           "PDNT1",
           "PDHB1",
           "PDTR1",
-          "PDPU1"
+          "PDPU1",
+          "G5PD1"
         ]
       },
       {
@@ -78,7 +79,7 @@
         "nik": ["01"],
         "name": "Suryadi",
         "number": "081280540525",
-        "plant": ["01", "02"],
+        "plant": ["01", "02", "06"],
         "set": ["mn"],
         "dep_no": [
           "PDHD1",
@@ -94,8 +95,18 @@
           "PDNT1",
           "PDHB1",
           "PDTR1",
-          "PDPU1"
+          "PDPU1",
+          "G5PD1"
         ]
+      },
+      {
+        "gender": "Mr",
+        "nik": ["01"],
+        "name": "Wahid",
+        "number": "081315080191",
+        "plant": ["06"],
+        "set": ["mn"],
+        "dep_no": ["G5PD1"]
       },
       {
         "gender": "Mr",
