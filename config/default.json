@@ -7,7 +7,7 @@
         "name": "Yusuf",
         "number": "082124610363",
         "plant": ["01", "06"],
-        "set": ["mn"],
+        "set": ["mn", "qc"],
         "dep_no": [
           "PDHD1",
           "PDHD2",
@@ -273,7 +273,7 @@
     "GroupList": [
       {
         "name": "GALINDO TEST",
-        "set": ["mn"]
+        "set": ["mn", "qc"]
       },
       {
         "name": "AQUA",

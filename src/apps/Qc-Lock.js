@@ -67,7 +67,7 @@ export default {
 
     if (User.length < 1) {
       error.push({
-        message: 'User not found',
+        message: 'Cant send msg, user qc not found',
       })
     }
 
