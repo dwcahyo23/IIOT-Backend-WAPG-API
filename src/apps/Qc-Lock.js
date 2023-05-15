@@ -49,6 +49,8 @@ export default {
       join sch_ot.bas_pdc_mast on sch_ot.mad_qap_locm.pdc_code = sch_ot.bas_pdc_mast.pdc_code 
     where       
       sts_wa = 'N' 
+      and
+	date(sch_ot.mad_qap_locm.ymd) = CURRENT_DATE
     order by 
       sch_ot.mad_qap_locm.ymd asc`,
       { type: QueryTypes.SELECT },
