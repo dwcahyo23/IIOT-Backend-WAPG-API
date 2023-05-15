@@ -273,7 +273,7 @@
     "GroupList": [
       {
         "name": "GALINDO TEST",
-        "set": ["mn", "qc"]
+        "set": ["mn"]
       },
       {
         "name": "AQUA",
