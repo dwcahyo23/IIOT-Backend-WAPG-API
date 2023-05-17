@@ -2,6 +2,7 @@ import schedule from 'node-schedule'
 import MnWo from '../Mn-Wo'
 import PRPo from '../PR-Po'
 import QcLock from '../Qc-Lock'
+import Ews from '../Ews'
 import { format } from 'date-fns'
 import user from '../user'
 
@@ -18,6 +19,7 @@ export default {
       MnWo.getOpen().then((res) => console.log(res))
       MnWo.getClose().then((res) => console.log(res))
       QcLock.getLock().then((res) => console.log(res))
+      Ews.getCritical().then((res) => console.log(res))
 
       //! Debug Test
       // PRPo.getPPU({ isTime: 'morning' }).then((res) => console.log(res))

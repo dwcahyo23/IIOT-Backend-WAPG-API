@@ -16,6 +16,7 @@ export const Ews = db.define(
     wip3_qty: DataTypes.INTEGER,
     wip_qty: DataTypes.INTEGER,
     asrs_qty: DataTypes.INTEGER,
+    subcon_qty: DataTypes.INTEGER,
     part_name: DataTypes.TEXT,
   },
   { freezeTableName: true, timestamps: false },

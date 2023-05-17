@@ -1,5 +1,5 @@
 import { Op, Sequelize } from 'sequelize'
-import { MntnWoModel } from '../api/models/Mntn-WoModel'
+import { Ews } from '../api/models/Ews'
 import config from 'config'
 import _ from 'lodash'
 import axios from 'axios'
@@ -28,5 +28,46 @@ const sendMsg = async (params) => {
 }
 
 export default {
-  async getCritical() {},
+  async getCritical() {
+    const error = []
+    const User = _.filter(config.get('ConfigUsers.UserList'), (el) =>
+      _.includes(el.set, 'ews'),
+    )
+
+    const ews = await Ews.findAll({
+      where: {
+        subcon_qty: {
+          [Op.lt]: 0,
+        },
+      },
+    })
+
+    if (User.length < 1) {
+      error.push({
+        message: 'User not found',
+      })
+    }
+
+    if (ews.length < 1) {
+      error.push({
+        message: 'Data ews not found',
+      })
+    }
+    if (error.length === 0) {
+      _.forEach(User, async (field) => {
+        let msg = `*Hello ${field.gender} ${field.name}*\n`
+        msg += `\nBelow is the current info of EWS:\n\n`
+        _.forEach(ews, async (record, i) => {
+          msg += `\n*${i + 1}. Part_no:* ${record.part_no} | ${
+            record.part_name
+          } | ${record.subcon_qty}\n`
+        })
+        msg += `\n\nThank you and have a nice day!`
+        sendMsg({ number: field.number, msg: msg })
+      })
+      return { type: 'succes', message: 'message sended successfully' }
+    }
+
+    return error
+  },
 }
