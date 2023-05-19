@@ -19,7 +19,6 @@ export default {
       MnWo.getOpen().then((res) => console.log(res))
       MnWo.getClose().then((res) => console.log(res))
       QcLock.getLock().then((res) => console.log(res))
-      Ews.getCritical().then((res) => console.log(res))
 
       //! Debug Test
       // PRPo.getPPU({ isTime: 'morning' }).then((res) => console.log(res))
@@ -27,6 +26,7 @@ export default {
     //! Job Scheduler Custom
     const jobPPUMorning = schedule.scheduleJob('1 0 8 * * 1-5', function () {
       PRPo.getPPU({ isTime: 'morning' }).then((res) => console.log(res))
+      Ews.getCritical().then((res) => console.log(res))
       console.log(
         'jobPPU has been injected at ' +
           format(new Date(), 'dd-MM-yyyy HH:mm:ss'),
@@ -35,6 +35,7 @@ export default {
 
     const jobPPUEvening = schedule.scheduleJob('1 0 13 * * 1-5', function () {
       PRPo.getPPU({ isTime: 'evening' }).then((res) => console.log(res))
+      Ews.getCritical().then((res) => console.log(res))
       console.log(
         'jobPPU has been injected at ' +
           format(new Date(), 'dd-MM-yyyy HH:mm:ss'),
