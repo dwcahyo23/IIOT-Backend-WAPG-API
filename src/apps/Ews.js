@@ -58,17 +58,27 @@ export default {
         let msg = `*Hello ${field.gender} ${field.name}*\n`
         msg += `\nThis is critical info from EWS:\n\n`
         _.forEach(ews, async (record, i) => {
-          msg += `\n*${i + 1}. Part_no:* ${record.part_no} \nPart_name: ${
-            record.part_name
-          }\nCustomer: ${record.cst_no} \n Qty Order: ${
-            record.qty_order
-          } \nQty Wdo: ${record.wdo_qty} \nQty FG: ${
-            record.fg_qty
-          } \nQty Transit: ${record.trs_qty} \nQty PK: ${
-            record.pk_qty
-          } \nQty Wip3: ${record.wip3_qty} \nQty Wip: ${
-            record.wip_qty
-          } \nQty Asrs: ${record.asrs_qty} \nQty Subcon: ${record.subcon_qty}`
+          msg += `\n*${i + 1}.Customer: ${record.cst_no} \n Part_no: ${
+            record.part_no
+          } \nPart_name: ${record.part_name} \n\nQty Order: ${(
+            record.qty_order * 1
+          ).toLocaleString()} \nQty Wdo: ${(
+            record.wdo_qty * 1
+          ).toLocaleString()} \nQty FG: ${(
+            record.fg_qty * 1
+          ).toLocaleString()} \nQty Transit: ${(
+            record.trs_qty * 1
+          ).toLocaleString()} \nQty PK: ${(
+            record.pk_qty * 1
+          ).toLocaleString()} \nQty Wip3: ${(
+            record.wip3_qty * 1
+          ).toLocaleString()} \nQty Wip: ${(
+            record.wip_qty * 1
+          ).toLocaleString()} \nQty Asrs: ${(
+            record.asrs_qty * 1
+          ).toLocaleString()} \nQty Subcon: ${(
+            record.subcon_qty * 1
+          ).toLocaleString()}`
         })
         msg += `\n\nThank you!`
         sendMsg({ number: field.number, msg: msg })
