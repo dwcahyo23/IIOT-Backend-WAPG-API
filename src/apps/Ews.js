@@ -58,9 +58,17 @@ export default {
         let msg = `*Hello ${field.gender} ${field.name}*\n`
         msg += `\nBelow is the current info of EWS:\n\n`
         _.forEach(ews, async (record, i) => {
-          msg += `\n*${i + 1}. Part_no:* ${record.part_no} | ${
+          msg += `\n*${i + 1}. Part_no:* ${record.part_no} \nPart_name: ${
             record.part_name
-          } | ${record.subcon_qty}\n`
+          }\nCustomer: ${record.cst_no} \nQty_order: ${
+            record.qty_order
+          } \nQty_wdo: ${record.wdo_qty} \nQty_FG: ${
+            record.fg_qty
+          } \nQty_transit: ${record.trs_qty} \nQty_PK: ${
+            record.pk_qty
+          } \nQty_wip3: ${record.wip3_qty} \nQty_wip: ${
+            record.wip_qty
+          } \nQty_asrs: ${record.asrs_qty} \nQty_subcon: ${record.subcon_qty}`
         })
         msg += `\n\nThank you and have a nice day!`
         sendMsg({ number: field.number, msg: msg })
