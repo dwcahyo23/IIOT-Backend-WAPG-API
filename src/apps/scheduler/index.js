@@ -37,7 +37,7 @@ export default {
       Ews.getCritical().then((res) => console.log(res))
     })
 
-    const ews4 = schedule.scheduleJob('1 0 15 * * *', function () {
+    const ews4 = schedule.scheduleJob('1 30 15 * * *', function () {
       Ews.getCritical().then((res) => console.log(res))
     })
 
