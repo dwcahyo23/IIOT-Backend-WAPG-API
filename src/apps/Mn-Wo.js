@@ -83,7 +83,7 @@ export default {
             _.includes(field.dep_no, record.dep_no)
           ) {
             let msg = `*Sheet_no:* ${record.sheet_no} (Open)❌`
-            msg += `\n\nHello ${field.gender} ${field.name}, Below is the current info of WO Open:`
+            msg += `\n\nHello ${field.gender} ${field.name}, This is the current state of Work-Order MN::`
             msg += `\n\n*Stoptime:* ${format(
               new Date(record.ymd),
               'dd MMM yyyy HH:mm',
@@ -175,7 +175,7 @@ export default {
 
     if (User.length < 1) {
       error.push({
-        message: 'User not found',
+        message: 'User mn not found',
       })
     }
 
@@ -187,8 +187,8 @@ export default {
 
     if (error.length === 0) {
       _.forEach(User, async (field) => {
-        let msg = `Hello ${field.gender} ${field.name}\n`
-        msg += `\nBelow is the current info of WO Close:`
+        let msg = `Hello ${field.gender} ${field.name}`
+        msg += `\nThis is the current state of Work-Order MN:`
         _.forEach(Wo, async (record, i) => {
           if (
             _.includes(field.plant, record.com_no) &&

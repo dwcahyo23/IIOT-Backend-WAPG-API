@@ -31,8 +31,8 @@
         "nik": ["01"],
         "name": "Edy Wijaya",
         "number": "08170891399",
-        "plant": ["01", "02"],
-        "set": ["mn"],
+        "plant": ["01", "02", "06"],
+        "set": ["mn", "ews"],
         "dep_no": [
           "PDHD1",
           "PDHD2",
@@ -56,7 +56,7 @@
         "name": "Triyono",
         "number": "081387503504",
         "plant": ["01", "02"],
-        "set": ["mn"],
+        "set": ["mn", "ews"],
         "dep_no": [
           "PDHD1",
           "PDHD2",

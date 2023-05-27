@@ -44,7 +44,7 @@ export default {
 
     if (User.length < 1) {
       error.push({
-        message: 'User not found',
+        message: 'User ews not found',
       })
     }
 
@@ -56,21 +56,21 @@ export default {
     if (error.length === 0) {
       _.forEach(User, async (field) => {
         let msg = `*Hello ${field.gender} ${field.name}*\n`
-        msg += `\nBelow is the current info of EWS:\n\n`
+        msg += `\nThis is critical info from EWS:\n\n`
         _.forEach(ews, async (record, i) => {
           msg += `\n*${i + 1}. Part_no:* ${record.part_no} \nPart_name: ${
             record.part_name
-          }\nCustomer: ${record.cst_no} \nQty_order: ${
+          }\nCustomer: ${record.cst_no} \n Qty Order: ${
             record.qty_order
-          } \nQty_wdo: ${record.wdo_qty} \nQty_FG: ${
+          } \nQty Wdo: ${record.wdo_qty} \nQty FG: ${
             record.fg_qty
-          } \nQty_transit: ${record.trs_qty} \nQty_PK: ${
+          } \nQty Transit: ${record.trs_qty} \nQty PK: ${
             record.pk_qty
-          } \nQty_wip3: ${record.wip3_qty} \nQty_wip: ${
+          } \nQty Wip3: ${record.wip3_qty} \nQty Wip: ${
             record.wip_qty
-          } \nQty_asrs: ${record.asrs_qty} \nQty_subcon: ${record.subcon_qty}`
+          } \nQty Asrs: ${record.asrs_qty} \nQty Subcon: ${record.subcon_qty}`
         })
-        msg += `\n\nThank you and have a nice day!`
+        msg += `\n\nThank you!`
         sendMsg({ number: field.number, msg: msg })
       })
       return { type: 'succes', message: 'message sended successfully' }

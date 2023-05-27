@@ -36,7 +36,7 @@ export default {
     if (User.length < 1) {
       error.push({
         type: 'error',
-        message: 'User not found',
+        message: 'User pr not found',
       })
     }
 
