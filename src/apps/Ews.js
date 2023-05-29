@@ -58,7 +58,7 @@ export default {
         let msg = `*Hello ${field.gender} ${field.name}*\n`
         msg += `\nThis is critical info from EWS:\n\n`
         _.forEach(ews, async (record, i) => {
-          msg += `\n*${i + 1}.Customer: ${record.cst_no} \n Part_no: ${
+          msg += `\n*${i + 1}.Customer: ${record.cst_no}* \n Part_no: ${
             record.part_no
           } \nPart_name: ${record.part_name} \n\nQty Order: ${(
             record.qty_order * 1
@@ -78,9 +78,9 @@ export default {
             record.asrs_qty * 1
           ).toLocaleString()} \nQty Subcon: ${(
             record.subcon_qty * 1
-          ).toLocaleString()}`
+          ).toLocaleString()}\n`
         })
-        msg += `\n\nThank you!`
+        msg += `\nThank you!`
         sendMsg({ number: field.number, msg: msg })
       })
       return { type: 'succes', message: 'message sended successfully' }
