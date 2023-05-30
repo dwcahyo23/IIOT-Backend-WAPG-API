@@ -58,9 +58,9 @@ export default {
         let msg = `*Hello ${field.gender} ${field.name}*\n`
         msg += `\nThis is critical info from EWS:\n\n`
         _.forEach(ews, async (record, i) => {
-          msg += `\n*${i + 1}.Customer: ${record.cst_no}* \n Part_no: ${
+          msg += `\n*${i + 1}.Customer: ${record.cst_no}* \nPart_no: ${
             record.part_no
-          } \nPart_name: ${record.part_name} \n\nQty Order: ${(
+          } \nPart_name: ${record.part_name} \nQty Order: ${(
             record.qty_order * 1
           ).toLocaleString()} \nQty Wdo: ${(
             record.wdo_qty * 1
@@ -78,7 +78,11 @@ export default {
             record.asrs_qty * 1
           ).toLocaleString()} \nQty Subcon: ${(
             record.subcon_qty * 1
-          ).toLocaleString()}\n`
+          ).toLocaleString()}\n${
+            record.length - 1 == i
+              ? '\n'
+              : '\n--------------------------------------------'
+          }`
         })
         msg += `\nThank you!`
         sendMsg({ number: field.number, msg: msg })
