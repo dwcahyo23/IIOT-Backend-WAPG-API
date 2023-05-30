@@ -78,7 +78,7 @@ export default {
             record.asrs_qty * 1
           ).toLocaleString()} \nQty Subcon: ${(
             record.subcon_qty * 1
-          ).toLocaleString()}\n${
+          ).toLocaleString()}${
             record.length - 1 == i
               ? '\n'
               : '\n--------------------------------------------'
