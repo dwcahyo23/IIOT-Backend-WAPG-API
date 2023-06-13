@@ -75,7 +75,6 @@ export default {
 
     if (Lock.length < 1) {
       error.push({
-        type: 'error',
         message: 'Data qc-lock not found',
       })
     }
