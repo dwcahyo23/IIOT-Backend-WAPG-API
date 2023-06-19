@@ -21,6 +21,11 @@ app.get('/', (req, res) => {
 routes(app)
 scheduler.getScheduler()
 
+// handle uncaught exceptions
+process.on('uncaughtException', function (error) {
+  console.log('Error', error.message)
+})
+
 app.listen(process.env.PORT_APP, () =>
   console.log(`Server up & running in ${process.env.PORT_APP}`),
 )
