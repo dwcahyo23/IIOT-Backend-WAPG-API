@@ -48,14 +48,23 @@ export default {
     }
 
     const sendMsg = async (params) => {
-      await axios({
-        method: 'post',
-        url: 'http://192.168.192.7:5010/send-message',
-        data: {
-          number: params.number,
-          message: params.msg,
-        },
-      })
+      if (params.type == 'group') {
+        await axios
+          .post('http://192.168.192.7:5010/send-message-group', {
+            name: params.name,
+            message: params.msg,
+          })
+          .then((res) => console.log(res.status))
+          .catch((e) => console.log(e.message))
+      } else {
+        await axios
+          .post('http://192.168.192.7:5010/send-message', {
+            number: params.number,
+            message: params.msg,
+          })
+          .then((res) => console.log(res.status))
+          .catch((e) => console.log(e.message))
+      }
     }
 
     if (error.length === 0) {

@@ -7,23 +7,21 @@ import { format } from 'date-fns'
 
 const sendMsg = async (params) => {
   if (params.type == 'group') {
-    await axios({
-      method: 'post',
-      url: 'http://192.168.192.7:5010/send-message-group',
-      data: {
+    await axios
+      .post('http://192.168.192.7:5010/send-message-group', {
         name: params.name,
         message: params.msg,
-      },
-    })
+      })
+      .then((res) => console.log(res.status))
+      .catch((e) => console.log(e.message))
   } else {
-    await axios({
-      method: 'post',
-      url: 'http://192.168.192.7:5010/send-message',
-      data: {
+    await axios
+      .post('http://192.168.192.7:5010/send-message', {
         number: params.number,
         message: params.msg,
-      },
-    })
+      })
+      .then((res) => console.log(res.status))
+      .catch((e) => console.log(e.message))
   }
 }
 
