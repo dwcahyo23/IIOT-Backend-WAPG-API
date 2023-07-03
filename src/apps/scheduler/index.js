@@ -37,7 +37,7 @@ export default {
       Ews.getCritical().then((res) => console.log(res))
     })
 
-    const ews4 = schedule.scheduleJob('1 40 15 * * *', function () {
+    const ews4 = schedule.scheduleJob('1 0 15 * * *', function () {
       Ews.getCritical().then((res) => console.log(res))
     })
 
@@ -45,21 +45,21 @@ export default {
       Ews.getCritical().then((res) => console.log(res))
     })
 
-    //! Job Scheduler Custom
-    const jobPPUMorning = schedule.scheduleJob('1 0 8 * * 1-5', function () {
-      PRPo.getPPU({ isTime: 'morning' }).then((res) => console.log(res))
-      console.log(
-        'jobPPU has been injected at ' +
-          format(new Date(), 'dd-MM-yyyy HH:mm:ss'),
-      )
-    })
+    //! Job Scheduler PR
+    // const jobPPUMorning = schedule.scheduleJob('1 0 8 * * 1-5', function () {
+    //   PRPo.getPPU({ isTime: 'morning' }).then((res) => console.log(res))
+    //   console.log(
+    //     'jobPPU has been injected at ' +
+    //       format(new Date(), 'dd-MM-yyyy HH:mm:ss'),
+    //   )
+    // })
 
-    const jobPPUEvening = schedule.scheduleJob('1 0 13 * * 1-5', function () {
-      PRPo.getPPU({ isTime: 'evening' }).then((res) => console.log(res))
-      console.log(
-        'jobPPU has been injected at ' +
-          format(new Date(), 'dd-MM-yyyy HH:mm:ss'),
-      )
-    })
+    // const jobPPUEvening = schedule.scheduleJob('1 0 13 * * 1-5', function () {
+    //   PRPo.getPPU({ isTime: 'evening' }).then((res) => console.log(res))
+    //   console.log(
+    //     'jobPPU has been injected at ' +
+    //       format(new Date(), 'dd-MM-yyyy HH:mm:ss'),
+    //   )
+    // })
   },
 }

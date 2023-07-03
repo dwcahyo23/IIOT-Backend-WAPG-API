@@ -8,7 +8,7 @@ import { format } from 'date-fns'
 const sendMsg = async (params) => {
   if (params.type == 'group') {
     await axios
-      .post('http://192.168.192.7:5010/send-message-group', {
+      .post('http://localhost:5010/send-message-group', {
         name: params.name,
         message: params.msg,
       })
@@ -16,7 +16,7 @@ const sendMsg = async (params) => {
       .catch((e) => console.log(e.message))
   } else {
     await axios
-      .post('http://192.168.192.7:5010/send-message', {
+      .post('http://localhost:5010/send-message', {
         number: params.number,
         message: params.msg,
       })

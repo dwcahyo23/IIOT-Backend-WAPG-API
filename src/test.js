@@ -2,7 +2,7 @@ const axios = require('axios')
 
 const sendMsg = async (params) => {
   await axios
-    .post('http://192.168.192.7:5010/send-message', {
+    .post('http://localhost:5010/send-message', {
       number: params.number,
       message: params.message,
     })
@@ -13,7 +13,7 @@ const sendMsg = async (params) => {
 const sendMsg2 = async (params) => {
   await axios({
     method: 'post',
-    url: 'http://192.168.192.7:5010/send-message',
+    url: 'http://localhost:5010/send-message',
     data: {
       number: params.number,
       message: params.msg,
@@ -23,7 +23,7 @@ const sendMsg2 = async (params) => {
 
 const sendMsgGroup = async (params) => {
   await axios
-    .post('http://192.168.192.7:5010/send-message-group', {
+    .post('http://localhost:5010/send-message-group', {
       name: params.name,
       message: params.message,
     })
@@ -34,7 +34,7 @@ const sendMsgGroup = async (params) => {
 const sendMsgGroup2 = async (params) => {
   await axios({
     method: 'post',
-    url: 'http://192.168.192.7:5010/send-message-group',
+    url: 'http://localhost:5010/send-message-group',
     data: {
       name: params.name,
       message: params.msg,
