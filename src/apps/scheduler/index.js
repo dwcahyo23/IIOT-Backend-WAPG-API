@@ -17,7 +17,7 @@ export default {
       //   .catch((err) => console.log(err))
 
       MnWo.getOpen().then((res) => console.log(res))
-      MnWo.getClose().then((res) => console.log(res))
+      // MnWo.getClose().then((res) => console.log(res)) //!matiin sementara utk audit
       QcLock.getLock().then((res) => console.log(res))
 
       //! Debug Test

@@ -81,7 +81,7 @@ export default {
             _.includes(field.dep_no, record.dep_no)
           ) {
             let msg = `*Sheet_no:* ${record.sheet_no} (Open)❌`
-            msg += `\n\nHello ${field.gender} ${field.name}, This is the current state of Work-Order MN::`
+            msg += `\n\nHello ${field.gender} ${field.name}, This is the current state of Work-Order MN:`
             msg += `\n\n*Stoptime:* ${format(
               new Date(record.ymd),
               'dd MMM yyyy HH:mm',
