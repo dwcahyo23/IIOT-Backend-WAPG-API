@@ -24,7 +24,8 @@
           "PDTR1",
           "PDPU1",
           "G5PD1"
-        ]
+        ],
+        "mch": []
       },
       {
         "gender": "Mr",
@@ -48,7 +49,8 @@
           "PDHB1",
           "PDTR1",
           "PDPU1"
-        ]
+        ],
+        "mch": []
       },
       {
         "gender": "Mr",
@@ -72,7 +74,8 @@
           "PDHB1",
           "PDTR1",
           "PDPU1"
-        ]
+        ],
+        "mch": []
       },
       {
         "gender": "Mr",
@@ -97,7 +100,8 @@
           "PDTR1",
           "PDPU1",
           "G5PD1"
-        ]
+        ],
+        "mch": []
       },
       {
         "gender": "Mr",
@@ -106,7 +110,8 @@
         "number": "081315080191",
         "plant": ["06"],
         "set": ["mn"],
-        "dep_no": ["G5PD1"]
+        "dep_no": ["G5PD1"],
+        "mch": []
       },
       {
         "gender": "Mr",
@@ -130,7 +135,8 @@
           "PDHB1",
           "PDTR1",
           "PDPU1"
-        ]
+        ],
+        "mch": []
       },
       {
         "gender": "Mr",
@@ -154,7 +160,8 @@
           "PDHB1",
           "PDTR1",
           "PDPU1"
-        ]
+        ],
+        "mch": []
       },
       {
         "gender": "Mr",
@@ -162,7 +169,7 @@
         "name": "Sutaryo",
         "number": "08128284903",
         "plant": ["01"],
-        "set": ["mn"],
+        "set": [],
         "dep_no": [
           "PDHD1",
           "PDHD2",
@@ -178,7 +185,8 @@
           "PDHB1",
           "PDTR1",
           "PDPU1"
-        ]
+        ],
+        "mch": []
       },
       {
         "gender": "Mr",
@@ -202,7 +210,8 @@
           "PDHB1",
           "PDTR1",
           "PDPU1"
-        ]
+        ],
+        "mch": []
       },
       {
         "gender": "Mr",
@@ -211,7 +220,8 @@
         "number": "087888194994",
         "plant": ["01"],
         "set": ["mn"],
-        "dep_no": ["PDPU1", "PDTR1"]
+        "dep_no": ["PDPU1", "PDTR1"],
+        "mch": []
       },
       {
         "gender": "Mr",
@@ -220,7 +230,8 @@
         "number": "08999196819",
         "plant": ["01"],
         "set": ["mn"],
-        "dep_no": ["PDMC1", "PDNC1", "PDHB1"]
+        "dep_no": ["PDMC1", "PDNC1", "PDHB1"],
+        "mch": []
       },
       {
         "gender": "Mr",
@@ -229,7 +240,8 @@
         "number": "081381159279",
         "plant": ["01"],
         "set": [],
-        "dep_no": []
+        "dep_no": [],
+        "mch": []
       },
       {
         "gender": "Mr",
@@ -238,7 +250,8 @@
         "number": "081280660209",
         "plant": ["01"],
         "set": [],
-        "dep_no": []
+        "dep_no": [],
+        "mch": []
       },
       {
         "gender": "Mr",
@@ -246,8 +259,9 @@
         "name": "Hendrawan",
         "number": "081807999193",
         "plant": ["01"],
-        "set": ["pr"],
-        "dep_no": []
+        "set": [],
+        "dep_no": [],
+        "mch": []
       },
       {
         "gender": "Ms",
@@ -255,8 +269,9 @@
         "name": "Emily",
         "number": "08170003349",
         "plant": ["01"],
-        "set": ["pr"],
-        "dep_no": []
+        "set": [],
+        "dep_no": [],
+        "mch": []
       },
       {
         "gender": "Mr",
@@ -273,7 +288,8 @@
     "GroupList": [
       {
         "name": "GALINDO TEST",
-        "set": ["mn"]
+        "set": ["mn"],
+        "mch": []
       },
       {
         "name": "AQUA",

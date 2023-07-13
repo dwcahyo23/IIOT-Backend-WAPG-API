@@ -11,10 +11,6 @@ export default {
     //! Job Scheduler Reguler
     const regulerJob = schedule.scheduleJob('1 * * * * *', function () {
       // !update from user
-      // user
-      //   .getUser({ nik_pro: '55241d2b-dcc8-4502-88b9-ab12c7e140a3' })
-      //   .then((res) => console.log(res))
-      //   .catch((err) => console.log(err))
 
       MnWo.getOpen().then((res) => console.log(res))
       // MnWo.getClose().then((res) => console.log(res)) //!matiin sementara utk audit
