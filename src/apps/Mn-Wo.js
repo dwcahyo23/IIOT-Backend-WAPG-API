@@ -123,6 +123,7 @@ export default {
         })
         if (
           record.com_no == '01' &&
+          record.com_no == '03' &&
           (record.mch_no == '-' || _.isNull(record.mch_no))
         ) {
           let msg = `*Sheet_no:* ${record.sheet_no} (Open)❌`
@@ -163,6 +164,7 @@ export default {
           } `
           sendMsg({ number: '08128284903', msg: msg })
           sendMsg({ number: '081280540525', msg: msg })
+          upStsWa({ id: record.sheet_no })
         }
       })
       return { type: 'succes', message: 'message sended successfully' }
