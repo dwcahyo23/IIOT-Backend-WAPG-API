@@ -5,20 +5,26 @@ import QcLock from '../Qc-Lock'
 import Ews from '../Ews'
 import { format } from 'date-fns'
 import user from '../user'
+import MnReq from '../Mn-Req'
 
 export default {
   async getScheduler() {
     //! Job Scheduler Reguler
     const regulerJob = schedule.scheduleJob('1 * * * * *', function () {
       // !update from user
-
       MnWo.getOpen().then((res) => console.log(res))
-      // MnWo.getClose().then((res) => console.log(res)) //!matiin sementara utk audit
+      MnWo.getClose().then((res) => console.log(res))
       QcLock.getLock().then((res) => console.log(res))
-
-      //! Debug Test
-      // PRPo.getPPU({ isTime: 'morning' }).then((res) => console.log(res))
     })
+
+    const requestSparepartJob = schedule.scheduleJob(
+      '* 59 * * * *',
+      function () {
+        //!MN req
+        MnReq.MnReq()
+        // MnReq.MnReqMre()
+      },
+    )
 
     //! Job Scheduler EWS 2H
     const ews1 = schedule.scheduleJob('1 0 8 * * *', function () {
