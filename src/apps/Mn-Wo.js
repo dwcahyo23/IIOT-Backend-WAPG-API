@@ -190,7 +190,7 @@ export default {
           Sequelize.where(
             Sequelize.fn('date', Sequelize.col('ymd')),
             '>=',
-            '2023-03-08',
+            format(new Date(), 'yyyy-MM-dd'),
           ),
           {
             chk_mark: {

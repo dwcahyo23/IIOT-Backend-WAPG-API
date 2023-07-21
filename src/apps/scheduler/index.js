@@ -21,7 +21,7 @@ export default {
       '* 59 * * * *',
       function () {
         //!MN req
-        MnReq.MnReq()
+        // MnReq.MnReq()
         // MnReq.MnReqMre()
       },
     )

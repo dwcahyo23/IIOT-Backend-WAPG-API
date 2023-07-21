@@ -61,9 +61,9 @@ export default {
       upStsWa({ id: val.sheet_no })
     })
 
-    sendMsg({ number: '081382466660', msg: msg })
-    sendMsg({ number: '085163121617', msg: msg })
-    sendMsg({ number: '081280540525', msg: msg })
+    // sendMsg({ number: '081382466660', msg: msg })
+    // sendMsg({ number: '085163121617', msg: msg })
+    // sendMsg({ number: '081280540525', msg: msg })
   },
 
   async MnReqMre() {
