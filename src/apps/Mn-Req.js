@@ -80,6 +80,7 @@ export default {
       sendMsg({ number: '081382466660', msg: msg })
       sendMsg({ number: '085163121617', msg: msg })
       sendMsg({ number: '081280540525', msg: msg })
+      sendMsg({ number: '089614789761', msg: msg })
     }
   },
 
@@ -155,6 +156,7 @@ export default {
       sendMsg({ number: '081382466660', msg: msg })
       sendMsg({ number: '085163121617', msg: msg })
       sendMsg({ number: '081280540525', msg: msg })
+      sendMsg({ number: '089614789761', msg: msg })
     }
   },
 
@@ -216,6 +218,7 @@ export default {
       sendMsg({ number: '081382466660', msg: msg })
       sendMsg({ number: '085163121617', msg: msg })
       sendMsg({ number: '081280540525', msg: msg })
+      sendMsg({ number: '089614789761', msg: msg })
     }
   },
 }
