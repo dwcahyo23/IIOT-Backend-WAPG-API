@@ -17,14 +17,11 @@ export default {
       QcLock.getLock().then((res) => console.log(res))
     })
 
-    const requestSparepartJob = schedule.scheduleJob(
-      '* 59 * * * *',
-      function () {
-        //!MN req
-        // MnReq.MnReq()
-        // MnReq.MnReqMre()
-      },
-    )
+    setInterval(() => {
+      MnReq.MnReq()
+      MnReq.MnReqMRE()
+      MnReq.MnReqRdy()
+    }, 600000)
 
     //! Job Scheduler EWS 2H
     const ews1 = schedule.scheduleJob('1 0 8 * * *', function () {
