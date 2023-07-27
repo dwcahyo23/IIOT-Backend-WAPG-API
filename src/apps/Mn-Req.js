@@ -32,6 +32,10 @@ export default {
       order: [['sheet_no', 'ASC']],
     })
 
+    const Group = _.filter(config.get('ConfigGroups.GroupList'), (el) =>
+      _.includes(el.set, 'mn'),
+    )
+
     const user = await AuthData.findAll({})
 
     const upStsWa = async (params) => {
@@ -45,43 +49,49 @@ export default {
       )
     }
 
-    const result = _.map(req, (val) => {
-      return {
-        ...val.dataValues,
-        user: _.find(user, { displayName: val.user_req1 }),
-      }
-    })
-
-    if (result.length > 0) {
-      let msg = `Penanganan Sparepart Maintenance\n(IK-03-03-11)`
-      msg += `\n\nPermintaan Sparepart: 🔧`
-      _.forEach(result, (val, i) => {
-        msg += `\n*${i + 1}. Sheet:* ${val.sheet_no} | ${
-          val.category_request
-        }\n*Sparepart:* ${val.item_stock} \n*Remaks:* ${val.item_name}`
-        msg += `\n*Qty:* ${val.item_qty} ${val.item_uom}\n*User:* ${val.user_req1}`
-        msg += `\n*Target:* ${dayjs(val.date_request).format('DD-MM-YYYY')}`
-        msg += `\n*Machine:* ${val.mch_code} ${val.mch_com}\n`
-
-        let msg1 = `Penanganan Sparepart Maintenance\n(IK-03-03-11)`
-        msg1 += `\n\nPermintaan Sparepart: 🔧`
-        msg1 += `\n*Sheet:* ${val.sheet_no} | ${val.category_request}\n*Sparepart:* ${val.item_stock} \n*Remaks:* ${val.item_name}`
-        msg1 += `\n*Qty:* ${val.item_qty} ${val.item_uom}\n*User:* ${val.user_req1}`
-        msg1 += `\n*Target:* ${dayjs(val.date_request).format('DD-MM-YYYY')}`
-        msg1 += `\n*Machine:* ${val.mch_code} ${val.mch_com}\n`
-
-        val.user?.userNumber &&
-          sendMsg({ number: val.user.userNumber, msg: msg1 })
-        // val.user?.userNumber && sendMsg({ number: '082124610363', msg: msg1 })
-
-        upStsWa({ uuid_request: val.uuid_request })
+    if (req.length > 0) {
+      _.forEach(Group, (val) => {
+        let msg = `Penanganan Sparepart Maintenance\n(IK-03-03-11)`
       })
-
-      sendMsg({ number: '081382466660', msg: msg })
-      sendMsg({ number: '085163121617', msg: msg })
-      sendMsg({ number: '081280540525', msg: msg })
-      sendMsg({ number: '089614789761', msg: msg })
     }
+
+    // const result = _.map(req, (val) => {
+    //   return {
+    //     ...val.dataValues,
+    //     user: _.find(user, { displayName: val.user_req1 }),
+    //   }
+    // })
+
+    // if (result.length > 0) {
+    //   let msg = `Penanganan Sparepart Maintenance\n(IK-03-03-11)`
+    //   msg += `\n\nPermintaan Sparepart: 🔧`
+    //   _.forEach(result, (val, i) => {
+    //     msg += `\n*${i + 1}. Sheet:* ${val.sheet_no} | ${
+    //       val.category_request
+    //     }\n*Sparepart:* ${val.item_stock} \n*Remaks:* ${val.item_name}`
+    //     msg += `\n*Qty:* ${val.item_qty} ${val.item_uom}\n*User:* ${val.user_req1}`
+    //     msg += `\n*Target:* ${dayjs(val.date_request).format('DD-MM-YYYY')}`
+    //     msg += `\n*Machine:* ${val.mch_code} ${val.mch_com}\n`
+
+    //     let msg1 = `Penanganan Sparepart Maintenance\n(IK-03-03-11)`
+    //     msg1 += `\n\nPermintaan Sparepart: 🔧`
+    //     msg1 += `\n*Sheet:* ${val.sheet_no} | ${val.category_request}\n*Sparepart:* ${val.item_stock} \n*Remaks:* ${val.item_name}`
+    //     msg1 += `\n*Qty:* ${val.item_qty} ${val.item_uom}\n*User:* ${val.user_req1}`
+    //     msg1 += `\n*Target:* ${dayjs(val.date_request).format('DD-MM-YYYY')}`
+    //     msg1 += `\n*Machine:* ${val.mch_code} ${val.mch_com}\n`
+
+    //     val.user?.userNumber &&
+    //       sendMsg({ number: val.user.userNumber, msg: msg1 })
+    //     // val.user?.userNumber && sendMsg({ number: '082124610363', msg: msg1 })
+
+    //     upStsWa({ uuid_request: val.uuid_request })
+    //   })
+
+    //   sendMsg({ number: '081382466660', msg: msg })
+    //   sendMsg({ number: '085163121617', msg: msg })
+    //   sendMsg({ number: '081280540525', msg: msg })
+    //   sendMsg({ number: '089614789761', msg: msg })
+    // }
   },
 
   async MnReqMRE() {
