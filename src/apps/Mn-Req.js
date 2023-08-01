@@ -246,45 +246,17 @@ export default {
         sendMsg({ name: val.name, msg: msg, type: 'group' })
       })
     }
-
-    // if (result.length > 0) {
-    //   let msg = `Penanganan Sparepart Maintenance\n(IK-03-03-11)`
-    //   msg += `\n\nSparepart sudah terbit MRE ya, silahkan dicek 📝`
-    //   _.forEach(result, async (val, i) => {
-    //     msg += `\n*${i + 1}. Sheet:* ${val.sheet_no} | ${
-    //       val.category_request
-    //     }\n*Sparepart:* ${val.item_stock} \n*Remaks:* ${val.item_name}`
-    //     msg += `\n*Qty:* ${val.item_qty} ${val.item_uom}\n*User:* ${val.user_req1}`
-    //     msg += `\n*Target:* ${dayjs(val.date_request).format('DD-MM-YYYY')}`
-    //     msg += `\n*Machine:* ${val.mch_code} ${val.mch_com}`
-    //     msg += `\n*Mre:* ${val.mre_request}\n`
-
-    //     let msg1 = `Penanganan Sparepart Maintenance\n(IK-03-03-11)`
-    //     msg1 += `\n\nSparepart sudah terbit MRE ya, silahkan dicek 📝`
-    //     msg1 += `\n*${i + 1}. Sheet:* ${val.sheet_no} | ${
-    //       val.category_request
-    //     }\n*Sparepart:* ${val.item_stock} \n*Remaks:* ${val.item_name}`
-    //     msg1 += `\n*Qty:* ${val.item_qty} ${val.item_uom}\n*User:* ${val.user_req1}`
-    //     msg1 += `\n*Target:* ${dayjs(val.date_request).format('DD-MM-YYYY')}`
-    //     msg1 += `\n*Machine:* ${val.mch_code} ${val.mch_com}`
-    //     msg1 += `\n*Mre:* ${val.mre_request}\n`
-
-    //     val.user?.userNumber &&
-    //       sendMsg({ number: val.user.userNumber, msg: msg1 })
-
-    //     await upStsWa({ uuid_request: val.uuid_request })
-    //   })
-    //   sendMsg({ number: '081382466660', msg: msg })
-    //   sendMsg({ number: '085163121617', msg: msg })
-    //   sendMsg({ number: '081280540525', msg: msg })
-    //   sendMsg({ number: '089614789761', msg: msg })
-    // }
   },
 
   async MnReqRdy() {
     const req = await MaintenanceRequest.findAll({
       where: {
-        [Op.and]: [{ sts_wa1: 'Y' }, { item_ready: 'Y' }, { sts_wa3: 'N' }],
+        [Op.and]: [
+          { sts_wa1: 'Y' },
+          { item_ready: 'Y' },
+          { sts_wa3: 'N' },
+          { mch_com: 'GM1' },
+        ],
       },
       order: [['sheet_no', 'ASC']],
     })

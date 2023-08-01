@@ -220,7 +220,12 @@ export default {
   async MnReqRdy() {
     const req = await MaintenanceRequest.findAll({
       where: {
-        [Op.and]: [{ sts_wa1: 'Y' }, { item_ready: 'Y' }, { sts_wa3: 'N' }],
+        [Op.and]: [
+          { sts_wa1: 'Y' },
+          { item_ready: 'Y' },
+          { sts_wa3: 'N' },
+          { mch_com: 'GM2' },
+        ],
       },
       order: [['sheet_no', 'ASC']],
     })
