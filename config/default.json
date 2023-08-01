@@ -297,6 +297,11 @@
         "mch": []
       },
       {
+        "name": "PENANGANAN SPAREPART GM2 IK-03-03-01",
+        "set": ["mn_req2"],
+        "mch": []
+      },
+      {
         "name": "WORK ORDER MAINTENANCE GM1 FO-03-04-01",
         "set": ["mn_wo"],
         "mch": []

@@ -6,6 +6,7 @@ import Ews from '../Ews'
 import { format } from 'date-fns'
 import user from '../user'
 import MnReq from '../Mn-Req'
+import MnReqGM2 from '../Mn-Req-GM2'
 
 export default {
   async getScheduler() {
@@ -21,6 +22,10 @@ export default {
       MnReq.MnReq()
       MnReq.MnReqMRE()
       MnReq.MnReqRdy()
+
+      MnReqGM2.MnReq()
+      MnReqGM2.MnReqMRE()
+      MnReqGM2.MnReqRdy()
     }, 600000)
 
     // setInterval(() => {
