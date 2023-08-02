@@ -82,7 +82,7 @@
         "nik": ["01"],
         "name": "Suryadi",
         "number": "081280540525",
-        "plant": ["01", "02", "06"],
+        "plant": ["01", "02", "03", "06"],
         "set": ["mn"],
         "dep_no": [
           "PDHD1",
@@ -99,8 +99,32 @@
           "PDHB1",
           "PDTR1",
           "PDPU1",
-          "G5PD1"
+          "G5PD1",
+          "G3PK2",
+          "G3GD2",
+          "G3GD3",
+          "G3MN1"
         ],
+        "mch": []
+      },
+      {
+        "gender": "Mr",
+        "nik": ["01"],
+        "name": "Suhendri",
+        "number": "085723929978",
+        "plant": ["03"],
+        "set": ["mn"],
+        "dep_no": ["G3PK2", "G3GD2", "G3GD3", "G3MN1"],
+        "mch": []
+      },
+      {
+        "gender": "Mr",
+        "nik": ["01"],
+        "name": "Jumeri",
+        "number": "085211234074",
+        "plant": ["03"],
+        "set": ["mn"],
+        "dep_no": ["G3PK2", "G3GD2", "G3GD3", "G3MN1"],
         "mch": []
       },
       {
