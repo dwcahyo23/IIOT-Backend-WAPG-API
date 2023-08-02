@@ -130,6 +130,16 @@
       {
         "gender": "Mr",
         "nik": ["01"],
+        "name": "Ilyas",
+        "number": "08581142214",
+        "plant": ["03"],
+        "set": ["mn"],
+        "dep_no": ["G3PK2", "G3GD2", "G3GD3", "G3MN1"],
+        "mch": []
+      },
+      {
+        "gender": "Mr",
+        "nik": ["01"],
         "name": "Wahid",
         "number": "081315080191",
         "plant": ["06"],
@@ -192,24 +202,9 @@
         "nik": ["01"],
         "name": "Sutaryo",
         "number": "08128284903",
-        "plant": ["01"],
-        "set": [],
-        "dep_no": [
-          "PDHD1",
-          "PDHD2",
-          "PDHD3",
-          "PDHD4",
-          "PDRL1",
-          "PDRL2",
-          "PDMC1",
-          "PDMC3",
-          "PDMR1",
-          "PDNC1",
-          "PDNT1",
-          "PDHB1",
-          "PDTR1",
-          "PDPU1"
-        ],
+        "plant": ["03"],
+        "set": ["mn"],
+        "dep_no": ["G3PK2", "G3GD2", "G3GD3", "G3MN1"],
         "mch": []
       },
       {
