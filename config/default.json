@@ -103,7 +103,8 @@
           "G3PK2",
           "G3GD2",
           "G3GD3",
-          "G3MN1"
+          "G3MN1",
+          "G3LG1"
         ],
         "mch": []
       },
@@ -114,7 +115,7 @@
         "number": "085723929978",
         "plant": ["03"],
         "set": ["mn"],
-        "dep_no": ["G3PK2", "G3GD2", "G3GD3", "G3MN1"],
+        "dep_no": ["G3PK2", "G3GD2", "G3GD3", "G3MN1", "G3LG1"],
         "mch": []
       },
       {
@@ -124,7 +125,7 @@
         "number": "085211234074",
         "plant": ["03"],
         "set": ["mn"],
-        "dep_no": ["G3PK2", "G3GD2", "G3GD3", "G3MN1"],
+        "dep_no": ["G3PK2", "G3GD2", "G3GD3", "G3MN1", "G3LG1"],
         "mch": []
       },
       {
@@ -134,7 +135,7 @@
         "number": "08581142214",
         "plant": ["03"],
         "set": ["mn"],
-        "dep_no": ["G3PK2", "G3GD2", "G3GD3", "G3MN1"],
+        "dep_no": ["G3PK2", "G3GD2", "G3GD3", "G3MN1", "G3LG1"],
         "mch": []
       },
       {
