@@ -52,6 +52,9 @@ export default {
             mch_com: {
               [Op.eq]: 'GM2',
             },
+            audit_request: {
+              [Op.ne]: 'C',
+            },
           },
         ],
       },
