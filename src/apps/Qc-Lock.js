@@ -65,11 +65,11 @@ export default {
       )
     }
 
-    if (User.length < 1) {
-      error.push({
-        message: 'User qc not found',
-      })
-    }
+    // if (User.length < 1) {
+    //   error.push({
+    //     message: 'User qc not found',
+    //   })
+    // }
 
     if (Lock.length < 1) {
       error.push({
