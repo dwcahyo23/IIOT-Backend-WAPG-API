@@ -190,7 +190,7 @@ export default {
           Sequelize.where(
             Sequelize.fn('date', Sequelize.col('ymd')),
             '>=',
-            '2023-08-01',
+            '2023-07-01',
           ),
           {
             chk_mark: {
@@ -216,19 +216,19 @@ export default {
       )
     }
 
-    if (User.length < 1) {
-      error.push({
-        message: 'User mn not found',
-      })
-    }
+    // if (User.length < 1) {
+    //   error.push({
+    //     message: 'User mn not found',
+    //   })
+    // }
 
-    if (Wo.length < 1) {
-      error.push({
-        message: 'Data mntn-wo closed not found',
-      })
-    }
+    // if (Wo.length < 1) {
+    //   error.push({
+    //     message: 'Data mntn-wo closed not found',
+    //   })
+    // }
 
-    if (error.length === 0) {
+    if (Wo.length > 0) {
       _.forEach(User, async (field) => {
         let msg = `Hello ${field.gender} ${field.name}`
         msg += `\nThis is the current state of Work-Order MN:`
@@ -281,57 +281,9 @@ export default {
         msg += `\nThank you and have a nice day! 😊`
         sendMsg({ number: field.number, msg: msg })
       })
-
-      // _.forEach(Group, async (field) => {
-      //   let msg = `Hello Group ${field.name}\n`
-      //   msg += `\nBelow is the current info of WO Close:`
-      //   _.forEach(Wo, async (record, i) => {
-      //     msg += `\n${i + 1}. Sheet: ${
-      //       record.sheet_no
-      //     } (Closed) ✅\nStoptime: ${format(
-      //       new Date(record.ymd),
-      //       'dd MMM yyyy HH:mm',
-      //     )}\nMachine: ${record.mch_no} | ${record.dep_no} | ${
-      //       record.com_no == '01'
-      //         ? 'GM1'
-      //         : record.com_no == '02'
-      //         ? 'GM2'
-      //         : record.com_no == '03'
-      //         ? 'GM3'
-      //         : 'GM5'
-      //     }\n*Priority:* ${
-      //       record.pri_no == '01'
-      //         ? 'Breakdown time'
-      //         : record.pri_no == '02'
-      //         ? 'Mesin tetap beroperasi'
-      //         : record.pri_no == '03'
-      //         ? 'Prev & Pred'
-      //         : 'Workshop'
-      //     }\nProblem: ${record.s_memo}\nRemarks: ${record.memo}\nReason: ${
-      //       record.rsn_no == '00'
-      //         ? 'Stoptime'
-      //         : record.rsn_no == '01'
-      //         ? 'Aus&Retak'
-      //         : record.rsn_no == '02'
-      //         ? 'Kecelakaan'
-      //         : record.rsn_no == '03'
-      //         ? 'Salah Operasi'
-      //         : record.rsn_no == '04'
-      //         ? 'Lalai'
-      //         : 'Lain-lain'
-      //     }${
-      //       Wo.length - 1 == i
-      //         ? '\n'
-      //         : '\n--------------------------------------------'
-      //     }`
-      //   })
-      //   msg += `\nThank you and have a nice day! 😊`
-      //   sendMsg({ name: field.name, msg: msg, type: 'group' })
-      // })
-
-      return { type: 'succes', message: 'message sended successfully' }
+      return { message: 'message wo close sended successfully' }
+    } else {
+      return { message: 'data mntn-wo closed not found' }
     }
-
-    return error
   },
 }
