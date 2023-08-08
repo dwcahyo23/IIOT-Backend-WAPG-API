@@ -163,7 +163,7 @@ export default {
               : 'Lain-lain'
           } `
           sendMsg({ number: '08128284903', msg: msg })
-          sendMsg({ number: '081280540525', msg: msg })
+          // sendMsg({ number: '081280540525', msg: msg })
           upStsWa({ id: record.sheet_no })
         }
       })
