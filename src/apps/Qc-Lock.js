@@ -78,22 +78,22 @@ export default {
     }
 
     if (error.length === 0) {
-      _.forEach(User, async (field) => {
-        let msg = `*Hello ${field.gender} ${field.name}*`
-        msg += `\nThis is the current state of QC-Lock:\n\n`
-        _.forEach(Lock, async (record, i) => {
-          msg += `\n*${i + 1}. Sheet_no:* ${record.sheet_no}\n*Product:* ${
-            record.pdc_name
-          }\n*Travel Card:* ${record.bat_card}\n*Fragment:* ${
-            record.bat_card_2
-          } | ${record.stk_no_2}\n*Problem:* ${record.problem}\n*Standard:* ${
-            record.standard
-          }\n*Result:* ${record.result}\n`
-          upStsLock({ id: record.sheet_no })
-        })
-        msg += `\n\nThank you and have a nice day!`
-        sendMsg({ number: field.number, msg: msg })
-      })
+      // _.forEach(User, async (field) => {
+      //   let msg = `*Hello ${field.gender} ${field.name}*`
+      //   msg += `\nThis is the current state of QC-Lock:\n\n`
+      //   _.forEach(Lock, async (record, i) => {
+      //     msg += `\n*${i + 1}. Sheet_no:* ${record.sheet_no}\n*Product:* ${
+      //       record.pdc_name
+      //     }\n*Travel Card:* ${record.bat_card}\n*Fragment:* ${
+      //       record.bat_card_2
+      //     } | ${record.stk_no_2}\n*Problem:* ${record.problem}\n*Standard:* ${
+      //       record.standard
+      //     }\n*Result:* ${record.result}\n`
+      //     upStsLock({ id: record.sheet_no })
+      //   })
+      //   msg += `\n\nThank you and have a nice day!`
+      //   sendMsg({ number: field.number, msg: msg })
+      // })
 
       _.forEach(Group, async (field) => {
         let msg = `*Hello Group ${field.name}*\n`
