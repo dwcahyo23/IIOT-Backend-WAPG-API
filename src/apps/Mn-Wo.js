@@ -119,53 +119,52 @@ export default {
             sendMsg({ number: field.number, msg: msg })
             upStsWa({ id: record.sheet_no })
             // console.log(JSON.stringify(User))
+          } else if (
+            record.com_no == '01' &&
+            record.com_no == '03' &&
+            (record.mch_no == '-' || _.isNull(record.mch_no))
+          ) {
+            let msg = `*Sheet_no:* ${record.sheet_no} (Open)❌`
+            msg += `\n\nHello, This is the current state of Work-Order MN:`
+            msg += `\n\n*Stoptime:* ${format(
+              new Date(record.ymd),
+              'dd MMM yyyy HH:mm',
+            )}\n*Machine:* ${record.mch_no} | ${record.dep_no} | ${
+              record.com_no == '01'
+                ? 'GM1'
+                : record.com_no == '02'
+                ? 'GM2'
+                : record.com_no == '03'
+                ? 'GM3'
+                : 'GM5'
+            }\n*Priority:* ${
+              record.pri_no == '01'
+                ? 'Breakdown time'
+                : record.pri_no == '02'
+                ? 'Mesin tetap beroperasi'
+                : record.pri_no == '03'
+                ? 'Prev & Pred'
+                : 'Workshop'
+            }\n*Problem:* ${record.s_memo}\n*Remarks:* ${
+              record.memo
+            }\n*Reason:* ${
+              record.rsn_no == '00'
+                ? 'Stoptime'
+                : record.rsn_no == '01'
+                ? 'Aus&Retak'
+                : record.rsn_no == '02'
+                ? 'Kecelakaan'
+                : record.rsn_no == '03'
+                ? 'Salah Operasi'
+                : record.rsn_no == '04'
+                ? 'Lalai'
+                : 'Lain-lain'
+            } `
+            sendMsg({ number: '08128284903', msg: msg })
+            // sendMsg({ number: '081280540525', msg: msg })
+            upStsWa({ id: record.sheet_no })
           }
         })
-        if (
-          record.com_no == '01' &&
-          record.com_no == '03' &&
-          (record.mch_no == '-' || _.isNull(record.mch_no))
-        ) {
-          let msg = `*Sheet_no:* ${record.sheet_no} (Open)❌`
-          msg += `\n\nHello, This is the current state of Work-Order MN:`
-          msg += `\n\n*Stoptime:* ${format(
-            new Date(record.ymd),
-            'dd MMM yyyy HH:mm',
-          )}\n*Machine:* ${record.mch_no} | ${record.dep_no} | ${
-            record.com_no == '01'
-              ? 'GM1'
-              : record.com_no == '02'
-              ? 'GM2'
-              : record.com_no == '03'
-              ? 'GM3'
-              : 'GM5'
-          }\n*Priority:* ${
-            record.pri_no == '01'
-              ? 'Breakdown time'
-              : record.pri_no == '02'
-              ? 'Mesin tetap beroperasi'
-              : record.pri_no == '03'
-              ? 'Prev & Pred'
-              : 'Workshop'
-          }\n*Problem:* ${record.s_memo}\n*Remarks:* ${
-            record.memo
-          }\n*Reason:* ${
-            record.rsn_no == '00'
-              ? 'Stoptime'
-              : record.rsn_no == '01'
-              ? 'Aus&Retak'
-              : record.rsn_no == '02'
-              ? 'Kecelakaan'
-              : record.rsn_no == '03'
-              ? 'Salah Operasi'
-              : record.rsn_no == '04'
-              ? 'Lalai'
-              : 'Lain-lain'
-          } `
-          sendMsg({ number: '08128284903', msg: msg })
-          // sendMsg({ number: '081280540525', msg: msg })
-          upStsWa({ id: record.sheet_no })
-        }
       })
       return { type: 'succes', message: 'message sended successfully' }
     }

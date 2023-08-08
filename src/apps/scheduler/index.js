@@ -14,7 +14,7 @@ export default {
     const regulerJob = schedule.scheduleJob('1 * * * * *', function () {
       // !update from user
       MnWo.getOpen().then((res) => console.log(res))
-      // MnWo.getClose().then((res) => console.log(res))
+      MnWo.getClose().then((res) => console.log(res))
       QcLock.getLock().then((res) => console.log(res))
     })
 
