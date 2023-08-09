@@ -109,6 +109,7 @@ export default {
         })
         msg += `\n\nThank you!`
         sendMsg({ name: field.name, msg: msg, type: 'group' })
+        upStsLock({ id: record.sheet_no })
       })
 
       return { message: 'message qc lock sended successfully' }
