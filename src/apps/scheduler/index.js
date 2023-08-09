@@ -28,12 +28,6 @@ export default {
       MnReqGM2.MnReqRdy()
     }, 600000)
 
-    // setInterval(() => {
-    //   MnReq.MnReq()
-    //   MnReq.MnReqMRE()
-    //   MnReq.MnReqRdy()
-    // }, 5000)
-
     //! Job Scheduler EWS 2H
     const ews1 = schedule.scheduleJob('1 0 8 * * *', function () {
       Ews.getCritical().then((res) => console.log(res))

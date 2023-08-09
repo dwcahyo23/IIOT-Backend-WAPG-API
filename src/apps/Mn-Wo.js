@@ -166,7 +166,7 @@ export default {
           }
         })
       })
-      return { type: 'succes', message: 'message sended successfully' }
+      return { message: 'message WO Open sended successfully' }
     }
 
     return error
