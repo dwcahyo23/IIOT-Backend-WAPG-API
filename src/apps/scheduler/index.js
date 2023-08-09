@@ -18,15 +18,15 @@ export default {
       QcLock.getLock().then((res) => console.log(res))
     })
 
-    // setInterval(() => {
-    //   MnReq.MnReq()
-    //   MnReq.MnReqMRE()
-    //   MnReq.MnReqRdy()
+    setInterval(() => {
+      MnReq.MnReq()
+      MnReq.MnReqMRE()
+      MnReq.MnReqRdy()
 
-    //   MnReqGM2.MnReq()
-    //   MnReqGM2.MnReqMRE()
-    //   MnReqGM2.MnReqRdy()
-    // }, 600000)
+      MnReqGM2.MnReq()
+      MnReqGM2.MnReqMRE()
+      MnReqGM2.MnReqRdy()
+    }, 600000)
 
     // setInterval(() => {
     //   MnReq.MnReq()
