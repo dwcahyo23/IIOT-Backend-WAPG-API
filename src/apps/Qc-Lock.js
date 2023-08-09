@@ -111,7 +111,7 @@ export default {
         sendMsg({ name: field.name, msg: msg, type: 'group' })
       })
 
-      return { type: 'succes', message: 'message sended successfully' }
+      return { message: 'message qc lock sended successfully' }
     }
     return error
   },

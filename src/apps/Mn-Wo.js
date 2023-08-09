@@ -236,9 +236,7 @@ export default {
             _.includes(field.plant, record.com_no) &&
             _.includes(field.dep_no, record.dep_no)
           ) {
-            msg += `\n${i + 1}. Sheet: ${
-              record.sheet_no
-            } (Closed) ✅\nStoptime: ${format(
+            msg += `\nSheet: ${record.sheet_no} (Closed) ✅\nStoptime: ${format(
               new Date(record.ymd),
               'dd MMM yyyy HH:mm',
             )}\nMachine: ${record.mch_no} | ${record.dep_no} | ${
