@@ -48,7 +48,7 @@ export default {
     where       
       sts_wa = 'N' 
       and
-	date(sch_ot.mad_qap_locm.ymd) >= '2023-07-01'
+	date(sch_ot.mad_qap_locm.ymd) = CURRENT_DATE
     order by 
       sch_ot.mad_qap_locm.ymd asc`,
       { type: QueryTypes.SELECT },
