@@ -85,7 +85,7 @@ export default {
         msg += `\nThank you!`
         sendMsg({ number: field.number, msg: msg })
       })
-      return { type: 'succes', message: 'message sended successfully' }
+      return { message: 'message EWS sended successfully' }
     }
 
     return error

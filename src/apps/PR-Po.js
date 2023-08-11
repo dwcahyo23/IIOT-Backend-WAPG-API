@@ -93,7 +93,7 @@ export default {
           }
         })
       })
-      return { type: 'succes', message: 'message sended successfully' }
+      return { type: 'succes', message: 'message PRPO sended successfully' }
     }
 
     return error
