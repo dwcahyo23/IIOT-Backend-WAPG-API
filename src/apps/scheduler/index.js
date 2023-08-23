@@ -18,16 +18,6 @@ export default {
       QcLock.getLock().then((res) => console.log(res))
     })
 
-    // setInterval(() => {
-    //   MnReq.MnReq()
-    //   MnReq.MnReqMRE()
-    //   MnReq.MnReqRdy()
-
-    //   MnReqGM2.MnReq()
-    //   MnReqGM2.MnReqMRE()
-    //   MnReqGM2.MnReqRdy()
-    // }, 600000)
-
     //! Job Scheduler EWS 2H
     const ews1 = schedule.scheduleJob('1 0 8 * * *', function () {
       Ews.getCritical().then((res) => console.log(res))

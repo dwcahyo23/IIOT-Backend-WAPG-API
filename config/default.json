@@ -312,12 +312,12 @@
         "mch": []
       },
       {
-        "name": "PENANGANAN SPAREPART GM1 IK-03-03-01",
+        "name": "GM1 PENANGANAN SPAREPART",
         "set": ["mn_req"],
         "mch": []
       },
       {
-        "name": "PENANGANAN SPAREPART GM2 IK-03-03-01",
+        "name": "GM2 PENANGANAN SPAREPART",
         "set": ["mn_req2"],
         "mch": []
       },
