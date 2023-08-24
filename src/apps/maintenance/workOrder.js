@@ -100,6 +100,8 @@ export default {
             })
             if (_.isArray(val.msg) && val.msg.length > 0) {
               sendMsgUser({ number: val.number, msg: msg })
+            } else {
+              console.log('news worderOpen not found')
             }
           })
         })
@@ -158,6 +160,8 @@ export default {
 
             if (_.isArray(val.msg) && val.msg.length > 0) {
               sendMsgUser({ number: val.number, msg: msg })
+            } else {
+              console.log('news worderOpen not found')
             }
           })
         })
