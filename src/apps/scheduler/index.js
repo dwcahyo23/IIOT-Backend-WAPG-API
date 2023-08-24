@@ -16,7 +16,7 @@ export default {
         .then((res) => console.log(res))
         .catch((err) => console.log(err))
       workOrder
-        .get()
+        .getClose()
         .then((res) => console.log(res))
         .catch((err) => console.log(err))
       QcLock.getLock().then((res) => console.log(res))

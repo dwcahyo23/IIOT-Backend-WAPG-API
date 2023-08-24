@@ -58,103 +58,107 @@ const sendMsgUser = async (params) => {
 
 export default {
   async getOpen() {
-    newsOpen()
-      .then((data) => {
-        _.forEach(data, (val) => {
-          let msg = `Hello ${val.name}, this is the current state of Work-Order :`
-          _.forEach(val.msg, (msgContext, numberContext) => {
-            msg += `\n\n${numberContext + 1}.*${msgContext.sheet_no}* | ${
-              msgContext.pri_no == '01'
-                ? '*Breakdown* ❌'
-                : msgContext.pri_no == '02'
-                ? '*Still Run* ⌛️'
-                : msgContext.pri_no == '03'
-                ? '*Preventive* 🔧'
-                : msgContext.pri_no == '04'
-                ? '*Workshop Still Run* ⌛️'
-                : msgContext.pri_no == '05'
-                ? '*Workshop Breakdown* ❌'
-                : msgContext.pri_no == '06'
-                ? '*Project (Machinery)* 🔧'
-                : msgContext.pri_no == '07'
-                ? '*Project (Workshop)* 🔧'
-                : 'undefined'
-            }`
-            msg += `\n*Machine :* ${msgContext.mch_no} | ${
-              msgContext.dep_no
-            } | ${
-              msgContext.com_no == '01'
-                ? 'GM1'
-                : msgContext.com_no == '02'
-                ? 'GM2'
-                : msgContext.com_no == '03'
-                ? 'GM3'
-                : 'GM5'
-            }`
-            msg += `\n*Open :* ${dayjs(msgContext.ymd).format(
-              'DD/MM/YYYY HH:mm',
-            )}`
-            msg += `\n*Problem:* ${msgContext.s_memo}\n*Remarks:* ${msgContext.memo}`
+    try {
+      newsOpen()
+        .then((data) => {
+          _.forEach(data, (val) => {
+            let msg = `Hello ${val.name}, this is the current state of Work-Order :`
+            _.forEach(val.msg, (msgContext, numberContext) => {
+              msg += `\n\n${numberContext + 1}.*${msgContext.sheet_no}* | ${
+                msgContext.pri_no == '01'
+                  ? '*Breakdown* ❌'
+                  : msgContext.pri_no == '02'
+                  ? '*Still Run* ⌛️'
+                  : msgContext.pri_no == '03'
+                  ? '*Preventive* 🔧'
+                  : msgContext.pri_no == '04'
+                  ? '*Workshop Still Run* ⌛️'
+                  : msgContext.pri_no == '05'
+                  ? '*Workshop Breakdown* ❌'
+                  : msgContext.pri_no == '06'
+                  ? '*Project (Machinery)* 🔧'
+                  : msgContext.pri_no == '07'
+                  ? '*Project (Workshop)* 🔧'
+                  : 'undefined'
+              }`
+              msg += `\n*Machine :* ${msgContext.mch_no} | ${
+                msgContext.dep_no
+              } | ${
+                msgContext.com_no == '01'
+                  ? 'GM1'
+                  : msgContext.com_no == '02'
+                  ? 'GM2'
+                  : msgContext.com_no == '03'
+                  ? 'GM3'
+                  : 'GM5'
+              }`
+              msg += `\n*Open :* ${dayjs(msgContext.ymd).format(
+                'DD/MM/YYYY HH:mm',
+              )}`
+              msg += `\n*Problem:* ${msgContext.s_memo}\n*Remarks:* ${msgContext.memo}`
+            })
+            if (_.isArray(val.msg) && val.msg.length > 0) {
+              sendMsgUser({ number: val.number, msg: msg })
+            }
           })
-          if (_.isArray(val.msg) && val.msg.length > 0) {
-            sendMsgUser({ number: val.number, msg: msg })
-          }
         })
-      })
-      .catch((err) => console.log(err))
+        .catch((err) => console.log(err))
+    } catch (error) {}
   },
 
   async getClose() {
-    newsClose()
-      .then((data) => {
-        _.forEach(data, (val) => {
-          let msg = `Hallo ${val.name}, this is the current state of Work-Order :`
-          _.forEach(val.msg, (msgContext, numberContext) => {
-            msg += `\n\n${numberContext + 1}.*${msgContext.sheet_no}* | ${
-              msgContext.pri_no == '01'
-                ? '*Breakdown* ✅'
-                : msgContext.pri_no == '02'
-                ? '*Still Run* ✅'
-                : msgContext.pri_no == '03'
-                ? '*Preventive* ✅'
-                : msgContext.pri_no == '04'
-                ? '*Workshop Still Run* ✅'
-                : msgContext.pri_no == '05'
-                ? '*Workshop Breakdown* ✅'
-                : msgContext.pri_no == '06'
-                ? '*Project (Machinery)* ✅'
-                : msgContext.pri_no == '07'
-                ? '*Project (Workshop)* ✅'
-                : 'undefined'
-            }`
-            msg += `\n*Machine :* ${msgContext.mch_no} | ${
-              msgContext.dep_no
-            } | ${
-              msgContext.com_no == '01'
-                ? 'GM1'
-                : msgContext.com_no == '02'
-                ? 'GM2'
-                : msgContext.com_no == '03'
-                ? 'GM3'
-                : 'GM5'
-            }`
-            msg += `\n*Open :* ${dayjs(msgContext.ymd).format(
-              'DD/MM/YYYY HH:mm',
-            )}`
-            msg += `\n*Close :* ${dayjs(msgContext.chk_date).format(
-              'DD/MM/YYYY HH:mm',
-            )}`
-            msg += `\n*Loss time :* ${dayjs(msgContext.chk_date)
-              .diff(dayjs(msgContext.ymd), 'h', true)
-              .toFixed(1)} hour ⏱`
-            msg += `\n*Problem:* ${msgContext.s_memo}\n*Remarks:* ${msgContext.memo}`
-          })
+    try {
+      await newsClose()
+        .then((data) => {
+          _.forEach(data, (val) => {
+            let msg = `Hallo ${val.name}, this is the current state of Work-Order :`
+            _.forEach(val.msg, (msgContext, numberContext) => {
+              msg += `\n\n${numberContext + 1}.*${msgContext.sheet_no}* | ${
+                msgContext.pri_no == '01'
+                  ? '*Breakdown* ✅'
+                  : msgContext.pri_no == '02'
+                  ? '*Still Run* ✅'
+                  : msgContext.pri_no == '03'
+                  ? '*Preventive* ✅'
+                  : msgContext.pri_no == '04'
+                  ? '*Workshop Still Run* ✅'
+                  : msgContext.pri_no == '05'
+                  ? '*Workshop Breakdown* ✅'
+                  : msgContext.pri_no == '06'
+                  ? '*Project (Machinery)* ✅'
+                  : msgContext.pri_no == '07'
+                  ? '*Project (Workshop)* ✅'
+                  : 'undefined'
+              }`
+              msg += `\n*Machine :* ${msgContext.mch_no} | ${
+                msgContext.dep_no
+              } | ${
+                msgContext.com_no == '01'
+                  ? 'GM1'
+                  : msgContext.com_no == '02'
+                  ? 'GM2'
+                  : msgContext.com_no == '03'
+                  ? 'GM3'
+                  : 'GM5'
+              }`
+              msg += `\n*Open :* ${dayjs(msgContext.ymd).format(
+                'DD/MM/YYYY HH:mm',
+              )}`
+              msg += `\n*Close :* ${dayjs(msgContext.chk_date).format(
+                'DD/MM/YYYY HH:mm',
+              )}`
+              msg += `\n*Loss time :* ${dayjs(msgContext.chk_date)
+                .diff(dayjs(msgContext.ymd), 'h', true)
+                .toFixed(1)} hour ⏱`
+              msg += `\n*Problem:* ${msgContext.s_memo}\n*Remarks:* ${msgContext.memo}`
+            })
 
-          if (_.isArray(val.msg) && val.msg.length > 0) {
-            sendMsgUser({ number: val.number, msg: msg })
-          }
+            if (_.isArray(val.msg) && val.msg.length > 0) {
+              sendMsgUser({ number: val.number, msg: msg })
+            }
+          })
         })
-      })
-      .catch((err) => console.log(err))
+        .catch((err) => console.log(err))
+    } catch (error) {}
   },
 }
