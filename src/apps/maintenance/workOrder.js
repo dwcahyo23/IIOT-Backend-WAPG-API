@@ -9,15 +9,15 @@ const newsOpen = () => {
         .get('http://192.168.192.7:5000/newsWorderOpen')
         .then((x) => {
           console.log('fetch newsWorderOpen')
-          resolve(x)
+          resolve(x.data)
         })
         .catch((err) => {
-          console.log(err.message)
+          console.log(err)
           reject(err)
         })
     } catch (err) {
       {
-        console.log(err.message)
+        console.log(err)
         reject(err)
       }
     }
@@ -34,12 +34,12 @@ const newsClose = () => {
           resolve(x.data)
         })
         .catch((err) => {
-          console.log(err.message)
+          console.log(err)
           reject(err)
         })
     } catch (err) {
       {
-        console.log(err.message)
+        console.log(err)
         reject(err)
       }
     }
@@ -61,6 +61,7 @@ export default {
     try {
       newsOpen()
         .then((data) => {
+          // console.log(data)
           _.forEach(data, (val) => {
             let msg = `Hello ${val.name}, this is the current state of Work-Order :`
             _.forEach(val.msg, (msgContext, numberContext) => {
@@ -103,7 +104,9 @@ export default {
           })
         })
         .catch((err) => console.log(err))
-    } catch (error) {}
+    } catch (error) {
+      console.log(error)
+    }
   },
 
   async getClose() {
@@ -159,6 +162,8 @@ export default {
           })
         })
         .catch((err) => console.log(err))
-    } catch (error) {}
+    } catch (error) {
+      console.log(error)
+    }
   },
 }
