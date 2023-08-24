@@ -1,20 +1,24 @@
 import schedule from 'node-schedule'
-import MnWo from '../Mn-Wo'
+
 import PRPo from '../PR-Po'
 import QcLock from '../Qc-Lock'
 import Ews from '../Ews'
 import { format } from 'date-fns'
-import user from '../user'
-import MnReq from '../Mn-Req'
-import MnReqGM2 from '../Mn-Req-GM2'
+import workOrder from '../maintenance/workOrder'
 
 export default {
   async getScheduler() {
     //! Job Scheduler Reguler
     const regulerJob = schedule.scheduleJob('1 * * * * *', function () {
       // !update from user
-      MnWo.getOpen().then((res) => console.log(res))
-      MnWo.getClose().then((res) => console.log(res))
+      workOrder
+        .getOpen()
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err))
+      workOrder
+        .get()
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err))
       QcLock.getLock().then((res) => console.log(res))
     })
 

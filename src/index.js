@@ -19,7 +19,7 @@ app.get('/', (req, res) => {
   res.render('index', { title: 'Whatsapp API' })
 })
 routes(app)
-scheduler.getScheduler()
+// scheduler.getScheduler()
 
 // handle uncaught exceptions
 process.on('uncaughtException', function (error) {

@@ -6,6 +6,7 @@
   "scripts": {
     "build": "babel ./src --out-dir ./build",
     "start": "node ./build/index.js",
+    "test": "npx babel-node src/apps/maintenance/workOrder.js",
     "dev": "nodemon --exec npx babel-node src/index.js",
     "lint": "eslint ."
   },
