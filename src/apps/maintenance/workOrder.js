@@ -63,22 +63,22 @@ export default {
         .then((data) => {
           // console.log(data)
           _.forEach(data, (val) => {
-            let msg = `Hello ${val.name}, this is the current state of Work-Order :`
+            let msg = `Hello ${val.name}, this is the current state of *Work Order Open* :`
             _.forEach(val.msg, (msgContext, numberContext) => {
               msg += `\n\n${numberContext + 1}.*${msgContext.sheet_no}* | ${
-                msgContext.pri_no == '01'
+                msgContext.pri_no == '01' || msgContext.pri_no == '1'
                   ? '*Breakdown* ❌'
-                  : msgContext.pri_no == '02'
+                  : msgContext.pri_no == '02' || msgContext.pri_no == '2'
                   ? '*Still Run* ⌛️'
-                  : msgContext.pri_no == '03'
+                  : msgContext.pri_no == '03' || msgContext.pri_no == '3'
                   ? '*Preventive* 🔧'
-                  : msgContext.pri_no == '04'
+                  : msgContext.pri_no == '04' || msgContext.pri_no == '4'
                   ? '*Workshop Still Run* ⌛️'
-                  : msgContext.pri_no == '05'
+                  : msgContext.pri_no == '05' || msgContext.pri_no == '5'
                   ? '*Workshop Breakdown* ❌'
-                  : msgContext.pri_no == '06'
+                  : msgContext.pri_no == '06' || msgContext.pri_no == '6'
                   ? '*Project (Machinery)* 🔧'
-                  : msgContext.pri_no == '07'
+                  : msgContext.pri_no == '07' || msgContext.pri_no == '7'
                   ? '*Project (Workshop)* 🔧'
                   : 'undefined'
               }`
@@ -91,7 +91,9 @@ export default {
                   ? 'GM2'
                   : msgContext.com_no == '03'
                   ? 'GM3'
-                  : 'GM5'
+                  : msgContext.com_no == '06'
+                  ? 'GM5'
+                  : 'undefined'
               }`
               msg += `\n*Open :* ${dayjs(msgContext.ymd).format(
                 'DD/MM/YYYY HH:mm',
@@ -116,22 +118,22 @@ export default {
       await newsClose()
         .then((data) => {
           _.forEach(data, (val) => {
-            let msg = `Hallo ${val.name}, this is the current state of Work-Order :`
+            let msg = `Hallo ${val.name}, this is the current state of *Work Order Close* :`
             _.forEach(val.msg, (msgContext, numberContext) => {
               msg += `\n\n${numberContext + 1}.*${msgContext.sheet_no}* | ${
-                msgContext.pri_no == '01'
+                msgContext.pri_no == '01' || msgContext.pri_no == '1'
                   ? '*Breakdown* ✅'
-                  : msgContext.pri_no == '02'
+                  : msgContext.pri_no == '02' || msgContext.pri_no == '2'
                   ? '*Still Run* ✅'
-                  : msgContext.pri_no == '03'
+                  : msgContext.pri_no == '03' || msgContext.pri_no == '3'
                   ? '*Preventive* ✅'
-                  : msgContext.pri_no == '04'
+                  : msgContext.pri_no == '04' || msgContext.pri_no == '4'
                   ? '*Workshop Still Run* ✅'
-                  : msgContext.pri_no == '05'
+                  : msgContext.pri_no == '05' || msgContext.pri_no == '5'
                   ? '*Workshop Breakdown* ✅'
-                  : msgContext.pri_no == '06'
+                  : msgContext.pri_no == '06' || msgContext.pri_no == '6'
                   ? '*Project (Machinery)* ✅'
-                  : msgContext.pri_no == '07'
+                  : msgContext.pri_no == '07' || msgContext.pri_no == '7'
                   ? '*Project (Workshop)* ✅'
                   : 'undefined'
               }`
@@ -144,7 +146,9 @@ export default {
                   ? 'GM2'
                   : msgContext.com_no == '03'
                   ? 'GM3'
-                  : 'GM5'
+                  : msgContext.com_no == '06'
+                  ? 'GM5'
+                  : 'undefined'
               }`
               msg += `\n*Open :* ${dayjs(msgContext.ymd).format(
                 'DD/MM/YYYY HH:mm',
@@ -152,7 +156,7 @@ export default {
               msg += `\n*Close :* ${dayjs(msgContext.chk_date).format(
                 'DD/MM/YYYY HH:mm',
               )}`
-              msg += `\n*Loss time :* ${dayjs(msgContext.chk_date)
+              msg += `\n*Total time :* ${dayjs(msgContext.chk_date)
                 .diff(dayjs(msgContext.ymd), 'h', true)
                 .toFixed(1)} hour ⏱`
               msg += `\n*Problem:* ${msgContext.s_memo}\n*Remarks:* ${msgContext.memo}`
