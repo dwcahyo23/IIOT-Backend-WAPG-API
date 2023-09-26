@@ -36,7 +36,7 @@ var _default = {
               _QcLock["default"].getLock().then(function (res) {
                 return console.log(res);
               });
-            }); //! Job Scheduler EWS 2H
+            }); // //! Job Scheduler EWS 2H
             ews1 = _nodeSchedule["default"].scheduleJob('1 0 8 * * *', function () {
               _Ews["default"].getCritical().then(function (res) {
                 return console.log(res);

@@ -80,17 +80,17 @@ var _default = {
               newsOpen().then(function (data) {
                 // console.log(data)
                 _lodash["default"].forEach(data, function (val) {
-                  var msg = "Hello ".concat(val.name, ", this is the current state of *Work Order Open* :");
-                  _lodash["default"].forEach(val.msg, function (msgContext, numberContext) {
-                    msg += "\n\n".concat(numberContext + 1, ".*").concat(msgContext.sheet_no, "* | ").concat(msgContext.pri_no == '01' || msgContext.pri_no == '1' ? '*Breakdown* ❌' : msgContext.pri_no == '02' || msgContext.pri_no == '2' ? '*Still Run* ⌛️' : msgContext.pri_no == '03' || msgContext.pri_no == '3' ? '*Preventive* 🔧' : msgContext.pri_no == '04' || msgContext.pri_no == '4' ? '*Workshop Still Run* ⌛️' : msgContext.pri_no == '05' || msgContext.pri_no == '5' ? '*Workshop Breakdown* ❌' : msgContext.pri_no == '06' || msgContext.pri_no == '6' ? '*Project (Machinery)* 🔧' : msgContext.pri_no == '07' || msgContext.pri_no == '7' ? '*Project (Workshop)* 🔧' : 'undefined');
-                    msg += "\n*Machine :* ".concat(msgContext.mch_no, " | ").concat(msgContext.dep_no, " | ").concat(msgContext.com_no == '01' ? 'GM1' : msgContext.com_no == '02' ? 'GM2' : msgContext.com_no == '03' ? 'GM3' : msgContext.com_no == '06' ? 'GM5' : 'undefined');
-                    msg += "\n*Open :* ".concat((0, _dayjs["default"])(msgContext.ymd).format('DD/MM/YYYY HH:mm'));
-                    msg += "\n*Problem:* ".concat(msgContext.s_memo, "\n*Remarks:* ").concat(msgContext.memo);
-                  });
                   if (_lodash["default"].isArray(val.msg) && val.msg.length > 0) {
-                    sendMsgUser({
-                      number: val.number,
-                      msg: msg
+                    _lodash["default"].forEach(val.msg, function (msgContext, numberContext) {
+                      var msg = "Hello Mr.".concat(val.name, ", \n*Work Order Open* :");
+                      msg += "\n\n*".concat(msgContext.sheet_no, "* | ").concat(msgContext.pri_no == '01' || msgContext.pri_no == '1' ? '*Breakdown* Open❌' : msgContext.pri_no == '02' || msgContext.pri_no == '2' ? '*Still Run* Open⌛️' : msgContext.pri_no == '03' || msgContext.pri_no == '3' ? '*Preventive* Open🔧' : msgContext.pri_no == '04' || msgContext.pri_no == '4' ? '*Workshop Still Run* Open⌛️' : msgContext.pri_no == '05' || msgContext.pri_no == '5' ? '*Workshop Breakdown* Open❌' : msgContext.pri_no == '06' || msgContext.pri_no == '6' ? '*Project (Machinery)* Open🔧' : msgContext.pri_no == '07' || msgContext.pri_no == '7' ? '*Project (Workshop)* Open🔧' : 'undefined');
+                      msg += "\n*Machine :* ".concat(msgContext.mch_no, " | ").concat(msgContext.dep_no, " | ").concat(msgContext.com_no == '01' ? 'GM1' : msgContext.com_no == '02' ? 'GM2' : msgContext.com_no == '03' ? 'GM3' : msgContext.com_no == '06' ? 'GM5' : 'undefined');
+                      msg += "\n*Open :* ".concat((0, _dayjs["default"])(msgContext.ymd).format('DD/MM/YYYY HH:mm'));
+                      msg += "\n*Problem:* ".concat(msgContext.s_memo, "\n*Remarks:* ").concat(msgContext.memo);
+                      sendMsgUser({
+                        number: val.number,
+                        msg: msg
+                      });
                     });
                   } else {
                     console.log('news worderOpen not found');
@@ -118,22 +118,23 @@ var _default = {
             _context3.next = 3;
             return newsClose().then(function (data) {
               _lodash["default"].forEach(data, function (val) {
-                var msg = "Hallo ".concat(val.name, ", this is the current state of *Work Order Close* :");
-                _lodash["default"].forEach(val.msg, function (msgContext, numberContext) {
-                  msg += "\n\n".concat(numberContext + 1, ".*").concat(msgContext.sheet_no, "* | ").concat(msgContext.pri_no == '01' || msgContext.pri_no == '1' ? '*Breakdown* ✅' : msgContext.pri_no == '02' || msgContext.pri_no == '2' ? '*Still Run* ✅' : msgContext.pri_no == '03' || msgContext.pri_no == '3' ? '*Preventive* ✅' : msgContext.pri_no == '04' || msgContext.pri_no == '4' ? '*Workshop Still Run* ✅' : msgContext.pri_no == '05' || msgContext.pri_no == '5' ? '*Workshop Breakdown* ✅' : msgContext.pri_no == '06' || msgContext.pri_no == '6' ? '*Project (Machinery)* ✅' : msgContext.pri_no == '07' || msgContext.pri_no == '7' ? '*Project (Workshop)* ✅' : 'undefined');
-                  msg += "\n*Machine :* ".concat(msgContext.mch_no, " | ").concat(msgContext.dep_no, " | ").concat(msgContext.com_no == '01' ? 'GM1' : msgContext.com_no == '02' ? 'GM2' : msgContext.com_no == '03' ? 'GM3' : msgContext.com_no == '06' ? 'GM5' : 'undefined');
-                  msg += "\n*Open :* ".concat((0, _dayjs["default"])(msgContext.ymd).format('DD/MM/YYYY HH:mm'));
-                  msg += "\n*Close :* ".concat((0, _dayjs["default"])(msgContext.chk_date).format('DD/MM/YYYY HH:mm'));
-                  msg += "\n*Total time :* ".concat((0, _dayjs["default"])(msgContext.chk_date).diff((0, _dayjs["default"])(msgContext.ymd), 'h', true).toFixed(1), " hour \u23F1");
-                  msg += "\n*Problem:* ".concat(msgContext.s_memo, "\n*Remarks:* ").concat(msgContext.memo);
-                });
-                if (_lodash["default"].isArray(val.msg) && val.msg.length > 0) {
-                  sendMsgUser({
-                    number: val.number,
-                    msg: msg
+                if (_lodash["default"].isArray(val.msg) && val.msg.length > 0 && val.name == 'Yusuf') {
+                  _lodash["default"].forEach(val.msg, function (msgContext, numberContext) {
+                    var msg = "Hallo Mr. ".concat(val.name, ", \n*Work Order Closed*:");
+                    msg += "\n\n*".concat(msgContext.sheet_no, "* | ").concat(msgContext.pri_no == '01' || msgContext.pri_no == '1' ? '*Breakdown* Closed✅' : msgContext.pri_no == '02' || msgContext.pri_no == '2' ? '*Still Run* Closed✅' : msgContext.pri_no == '03' || msgContext.pri_no == '3' ? '*Preventive* Closed✅' : msgContext.pri_no == '04' || msgContext.pri_no == '4' ? '*Workshop Still Run* Closed✅' : msgContext.pri_no == '05' || msgContext.pri_no == '5' ? '*Workshop Breakdown* Closed✅' : msgContext.pri_no == '06' || msgContext.pri_no == '6' ? '*Project (Machinery)* Closed✅' : msgContext.pri_no == '07' || msgContext.pri_no == '7' ? '*Project (Workshop)* Closed✅' : 'undefined');
+                    msg += "\n*Machine :* ".concat(msgContext.mch_no, " | ").concat(msgContext.dep_no, " | ").concat(msgContext.com_no == '01' ? 'GM1' : msgContext.com_no == '02' ? 'GM2' : msgContext.com_no == '03' ? 'GM3' : msgContext.com_no == '06' ? 'GM5' : 'undefined');
+                    msg += "\n*Open :* ".concat((0, _dayjs["default"])(msgContext.ymd).format('DD/MM/YYYY HH:mm'));
+                    msg += "\n*Close :* ".concat((0, _dayjs["default"])(msgContext.chk_date).format('DD/MM/YYYY HH:mm'));
+                    msg += "\n*Total time :* ".concat((0, _dayjs["default"])(msgContext.chk_date).diff((0, _dayjs["default"])(msgContext.ymd), 'h', true).toFixed(1), " hour \u23F1");
+                    msg += "\n*Problem:* ".concat(msgContext.s_memo, "\n*Remarks:* ").concat(msgContext.memo);
+                    // sendMsgUser({ number: '082124610363', msg: msg })
+                    sendMsgUser({
+                      number: val.number,
+                      msg: msg
+                    });
                   });
                 } else {
-                  console.log('news worderOpen not found');
+                  console.log('news worderClose not found');
                 }
               });
             })["catch"](function (err) {
