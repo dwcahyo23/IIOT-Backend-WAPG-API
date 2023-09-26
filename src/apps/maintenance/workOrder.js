@@ -63,45 +63,45 @@ export default {
         .then((data) => {
           // console.log(data)
           _.forEach(data, (val) => {
-            let msg = `Hello ${val.name}, this is the current state of *Work Order Open* :`
-            _.forEach(val.msg, (msgContext, numberContext) => {
-              msg += `\n\n${numberContext + 1}.*${msgContext.sheet_no}* | ${
-                msgContext.pri_no == '01' || msgContext.pri_no == '1'
-                  ? '*Breakdown* ❌'
-                  : msgContext.pri_no == '02' || msgContext.pri_no == '2'
-                  ? '*Still Run* ⌛️'
-                  : msgContext.pri_no == '03' || msgContext.pri_no == '3'
-                  ? '*Preventive* 🔧'
-                  : msgContext.pri_no == '04' || msgContext.pri_no == '4'
-                  ? '*Workshop Still Run* ⌛️'
-                  : msgContext.pri_no == '05' || msgContext.pri_no == '5'
-                  ? '*Workshop Breakdown* ❌'
-                  : msgContext.pri_no == '06' || msgContext.pri_no == '6'
-                  ? '*Project (Machinery)* 🔧'
-                  : msgContext.pri_no == '07' || msgContext.pri_no == '7'
-                  ? '*Project (Workshop)* 🔧'
-                  : 'undefined'
-              }`
-              msg += `\n*Machine :* ${msgContext.mch_no} | ${
-                msgContext.dep_no
-              } | ${
-                msgContext.com_no == '01'
-                  ? 'GM1'
-                  : msgContext.com_no == '02'
-                  ? 'GM2'
-                  : msgContext.com_no == '03'
-                  ? 'GM3'
-                  : msgContext.com_no == '06'
-                  ? 'GM5'
-                  : 'undefined'
-              }`
-              msg += `\n*Open :* ${dayjs(msgContext.ymd).format(
-                'DD/MM/YYYY HH:mm',
-              )}`
-              msg += `\n*Problem:* ${msgContext.s_memo}\n*Remarks:* ${msgContext.memo}`
-            })
             if (_.isArray(val.msg) && val.msg.length > 0) {
-              sendMsgUser({ number: val.number, msg: msg })
+              _.forEach(val.msg, (msgContext, numberContext) => {
+                let msg = `Hello Mr.${val.name}, \n*Work Order Open* :`
+                msg += `\n\n*${msgContext.sheet_no}* | ${
+                  msgContext.pri_no == '01' || msgContext.pri_no == '1'
+                    ? '*Breakdown* Open❌'
+                    : msgContext.pri_no == '02' || msgContext.pri_no == '2'
+                    ? '*Still Run* Open⌛️'
+                    : msgContext.pri_no == '03' || msgContext.pri_no == '3'
+                    ? '*Preventive* Open🔧'
+                    : msgContext.pri_no == '04' || msgContext.pri_no == '4'
+                    ? '*Workshop Still Run* Open⌛️'
+                    : msgContext.pri_no == '05' || msgContext.pri_no == '5'
+                    ? '*Workshop Breakdown* Open❌'
+                    : msgContext.pri_no == '06' || msgContext.pri_no == '6'
+                    ? '*Project (Machinery)* Open🔧'
+                    : msgContext.pri_no == '07' || msgContext.pri_no == '7'
+                    ? '*Project (Workshop)* Open🔧'
+                    : 'undefined'
+                }`
+                msg += `\n*Machine :* ${msgContext.mch_no} | ${
+                  msgContext.dep_no
+                } | ${
+                  msgContext.com_no == '01'
+                    ? 'GM1'
+                    : msgContext.com_no == '02'
+                    ? 'GM2'
+                    : msgContext.com_no == '03'
+                    ? 'GM3'
+                    : msgContext.com_no == '06'
+                    ? 'GM5'
+                    : 'undefined'
+                }`
+                msg += `\n*Open :* ${dayjs(msgContext.ymd).format(
+                  'DD/MM/YYYY HH:mm',
+                )}`
+                msg += `\n*Problem:* ${msgContext.s_memo}\n*Remarks:* ${msgContext.memo}`
+                sendMsgUser({ number: val.number, msg: msg })
+              })
             } else {
               console.log('news worderOpen not found')
             }
@@ -118,54 +118,58 @@ export default {
       await newsClose()
         .then((data) => {
           _.forEach(data, (val) => {
-            let msg = `Hallo ${val.name}, this is the current state of *Work Order Close* :`
-            _.forEach(val.msg, (msgContext, numberContext) => {
-              msg += `\n\n${numberContext + 1}.*${msgContext.sheet_no}* | ${
-                msgContext.pri_no == '01' || msgContext.pri_no == '1'
-                  ? '*Breakdown* ✅'
-                  : msgContext.pri_no == '02' || msgContext.pri_no == '2'
-                  ? '*Still Run* ✅'
-                  : msgContext.pri_no == '03' || msgContext.pri_no == '3'
-                  ? '*Preventive* ✅'
-                  : msgContext.pri_no == '04' || msgContext.pri_no == '4'
-                  ? '*Workshop Still Run* ✅'
-                  : msgContext.pri_no == '05' || msgContext.pri_no == '5'
-                  ? '*Workshop Breakdown* ✅'
-                  : msgContext.pri_no == '06' || msgContext.pri_no == '6'
-                  ? '*Project (Machinery)* ✅'
-                  : msgContext.pri_no == '07' || msgContext.pri_no == '7'
-                  ? '*Project (Workshop)* ✅'
-                  : 'undefined'
-              }`
-              msg += `\n*Machine :* ${msgContext.mch_no} | ${
-                msgContext.dep_no
-              } | ${
-                msgContext.com_no == '01'
-                  ? 'GM1'
-                  : msgContext.com_no == '02'
-                  ? 'GM2'
-                  : msgContext.com_no == '03'
-                  ? 'GM3'
-                  : msgContext.com_no == '06'
-                  ? 'GM5'
-                  : 'undefined'
-              }`
-              msg += `\n*Open :* ${dayjs(msgContext.ymd).format(
-                'DD/MM/YYYY HH:mm',
-              )}`
-              msg += `\n*Close :* ${dayjs(msgContext.chk_date).format(
-                'DD/MM/YYYY HH:mm',
-              )}`
-              msg += `\n*Total time :* ${dayjs(msgContext.chk_date)
-                .diff(dayjs(msgContext.ymd), 'h', true)
-                .toFixed(1)} hour ⏱`
-              msg += `\n*Problem:* ${msgContext.s_memo}\n*Remarks:* ${msgContext.memo}`
-            })
-
-            if (_.isArray(val.msg) && val.msg.length > 0) {
-              sendMsgUser({ number: val.number, msg: msg })
+            if (
+              _.isArray(val.msg) &&
+              val.msg.length > 0 &&
+              val.name == 'Yusuf'
+            ) {
+              _.forEach(val.msg, (msgContext, numberContext) => {
+                let msg = `Hallo Mr. ${val.name}, \n*Work Order Closed*:`
+                msg += `\n\n*${msgContext.sheet_no}* | ${
+                  msgContext.pri_no == '01' || msgContext.pri_no == '1'
+                    ? '*Breakdown* Closed✅'
+                    : msgContext.pri_no == '02' || msgContext.pri_no == '2'
+                    ? '*Still Run* Closed✅'
+                    : msgContext.pri_no == '03' || msgContext.pri_no == '3'
+                    ? '*Preventive* Closed✅'
+                    : msgContext.pri_no == '04' || msgContext.pri_no == '4'
+                    ? '*Workshop Still Run* Closed✅'
+                    : msgContext.pri_no == '05' || msgContext.pri_no == '5'
+                    ? '*Workshop Breakdown* Closed✅'
+                    : msgContext.pri_no == '06' || msgContext.pri_no == '6'
+                    ? '*Project (Machinery)* Closed✅'
+                    : msgContext.pri_no == '07' || msgContext.pri_no == '7'
+                    ? '*Project (Workshop)* Closed✅'
+                    : 'undefined'
+                }`
+                msg += `\n*Machine :* ${msgContext.mch_no} | ${
+                  msgContext.dep_no
+                } | ${
+                  msgContext.com_no == '01'
+                    ? 'GM1'
+                    : msgContext.com_no == '02'
+                    ? 'GM2'
+                    : msgContext.com_no == '03'
+                    ? 'GM3'
+                    : msgContext.com_no == '06'
+                    ? 'GM5'
+                    : 'undefined'
+                }`
+                msg += `\n*Open :* ${dayjs(msgContext.ymd).format(
+                  'DD/MM/YYYY HH:mm',
+                )}`
+                msg += `\n*Close :* ${dayjs(msgContext.chk_date).format(
+                  'DD/MM/YYYY HH:mm',
+                )}`
+                msg += `\n*Total time :* ${dayjs(msgContext.chk_date)
+                  .diff(dayjs(msgContext.ymd), 'h', true)
+                  .toFixed(1)} hour ⏱`
+                msg += `\n*Problem:* ${msgContext.s_memo}\n*Remarks:* ${msgContext.memo}`
+                // sendMsgUser({ number: '082124610363', msg: msg })
+                sendMsgUser({ number: val.number, msg: msg })
+              })
             } else {
-              console.log('news worderOpen not found')
+              console.log('news worderClose not found')
             }
           })
         })

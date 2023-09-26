@@ -28,6 +28,11 @@ app.get('/', function (req, res) {
 });
 (0, _routes["default"])(app);
 _scheduler["default"].getScheduler();
+
+// handle uncaught exceptions
+process.on('uncaughtException', function (error) {
+  console.log('Error', error.message);
+});
 app.listen(process.env.PORT_APP, function () {
   return console.log("Server up & running in ".concat(process.env.PORT_APP));
 });
