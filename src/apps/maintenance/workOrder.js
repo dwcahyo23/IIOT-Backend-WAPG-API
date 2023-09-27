@@ -64,7 +64,7 @@ export default {
           // console.log(data)
           _.forEach(data, (val) => {
             if (_.isArray(val.msg) && val.msg.length > 0) {
-              _.forEach(val.msg, (msgContext, numberContext) => {
+              _.forEach(val.msg, (msgContext) => {
                 let msg = `Hello Mr.${val.name}, \n*Work Order Open* :`
                 msg += `\n\n*${msgContext.sheet_no}* | ${
                   msgContext.pri_no == '01' || msgContext.pri_no == '1'
@@ -118,11 +118,7 @@ export default {
       await newsClose()
         .then((data) => {
           _.forEach(data, (val) => {
-            if (
-              _.isArray(val.msg) &&
-              val.msg.length > 0 &&
-              val.name == 'Yusuf'
-            ) {
+            if (_.isArray(val.msg) && val.msg.length > 0) {
               _.forEach(val.msg, (msgContext, numberContext) => {
                 let msg = `Hallo Mr. ${val.name}, \n*Work Order Closed*:`
                 msg += `\n\n*${msgContext.sheet_no}* | ${
@@ -165,7 +161,6 @@ export default {
                   .diff(dayjs(msgContext.ymd), 'h', true)
                   .toFixed(1)} hour ⏱`
                 msg += `\n*Problem:* ${msgContext.s_memo}\n*Remarks:* ${msgContext.memo}`
-                // sendMsgUser({ number: '082124610363', msg: msg })
                 sendMsgUser({ number: val.number, msg: msg })
               })
             } else {
