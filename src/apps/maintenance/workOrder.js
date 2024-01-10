@@ -84,7 +84,7 @@ export default {
                     : 'undefined'
                 }`
                 msg += `\n*Machine :* ${msgContext.mch_no} | ${
-                  msgContext.dep_no
+                  msgContext?.mch_index?.mch_name
                 } | ${
                   msgContext.com_no == '01'
                     ? 'GM1'
@@ -139,7 +139,7 @@ export default {
                     : 'undefined'
                 }`
                 msg += `\n*Machine :* ${msgContext.mch_no} | ${
-                  msgContext.dep_no
+                  msgContext?.mch_index?.mch_name
                 } | ${
                   msgContext.com_no == '01'
                     ? 'GM1'
