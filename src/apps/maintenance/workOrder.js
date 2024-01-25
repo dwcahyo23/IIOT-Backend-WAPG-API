@@ -81,7 +81,7 @@ const sendMsgUser = async (params) => {
 const sendMsgGroup = async (name, msg) => {
   axios
     .post('http://192.168.192.7:5010/send-message-group', {
-      // name: 'GM1 PENANGANAN SPAREPART',
+      name: 'GM1 PENANGANAN SPAREPART',
       // number: '082124610363',
       name: name,
       message: msg,
@@ -213,8 +213,12 @@ export default {
       await sparepartBreakdown().then((data) => {
         let msg = `*RESUME PERMINTAAN SPAREPART BREAKDOWN OPEN*:`
         _.forEach(data, (msgContext, i) => {
-          if (msgContext.com == 'GM1' || 'GM3' || 'GM5') {
-            msg += `\n\n*${i + 1}. ${msgContext.sheet_no}  ${
+          if (
+            msgContext.com == 'GM1' ||
+            msgContext.com == 'GM3' ||
+            msgContext.com == 'GM5'
+          ) {
+            msg += `\n\n*${i + 1}. ${msgContext.sheet_no}  ${msgContext.com}  ${
               msgContext.mch_code
             }* ❌`
             _.forEach(msgContext.value, (val, index) => {
@@ -235,7 +239,7 @@ export default {
         let msg = `*RESUME PERMINTAAN SPAREPART BREAKDOWN OPEN*:`
         _.forEach(data, (msgContext, i) => {
           if (msgContext.com == 'GM2') {
-            msg += `\n\n*${i + 1}. ${msgContext.sheet_no}  ${
+            msg += `\n\n*${i + 1}. ${msgContext.sheet_no}  ${msgContext.com} ${
               msgContext.mch_code
             }* ❌`
             _.forEach(msgContext.value, (val, index) => {
