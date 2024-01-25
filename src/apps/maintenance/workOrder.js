@@ -46,11 +46,45 @@ const newsClose = () => {
   })
 }
 
+const sparepartBreakdown = () => {
+  return new Promise((resolve, reject) => {
+    try {
+      axios
+        .get('http://192.168.192.7:5000/sprtbreakdown')
+        .then((x) => {
+          console.log('fetch sprtbreakdown')
+          resolve(x.data)
+        })
+        .catch((err) => {
+          console.log(err)
+          reject(err)
+        })
+    } catch (err) {
+      {
+        console.log(err)
+        reject(err)
+      }
+    }
+  })
+}
+
 const sendMsgUser = async (params) => {
   await axios
     .post('http://192.168.192.7:5010/send-message', {
       number: params.number,
       message: params.msg,
+    })
+    .then((res) => console.log(res.status))
+    .catch((e) => console.log(e.message))
+}
+
+const sendMsgGroup = async (name, msg) => {
+  axios
+    .post('http://192.168.192.7:5010/send-message-group', {
+      // name: 'GM1 PENANGANAN SPAREPART',
+      // number: '082124610363',
+      name: name,
+      message: msg,
     })
     .then((res) => console.log(res.status))
     .catch((e) => console.log(e.message))
@@ -172,5 +206,47 @@ export default {
     } catch (error) {
       console.log(error)
     }
+  },
+
+  async getSparepartBreakdownGM1() {
+    try {
+      await sparepartBreakdown().then((data) => {
+        let msg = `*RESUME PERMINTAAN SPAREPART BREAKDOWN OPEN*:`
+        _.forEach(data, (msgContext, i) => {
+          if (msgContext.mch_com == 'GM1' || 'GM3' || 'GM5') {
+            msg += `\n\n*${i + 1}. ${msgContext.sheet_no}  ${
+              msgContext.mch_code
+            }* ❌`
+            _.forEach(msgContext.value, (val, index) => {
+              msg += `\n${index + 1}. ${val.item_stock}  _(${val.item_qty}${
+                val.item_uom
+              } ${val.mre_request})_ `
+            })
+          }
+        })
+        sendMsgGroup('GM1 PENANGANAN SPAREPART', msg)
+      })
+    } catch (error) {}
+  },
+
+  async getSparepartBreakdownGM2() {
+    try {
+      await sparepartBreakdown().then((data) => {
+        let msg = `*RESUME PERMINTAAN SPAREPART BREAKDOWN OPEN*:`
+        _.forEach(data, (msgContext, i) => {
+          if (msgContext.mch_com == 'GM2') {
+            msg += `\n\n*${i + 1}. ${msgContext.sheet_no}  ${
+              msgContext.mch_code
+            }* ❌`
+            _.forEach(msgContext.value, (val, index) => {
+              msg += `\n${index + 1}. ${val.item_stock} _(${val.item_qty}${
+                val.item_uom
+              } ${val.mre_request})_ `
+            })
+          }
+        })
+        sendMsgGroup('GM2 PENANGANAN SPAREPART', msg)
+      })
+    } catch (error) {}
   },
 }

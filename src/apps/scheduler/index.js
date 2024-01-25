@@ -19,7 +19,27 @@ export default {
         .getClose()
         .then((res) => console.log(res))
         .catch((err) => console.log(err))
-      // QcLock.getLock().then((res) => console.log(res))
+    })
+
+    const getSprarepart1 = schedule.scheduleJob('1 0 8 * * *', function () {
+      workOrder
+        .getSparepartBreakdownGM1()
+        .then(() => workOrder.getSparepartBreakdownGM2())
+        .catch((err) => console.log(err))
+    })
+
+    const getSprarepart2 = schedule.scheduleJob('1 0 12 * * *', function () {
+      workOrder
+        .getSparepartBreakdownGM1()
+        .then(() => workOrder.getSparepartBreakdownGM2())
+        .catch((err) => console.log(err))
+    })
+
+    const getSprarepart3 = schedule.scheduleJob('1 0 13 * * *', function () {
+      workOrder
+        .getSparepartBreakdownGM1()
+        .then(() => workOrder.getSparepartBreakdownGM2())
+        .catch((err) => console.log(err))
     })
 
     // //! Job Scheduler EWS 2H
@@ -42,22 +62,5 @@ export default {
     const ews5 = schedule.scheduleJob('1 0 17 * * *', function () {
       Ews.getCritical().then((res) => console.log(res))
     })
-
-    //! Job Scheduler PR
-    // const jobPPUMorning = schedule.scheduleJob('1 0 8 * * 1-5', function () {
-    //   PRPo.getPPU({ isTime: 'morning' }).then((res) => console.log(res))
-    //   console.log(
-    //     'jobPPU has been injected at ' +
-    //       format(new Date(), 'dd-MM-yyyy HH:mm:ss'),
-    //   )
-    // })
-
-    // const jobPPUEvening = schedule.scheduleJob('1 0 13 * * 1-5', function () {
-    //   PRPo.getPPU({ isTime: 'evening' }).then((res) => console.log(res))
-    //   console.log(
-    //     'jobPPU has been injected at ' +
-    //       format(new Date(), 'dd-MM-yyyy HH:mm:ss'),
-    //   )
-    // })
   },
 }
