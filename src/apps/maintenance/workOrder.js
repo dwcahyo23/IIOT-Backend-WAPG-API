@@ -213,7 +213,7 @@ export default {
       await sparepartBreakdown().then((data) => {
         let msg = `*RESUME PERMINTAAN SPAREPART BREAKDOWN OPEN*:`
         _.forEach(data, (msgContext, i) => {
-          if (msgContext.mch_com == 'GM1' || 'GM3' || 'GM5') {
+          if (msgContext.com == 'GM1' || 'GM3' || 'GM5') {
             msg += `\n\n*${i + 1}. ${msgContext.sheet_no}  ${
               msgContext.mch_code
             }* ❌`
@@ -234,7 +234,7 @@ export default {
       await sparepartBreakdown().then((data) => {
         let msg = `*RESUME PERMINTAAN SPAREPART BREAKDOWN OPEN*:`
         _.forEach(data, (msgContext, i) => {
-          if (msgContext.mch_com == 'GM2') {
+          if (msgContext.com == 'GM2') {
             msg += `\n\n*${i + 1}. ${msgContext.sheet_no}  ${
               msgContext.mch_code
             }* ❌`
