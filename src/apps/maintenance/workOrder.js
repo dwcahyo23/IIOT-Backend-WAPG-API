@@ -211,7 +211,7 @@ export default {
   async getSparepartBreakdownGM1() {
     try {
       await sparepartBreakdown().then((data) => {
-        let msg = `*RESUME PERMINTAAN SPAREPART BREAKDOWN OPEN*:`
+        let msg = `*REMAINDER RESUME PERMINTAAN SPAREPART BREAKDOWN MASIH OPEN*:`
         _.forEach(data, (msgContext, i) => {
           if (
             msgContext.com == 'GM1' ||

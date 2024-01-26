@@ -21,14 +21,21 @@ export default {
         .catch((err) => console.log(err))
     })
 
-    const getSprarepart1 = schedule.scheduleJob('1 0 8 * * *', function () {
+    const getSprarepart1 = schedule.scheduleJob('1 0 8 * * 1-5', function () {
       workOrder
         .getSparepartBreakdownGM1()
         .then(() => workOrder.getSparepartBreakdownGM2())
         .catch((err) => console.log(err))
     })
 
-    const getSprarepart2 = schedule.scheduleJob('1 0 12 * * *', function () {
+    const getSprarepart2 = schedule.scheduleJob('1 0 12 * * 1-5', function () {
+      workOrder
+        .getSparepartBreakdownGM1()
+        .then(() => workOrder.getSparepartBreakdownGM2())
+        .catch((err) => console.log(err))
+    })
+
+    const getSprarepart3 = schedule.scheduleJob('1 0 16 * * 1-5', function () {
       workOrder
         .getSparepartBreakdownGM1()
         .then(() => workOrder.getSparepartBreakdownGM2())
