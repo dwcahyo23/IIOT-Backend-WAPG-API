@@ -46,11 +46,11 @@ const newsClose = () => {
   })
 }
 
-const sparepartBreakdown = () => {
+const fetchSparepart = (params) => {
   return new Promise((resolve, reject) => {
     try {
       axios
-        .get('http://192.168.192.7:5000/sprtbreakdown')
+        .post(`http://localhost:5000/sprtbreakdown/${params.cat}/${params.com}`)
         .then((x) => {
           console.log('fetch sprtbreakdown')
           resolve(x.data)
@@ -99,8 +99,9 @@ export default {
           _.forEach(data, (val) => {
             if (_.isArray(val.msg) && val.msg.length > 0) {
               _.forEach(val.msg, (msgContext) => {
-                let msg = `Hello Mr.${val.name}, \n*Work Order Open* :`
-                msg += `\n\n*${msgContext.sheet_no}* | ${
+                let msg = `*${msgContext.sheet_no}*`
+                msg += `Hello Mr.${val.name}, \n*Work Order Open* :`
+                msg += `\n\n*${
                   msgContext.pri_no == '01' || msgContext.pri_no == '1'
                     ? '*Breakdown* Open❌'
                     : msgContext.pri_no == '02' || msgContext.pri_no == '2'
@@ -154,8 +155,9 @@ export default {
           _.forEach(data, (val) => {
             if (_.isArray(val.msg) && val.msg.length > 0) {
               _.forEach(val.msg, (msgContext, numberContext) => {
-                let msg = `Hallo Mr. ${val.name}, \n*Work Order Closed*:`
-                msg += `\n\n*${msgContext.sheet_no}* | ${
+                let msg = `*${msgContext.sheet_no}*`
+                msg += `Hallo Mr. ${val.name}, \n*Work Order Closed*:`
+                msg += `\n\n*${
                   msgContext.pri_no == '01' || msgContext.pri_no == '1'
                     ? '*Breakdown* Closed✅'
                     : msgContext.pri_no == '02' || msgContext.pri_no == '2'
@@ -208,49 +210,89 @@ export default {
     }
   },
 
-  async getSparepartBreakdownGM1() {
+  async getfetchSparepartGM1(props) {
     try {
-      await sparepartBreakdown().then((data) => {
-        let msg = `*REMAINDER RESUME PERMINTAAN SPAREPART BREAKDOWN MASIH OPEN*:`
-        _.forEach(data, (msgContext, i) => {
-          if (
-            msgContext.com == 'GM1' ||
-            msgContext.com == 'GM3' ||
-            msgContext.com == 'GM5'
-          ) {
-            msg += `\n\n*${i + 1}. ${msgContext.sheet_no}  ${msgContext.com}  ${
-              msgContext.mch_code
-            }* ❌`
-            _.forEach(msgContext.value, (val, index) => {
-              msg += `\n${index + 1}. ${val.item_stock}  _(${val.item_qty}${
-                val.item_uom
-              } ${val.mre_request})_ `
-            })
+      await fetchSparepart(props).then((data) => {
+        const category = () => {
+          switch (props.cat) {
+            case '01':
+              return 'BREAKDOWN'
+            case '02':
+              return 'STILL RUN'
+            case '03':
+              return 'PREVENTIVE'
+            case '04':
+              return 'WORKSHOP STILL RUN'
+            case '05':
+              return 'WORKSHOP BREAKDOWN'
+            default:
+              return ''
           }
-        })
-        sendMsgGroup('GM1 PENANGANAN SPAREPART', msg)
-      })
-    } catch (error) {}
-  },
+        }
 
-  async getSparepartBreakdownGM2() {
-    try {
-      await sparepartBreakdown().then((data) => {
-        let msg = `*RESUME PERMINTAAN SPAREPART BREAKDOWN OPEN*:`
-        _.forEach(data, (msgContext, i) => {
-          if (msgContext.com == 'GM2') {
-            msg += `\n\n*${i + 1}. ${msgContext.sheet_no}  ${msgContext.com} ${
-              msgContext.mch_code
-            }* ❌`
-            _.forEach(msgContext.value, (val, index) => {
-              msg += `\n${index + 1}. ${val.item_stock} _(${val.item_qty}${
-                val.item_uom
-              } ${val.mre_request})_ `
-            })
+        const isReady = (pros) => {
+          switch (pros) {
+            case 'Y':
+              return 'Ready✅'
+
+            default:
+              return ''
           }
+        }
+
+        const isPo = (pros) => {
+          switch (pros) {
+            case 'Y':
+              return `_(SUDAH PO)_`
+
+            default:
+              return ''
+          }
+        }
+
+        const isAudit = (pros) => {
+          switch (pros) {
+            case 'Y':
+              return 'Audit✅'
+
+            default:
+              return 'NAudit❌'
+          }
+        }
+
+        let msg = `*REMAINDER PERMINTAAN SPAREPART ${category()}*:`
+        _.forEach(data, (msgContext, i) => {
+          msg += `\n\n*${i + 1}. ${msgContext.index} \`${category()}\` :*`
+          _.forEach(msgContext.sheet_no, (a, b) => {
+            msg += `\n\n> Work Order :`
+            msg += `\n- No.WO : ${a.j}`
+            msg += `\n- Problem : ${a.h[0].memo}`
+            msg += `\n- Stop : ${dayjs(a.h[0].ymd).format('DD/MM/YYYY HH:mm')}`
+            msg += `\n- Status Wo : ${isAudit(a.h[0].chk_mark)}`
+            msg += `\n> PERMINTAAN :`
+            msg += `\n- No.Permintaan : ${a.h[0].sheet_no}`
+            msg += `\n- Status Permintaan : NAudit❌`
+            _.forEach(a.h, (j, h) => {
+              msg += `\n- \`${j.stock}\` ${j.request_qty} ${j.request_uom} *${j.mre_request}*`
+            })
+            msg += `\n> PUR SHEET NO :`
+            if (a.i.length == 0)
+              msg += `\n- ERP \`pur_sheet_no\` is not yet in sync`
+            _.forEach(a.i, (x, y) => {
+              msg += `\n- \`${x.mat_name}\` *${x.pur_sheet_no}* ETA: ${dayjs(
+                x.eta_ymd,
+              ).format('DD-MM-YYYY')} ${isPo(x.ove_mk)}`
+            })
+          })
         })
-        sendMsgGroup('GM2 PENANGANAN SPAREPART', msg)
+        // sendMsgUser({
+        //   number: '082124610363',
+        //   msg,
+        // })
+        sendMsgGroup(props.group, msg)
       })
-    } catch (error) {}
+    } catch (error) {
+      console.log(error)
+    }
   },
 }

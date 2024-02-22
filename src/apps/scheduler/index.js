@@ -1,7 +1,7 @@
 import schedule from 'node-schedule'
 
-import PRPo from '../PR-Po'
-import QcLock from '../Qc-Lock'
+// import PRPo from '../PR-Po'
+// import QcLock from '../Qc-Lock'
 import Ews from '../Ews'
 import { format } from 'date-fns'
 import workOrder from '../maintenance/workOrder'
@@ -23,31 +23,69 @@ export default {
 
     const getSprarepart1 = schedule.scheduleJob('1 0 8 * * 1-5', function () {
       workOrder
-        .getSparepartBreakdownGM1()
-        .then(() => workOrder.getSparepartBreakdownGM2())
+        .getfetchSparepartGM1({
+          cat: '01',
+          com: 'GM1',
+          group: 'GM1 PENANGANAN SPAREPART',
+        })
+        .then(() =>
+          workOrder.getfetchSparepartGM1({
+            cat: '03',
+            com: 'GM1',
+            group: 'GM1 PENANGANAN SPAREPART',
+          }),
+        )
+        .catch((err) => console.log(err))
+
+      workOrder
+        .getfetchSparepartGM1({
+          cat: '01',
+          com: 'GM2',
+          group: 'GM2 PENANGANAN SPAREPART',
+        })
+        .then(() =>
+          workOrder.getfetchSparepartGM1({
+            cat: '03',
+            com: 'GM2',
+            group: 'GM2 PENANGANAN SPAREPART',
+          }),
+        )
         .catch((err) => console.log(err))
     })
 
-    // const getSprarepart2 = schedule.scheduleJob('1 0 12 * * 1-5', function () {
-    //   workOrder
-    //     .getSparepartBreakdownGM1()
-    //     .then(() => workOrder.getSparepartBreakdownGM2())
-    //     .catch((err) => console.log(err))
-    // })
+    const getSprarepart2 = schedule.scheduleJob('1 0 13 * * 1-5', function () {
+      workOrder
+        .getfetchSparepartGM1({
+          cat: '01',
+          com: 'GM1',
+          group: 'GM1 PENANGANAN SPAREPART',
+        })
+        .then(() =>
+          workOrder.getfetchSparepartGM1({
+            cat: '03',
+            com: 'GM1',
+            group: 'GM1 PENANGANAN SPAREPART',
+          }),
+        )
+        .catch((err) => console.log(err))
+    })
 
-    // const getSprarepart3 = schedule.scheduleJob('1 0 16 * * 1-5', function () {
-    //   workOrder
-    //     .getSparepartBreakdownGM1()
-    //     .then(() => workOrder.getSparepartBreakdownGM2())
-    //     .catch((err) => console.log(err))
-    // })
-
-    // const getSprarepart3 = schedule.scheduleJob('1 0 13 * * *', function () {
-    //   workOrder
-    //     .getSparepartBreakdownGM1()
-    //     .then(() => workOrder.getSparepartBreakdownGM2())
-    //     .catch((err) => console.log(err))
-    // })
+    const getSprarepart3 = schedule.scheduleJob('1 0 17 * * 1-5', function () {
+      workOrder
+        .getfetchSparepartGM1({
+          cat: '01',
+          com: 'GM1',
+          group: 'GM1 PENANGANAN SPAREPART',
+        })
+        .then(() =>
+          workOrder.getfetchSparepartGM1({
+            cat: '03',
+            com: 'GM1',
+            group: 'GM1 PENANGANAN SPAREPART',
+          }),
+        )
+        .catch((err) => console.log(err))
+    })
 
     // //! Job Scheduler EWS 2H
     const ews1 = schedule.scheduleJob('1 0 8 * * *', function () {
