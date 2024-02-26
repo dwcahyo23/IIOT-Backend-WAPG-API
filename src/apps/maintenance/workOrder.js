@@ -100,7 +100,7 @@ export default {
             if (_.isArray(val.msg) && val.msg.length > 0) {
               _.forEach(val.msg, (msgContext) => {
                 let msg = `*${msgContext.sheet_no}*`
-                msg += `Hello Mr.${val.name}, \n*Work Order Open* :`
+                msg += `\n Hello Mr.${val.name}, \nWork Order Open :`
                 msg += `\n\n*${
                   msgContext.pri_no == '01' || msgContext.pri_no == '1'
                     ? '*Breakdown* Open❌'
@@ -118,7 +118,7 @@ export default {
                     ? '*Project (Workshop)* Open🔧'
                     : 'undefined'
                 }`
-                msg += `\n*Machine :* ${msgContext.mch_no} | ${
+                msg += `\n*Machine :* \`${msgContext.mch_no}\` | ${
                   msgContext?.mch_index?.mch_name
                 } | ${
                   msgContext.com_no == '01'
@@ -134,7 +134,7 @@ export default {
                 msg += `\n*Open :* ${dayjs(msgContext.ymd).format(
                   'DD/MM/YYYY HH:mm',
                 )}`
-                msg += `\n*Problem:* ${msgContext.s_memo}\n*Remarks:* ${msgContext.memo}`
+                msg += `\n*Problem:* \`${msgContext.s_memo}\` \n*Remarks:* ${msgContext.memo}`
                 sendMsgUser({ number: val.number, msg: msg })
               })
             } else {
@@ -156,7 +156,7 @@ export default {
             if (_.isArray(val.msg) && val.msg.length > 0) {
               _.forEach(val.msg, (msgContext, numberContext) => {
                 let msg = `*${msgContext.sheet_no}*`
-                msg += `Hallo Mr. ${val.name}, \n*Work Order Closed*:`
+                msg += `\n Hallo Mr. ${val.name}, \nWork Order Closed :`
                 msg += `\n\n*${
                   msgContext.pri_no == '01' || msgContext.pri_no == '1'
                     ? '*Breakdown* Closed✅'
@@ -196,7 +196,7 @@ export default {
                 msg += `\n*Total time :* ${dayjs(msgContext.chk_date)
                   .diff(dayjs(msgContext.ymd), 'h', true)
                   .toFixed(1)} hour ⏱`
-                msg += `\n*Problem:* ${msgContext.s_memo}\n*Remarks:* ${msgContext.memo}`
+                msg += `\n*Problem:* \`${msgContext.s_memo}\` \n*Remarks:* ${msgContext.memo}`
                 sendMsgUser({ number: val.number, msg: msg })
               })
             } else {
