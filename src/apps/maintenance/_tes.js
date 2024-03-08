@@ -2,8 +2,8 @@ import workOrder from './workOrder'
 
 workOrder.getfetchSparepartGM1({
   cat: '01',
-  com: 'GM2',
-  group: 'GM2 PENANGANAN SPAREPART',
+  com: 'GM1',
+  group: 'GM1 PENANGANAN SPAREPART',
 })
 // workOrder.getfetchSparepartGM1({ cat: '03', com: 'GM1' })
 

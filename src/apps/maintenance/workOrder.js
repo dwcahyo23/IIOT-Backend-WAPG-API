@@ -285,11 +285,11 @@ export default {
             })
           })
         })
-        // sendMsgUser({
-        //   number: '082124610363',
-        //   msg,
-        // })
         sendMsgGroup(props.group, msg)
+
+        if (props.com == 'GM1' && props.cat == '01') {
+          sendMsgUser({ number: '08170891399', msg: msg })
+        }
       })
     } catch (error) {
       console.log(error)
