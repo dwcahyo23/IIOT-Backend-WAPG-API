@@ -2,6 +2,10 @@ import axios from 'axios'
 import _ from 'lodash'
 import dayjs from 'dayjs'
 
+import path from 'path'
+import TableRenderer, { saveImage } from 'table-renderer'
+const renderTable = TableRenderer().render
+
 const newsOpen = () => {
   return new Promise((resolve, reject) => {
     try {
@@ -50,7 +54,9 @@ const fetchSparepart = (params) => {
   return new Promise((resolve, reject) => {
     try {
       axios
-        .post(`http://localhost:5000/sprtbreakdown/${params.cat}/${params.com}`)
+        .post(
+          `http://192.168.192.7:5000/sprtbreakdown/${params.cat}/${params.com}`,
+        )
         .then((x) => {
           console.log('fetch sprtbreakdown')
           resolve(x.data)
@@ -290,6 +296,113 @@ export default {
         if (props.com == 'GM1' && props.cat == '01') {
           sendMsgUser({ number: '08170891399', msg: msg })
         }
+      })
+    } catch (error) {
+      console.log(error)
+    }
+  },
+
+  async RemainderSparepartTable(props) {
+    try {
+      await fetchSparepart(props).then(async (data) => {
+        const category = () => {
+          switch (props.cat) {
+            case '01':
+              return 'BREAKDOWN'
+            case '02':
+              return 'STILL RUN'
+            case '03':
+              return 'PREVENTIVE'
+            case '04':
+              return 'WORKSHOP STILL RUN'
+            case '05':
+              return 'WORKSHOP BREAKDOWN'
+            default:
+              return ''
+          }
+        }
+
+        const isReady = (pros) => {
+          switch (pros) {
+            case 'Y':
+              return 'Ready✅'
+
+            default:
+              return ''
+          }
+        }
+
+        const isPo = (pros) => {
+          switch (pros) {
+            case 'Y':
+              return `_(SUDAH PO)_`
+
+            default:
+              return ''
+          }
+        }
+
+        const isAudit = (pros) => {
+          switch (pros) {
+            case 'Y':
+              return 'Audit✅'
+
+            default:
+              return 'NAudit❌'
+          }
+        }
+
+        // console.log(JSON.stringify(data, null, 2))
+        let render = [
+          {
+            title: 'Remainder',
+            columns: [
+              { width: 50, title: 'No', dataIndex: 'no' },
+              { width: 100, title: 'MACHINE', dataIndex: 'mch' },
+              { width: 200, title: 'AP-SHEET', dataIndex: 'sheet' },
+              {
+                width: 700,
+                title: 'REQ',
+                dataIndex: 'request',
+              },
+              { width: 100, title: 'QTY', dataIndex: 'qty', align: 'right' },
+              { width: 100, title: 'UOM', dataIndex: 'uom', align: 'right' },
+              { width: 200, title: 'MRE', dataIndex: 'mre', align: 'right' },
+              { width: 200, title: 'ETA', dataIndex: 'eta', align: 'right' },
+            ],
+            dataSource: [],
+          },
+        ]
+
+        let number = 1
+
+        await _.forEach(data, (a, i) => {
+          _.forEach(a.sheet_no, (b) => {
+            _.forEach(b.h, (c) => {
+              // _.forEach(b.i, (d) => {
+              render[0].dataSource.push('-')
+              render[0].dataSource.push({
+                no: number++,
+                sheet: b.j,
+                mch: a.index,
+                request: c.stock,
+                qty: c.request_qty,
+                uom: c.request_uom,
+                mre: c.mre_request,
+                // eta: _.find(b.i, { pur_sheet_no: c.mre_request }),
+                //   eta: dayjs(d.eta_ymd).format('DD-MM-YYYY'),
+                // })
+              })
+            })
+          })
+        })
+
+        const canvas = renderTable(render)
+
+        const dataURL = canvas.toDataURL()
+        console.log(dataURL)
+
+        saveImage(canvas, path.join(__dirname, 'table1.png'))
       })
     } catch (error) {
       console.log(error)
