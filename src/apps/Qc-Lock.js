@@ -109,7 +109,7 @@ export default {
           msg += `\n-------------------------`
           upStsLock({ id: record.sheet_no })
         })
-        msg += `\n\nThank you!`
+        // msg += `\n\nThank you!`
         // sendMsg({ name: field.name, msg: msg, type: 'group' })
         sendMsg({ number: '082124610363', msg: msg, type: 'msg' })
       })
