@@ -106,11 +106,11 @@ export default {
           } | ${record.stk_no_2}\n\n*Problem:* ${record.problem}\n*Standard:* ${
             record.standard
           }\n*Result:* ${record.result}\n`
+          upStsLock({ id: record.sheet_no })
         })
         msg += `\n\nThank you!`
         // sendMsg({ name: field.name, msg: msg, type: 'group' })
-        sendMsg({number: '082124610363', msg: msg, type: 'msg'})
-        upStsLock({ id: record.sheet_no })
+        sendMsg({ number: '082124610363', msg: msg, type: 'msg' })
       })
 
       return { message: 'message qc lock sended successfully' }
