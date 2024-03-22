@@ -160,9 +160,9 @@ export default {
         .then((data) => {
           _.forEach(data, (val) => {
             if (_.isArray(val.msg) && val.msg.length > 0) {
-              let msg = `\nHello Mr.${val.name}`
               _.forEach(val.msg, (msgContext, numberContext) => {
-                msg += `$\n${msgContext.sheet_no} \`${msgContext.mch_no}\``
+                let msg = `${msgContext.sheet_no} \`${msgContext.mch_no}\``
+                msg += `\nHello Mr.${val.name}`
                 msg += `\n\n${
                   msgContext.pri_no == '01' || msgContext.pri_no == '1'
                     ? '*Breakdown* Closed✅'
@@ -203,9 +203,8 @@ export default {
                   .diff(dayjs(msgContext.ymd), 'h', true)
                   .toFixed(1)} hour ⏱`
                 msg += `\n*Problem:* \`${msgContext.s_memo}\` \n*Remarks:* ${msgContext.memo}`
-                msg += `\n------------------------------\n`
+                sendMsgUser({ number: val.number, msg: msg })
               })
-              sendMsgUser({ number: val.number, msg: msg })
             } else {
               console.log('news worderClose not found')
             }
