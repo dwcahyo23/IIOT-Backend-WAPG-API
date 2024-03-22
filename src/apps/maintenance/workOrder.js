@@ -105,9 +105,9 @@ export default {
           _.forEach(data, (val) => {
             if (_.isArray(val.msg) && val.msg.length > 0) {
               _.forEach(val.msg, (msgContext) => {
-                let msg = `*${msgContext.sheet_no}*`
-                msg += `\n Hello Mr.${val.name}, \nWork Order Open :`
-                msg += `\n\n*${
+                let msg = `*${msgContext.sheet_no} \`${msgContext.mch_no}\` *`
+                msg += `\nHello Mr.${val.name}`
+                msg += `\n\n>${
                   msgContext.pri_no == '01' || msgContext.pri_no == '1'
                     ? '*Breakdown* Open❌'
                     : msgContext.pri_no == '02' || msgContext.pri_no == '2'
@@ -161,9 +161,9 @@ export default {
           _.forEach(data, (val) => {
             if (_.isArray(val.msg) && val.msg.length > 0) {
               _.forEach(val.msg, (msgContext, numberContext) => {
-                let msg = `*${msgContext.sheet_no}*`
-                msg += `\n Hallo Mr. ${val.name}, \nWork Order Closed :`
-                msg += `\n\n*${
+                let msg = `*${msgContext.sheet_no} \`${msgContext.mch_no}\` *`
+                msg += `\nHello Mr.${val.name}`
+                msg += `\n\n>${
                   msgContext.pri_no == '01' || msgContext.pri_no == '1'
                     ? '*Breakdown* Closed✅'
                     : msgContext.pri_no == '02' || msgContext.pri_no == '2'
