@@ -162,7 +162,7 @@ export default {
             if (_.isArray(val.msg) && val.msg.length > 0) {
               let msg = `\nHello Mr.${val.name}`
               _.forEach(val.msg, (msgContext, numberContext) => {
-                msg += `$\n{msgContext.sheet_no} \`${msgContext.mch_no}\``
+                msg += `$\n${msgContext.sheet_no} \`${msgContext.mch_no}\``
                 msg += `\n\n${
                   msgContext.pri_no == '01' || msgContext.pri_no == '1'
                     ? '*Breakdown* Closed✅'
