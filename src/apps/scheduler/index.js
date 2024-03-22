@@ -15,10 +15,7 @@ export default {
         .getOpen()
         .then((res) => console.log(res))
         .catch((err) => console.log(err))
-    })
 
-    const closeJob = schedule.scheduleJob('30 * * * * *', function () {
-      // !update from user
       workOrder
         .getClose()
         .then((res) => console.log(res))
