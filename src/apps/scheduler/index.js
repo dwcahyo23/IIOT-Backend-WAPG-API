@@ -9,12 +9,16 @@ import workOrder from '../maintenance/workOrder'
 export default {
   async getScheduler() {
     //! Job Scheduler Reguler
-    const regulerJob = schedule.scheduleJob('1 * * * * *', function () {
+    const openJob = schedule.scheduleJob('1 * * * * *', function () {
       // !update from user
       workOrder
         .getOpen()
         .then((res) => console.log(res))
         .catch((err) => console.log(err))
+    })
+
+    const closeJob = schedule.scheduleJob('10 * * * * *', function () {
+      // !update from user
       workOrder
         .getClose()
         .then((res) => console.log(res))

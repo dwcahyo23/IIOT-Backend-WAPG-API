@@ -105,9 +105,9 @@ export default {
           _.forEach(data, (val) => {
             if (_.isArray(val.msg) && val.msg.length > 0) {
               _.forEach(val.msg, (msgContext) => {
-                let msg = `*${msgContext.sheet_no} \`${msgContext.mch_no}\` *`
+                let msg = `${msgContext.sheet_no} \`${msgContext.mch_no}\``
                 msg += `\nHello Mr.${val.name}`
-                msg += `\n\n>${
+                msg += `\n\n${
                   msgContext.pri_no == '01' || msgContext.pri_no == '1'
                     ? '*Breakdown* Open❌'
                     : msgContext.pri_no == '02' || msgContext.pri_no == '2'
@@ -160,10 +160,10 @@ export default {
         .then((data) => {
           _.forEach(data, (val) => {
             if (_.isArray(val.msg) && val.msg.length > 0) {
+              let msg = `\nHello Mr.${val.name}`
               _.forEach(val.msg, (msgContext, numberContext) => {
-                let msg = `*${msgContext.sheet_no} \`${msgContext.mch_no}\` *`
-                msg += `\nHello Mr.${val.name}`
-                msg += `\n\n>${
+                msg += `${msgContext.sheet_no} \`${msgContext.mch_no}\``
+                msg += `\n\n${
                   msgContext.pri_no == '01' || msgContext.pri_no == '1'
                     ? '*Breakdown* Closed✅'
                     : msgContext.pri_no == '02' || msgContext.pri_no == '2'
@@ -203,8 +203,9 @@ export default {
                   .diff(dayjs(msgContext.ymd), 'h', true)
                   .toFixed(1)} hour ⏱`
                 msg += `\n*Problem:* \`${msgContext.s_memo}\` \n*Remarks:* ${msgContext.memo}`
-                sendMsgUser({ number: val.number, msg: msg })
+                msg += `\n------------------------------\n`
               })
+              sendMsgUser({ number: val.number, msg: msg })
             } else {
               console.log('news worderClose not found')
             }
