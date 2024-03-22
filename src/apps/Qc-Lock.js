@@ -5,6 +5,7 @@ import config from 'config'
 import _ from 'lodash'
 import axios from 'axios'
 import { format } from 'date-fns'
+import dayjs from 'dayjs'
 
 const sendMsg = async (params) => {
   if (params.type == 'group') {
@@ -102,16 +103,23 @@ export default {
           msg += `\n- *Product:* ${record.pdc_name}`
           msg += `\n- *Travel Card:* ${record.bat_card}`
           msg += `\n- *Fragment:* ${record.bat_card_2} || ${record.stk_no_2} `
+          msg += `\n- *Date:* ${dayjs(record.appe_time).format(
+            'DD/MM/YYYY HH:mm',
+          )}`
+
           msg += `\n\n> *Issue:* `
           msg += `\n- *Problem:* ${record.problem}`
           msg += `\n- *Standard:* ${record.standard}`
           msg += `\n- *Result:* ${record.result}`
-          msg += `\n-------------------------`
+          msg += `\n------------------------------------`
           upStsLock({ id: record.sheet_no })
         })
         // msg += `\n\nThank you!`
         // sendMsg({ name: field.name, msg: msg, type: 'group' })
         sendMsg({ number: '082124610363', msg: msg, type: 'msg' })
+        sendMsg({ number: '08170891399', msg: msg, type: 'msg' })
+        sendMsg({ number: '081381159279', msg: msg, type: 'msg' })
+        sendMsg({ number: '081387503504', msg: msg, type: 'msg' })
       })
 
       return { message: 'message qc lock sended successfully' }

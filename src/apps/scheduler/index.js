@@ -19,10 +19,6 @@ export default {
         .getClose()
         .then((res) => console.log(res))
         .catch((err) => console.log(err))
-
-      QcLock.getLock()
-        .then((res) => console.log(res))
-        .catch((err) => console.log(err))
     })
 
     const getSprarepart1 = schedule.scheduleJob('1 0 8 * * 1-5', function () {
@@ -94,22 +90,54 @@ export default {
     // //! Job Scheduler EWS 2H
     const ews1 = schedule.scheduleJob('1 0 8 * * *', function () {
       Ews.getCritical().then((res) => console.log(res))
+
+      QcLock.getLock()
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err))
     })
 
     const ews2 = schedule.scheduleJob('1 0 10 * * *', function () {
       Ews.getCritical().then((res) => console.log(res))
+
+      QcLock.getLock()
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err))
     })
 
     const ews3 = schedule.scheduleJob('1 0 13 * * *', function () {
       Ews.getCritical().then((res) => console.log(res))
+
+      QcLock.getLock()
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err))
     })
 
     const ews4 = schedule.scheduleJob('1 0 15 * * *', function () {
       Ews.getCritical().then((res) => console.log(res))
+
+      QcLock.getLock()
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err))
     })
 
     const ews5 = schedule.scheduleJob('1 0 17 * * *', function () {
       Ews.getCritical().then((res) => console.log(res))
+
+      QcLock.getLock()
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err))
+    })
+
+    schedule.scheduleJob('1 0 19 * * *', function () {
+      QcLock.getLock()
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err))
+    })
+
+    schedule.scheduleJob('1 0 21 * * *', function () {
+      QcLock.getLock()
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err))
     })
   },
 }
