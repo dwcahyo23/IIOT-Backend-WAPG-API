@@ -21,7 +21,6 @@ const newsOpen = () => {
         })
     } catch (err) {
       {
-        console.log(err)
         reject(err)
       }
     }
@@ -43,7 +42,6 @@ const newsClose = () => {
         })
     } catch (err) {
       {
-        console.log(err)
         reject(err)
       }
     }
@@ -67,7 +65,6 @@ const fetchSparepart = (params) => {
         })
     } catch (err) {
       {
-        console.log(err)
         reject(err)
       }
     }
@@ -96,127 +93,129 @@ const sendMsgGroup = async (name, msg) => {
     .catch((e) => console.log(e.message))
 }
 
+let iPerson = 10 * 1000 // 5 seconds;
+let iMsg = 3 * 1000 // 2 seconds;
+
+function log(msg) {
+  return console.log(msg)
+}
+
+function priOpen(prop) {
+  if (prop === '01' || prop === '1') return '❌ Breakdown (Open)'
+
+  if (prop === '02' || prop === '2') return '❌ Still Run (Open)'
+
+  if (prop === '03' || prop === '3') return '❌ Preventive (Open)'
+
+  if (prop === '04' || prop === '4') return '❌ Workshop Run (Open)'
+
+  if (prop === '05' || prop === '5') return '❌ Workshop Breakdown (Open)'
+
+  if (prop === '06' || prop === '6') return '❌ Project Machinery (Open)'
+
+  if (prop === '07' || prop === '7') return '❌ Project Workshop (Open)'
+}
+
+function priClose(prop) {
+  if (prop === '01' || prop === '1') return '✅ Breakdown (Close)'
+
+  if (prop === '02' || prop === '2') return '✅ Still Run (Close)'
+
+  if (prop === '03' || prop === '3') return '✅ Preventive (Close)'
+
+  if (prop === '04' || prop === '4') return '✅ Workshop Run (Close)'
+
+  if (prop === '05' || prop === '5') return '✅ Workshop Breakdown (Close)'
+
+  if (prop === '06' || prop === '6') return '✅ Project Machinery (Close)'
+
+  if (prop === '07' || prop === '7') return '✅ Project Workshop (Close)'
+}
+
 export default {
-  async getOpen() {
-    try {
-      newsOpen()
-        .then((data) => {
-          // console.log(data)
-          _.forEach(data, (val) => {
-            if (_.isArray(val.msg) && val.msg.length > 0) {
-              _.forEach(val.msg, (msgContext) => {
-                let msg = `${msgContext.sheet_no} \`${msgContext.mch_no}\``
-                msg += `\nHello Mr.${val.name}`
-                msg += `\n\n${
-                  msgContext.pri_no == '01' || msgContext.pri_no == '1'
-                    ? '*Breakdown* Open❌'
-                    : msgContext.pri_no == '02' || msgContext.pri_no == '2'
-                    ? '*Still Run* Open❌'
-                    : msgContext.pri_no == '03' || msgContext.pri_no == '3'
-                    ? '*Preventive* Open❌'
-                    : msgContext.pri_no == '04' || msgContext.pri_no == '4'
-                    ? '*Workshop Still Run* Open❌'
-                    : msgContext.pri_no == '05' || msgContext.pri_no == '5'
-                    ? '*Workshop Breakdown* Open❌'
-                    : msgContext.pri_no == '06' || msgContext.pri_no == '6'
-                    ? '*Project (Machinery)* Open❌'
-                    : msgContext.pri_no == '07' || msgContext.pri_no == '7'
-                    ? '*Project (Workshop)* Open❌'
-                    : 'undefined'
-                }`
-                msg += `\n*Machine :* \`${msgContext.mch_no}\` | ${
-                  msgContext?.mch_index?.mch_name
-                } | ${
-                  msgContext.com_no == '01'
-                    ? 'GM1'
-                    : msgContext.com_no == '02'
-                    ? 'GM2'
-                    : msgContext.com_no == '03'
-                    ? 'GM3'
-                    : msgContext.com_no == '06'
-                    ? 'GM5'
-                    : 'undefined'
-                }`
-                msg += `\n*Open :* ${dayjs(msgContext.ymd).format(
-                  'DD/MM/YYYY HH:mm',
-                )}`
-                msg += `\n*Problem:* \`${msgContext.s_memo}\` \n*Remarks:* ${msgContext.memo}`
-                sendMsgUser({ number: val.number, msg: msg })
-              })
-            } else {
-              console.log('news worderOpen not found')
-            }
-          })
-        })
-        .catch((err) => console.log(err))
-    } catch (error) {
-      console.log(error)
-    }
+  async testProp() {
+    return await priClose('04')
   },
 
-  async getClose() {
-    try {
-      await newsClose()
-        .then((data) => {
-          _.forEach(data, (val) => {
-            if (_.isArray(val.msg) && val.msg.length > 0) {
-              _.forEach(val.msg, (msgContext, numberContext) => {
-                let msg = `${msgContext.sheet_no} \`${msgContext.mch_no}\``
-                msg += `\nHello Mr.${val.name}`
-                msg += `\n\n${
-                  msgContext.pri_no == '01' || msgContext.pri_no == '1'
-                    ? '*Breakdown* Closed✅'
-                    : msgContext.pri_no == '02' || msgContext.pri_no == '2'
-                    ? '*Still Run* Closed✅'
-                    : msgContext.pri_no == '03' || msgContext.pri_no == '3'
-                    ? '*Preventive* Closed✅'
-                    : msgContext.pri_no == '04' || msgContext.pri_no == '4'
-                    ? '*Workshop Still Run* Closed✅'
-                    : msgContext.pri_no == '05' || msgContext.pri_no == '5'
-                    ? '*Workshop Breakdown* Closed✅'
-                    : msgContext.pri_no == '06' || msgContext.pri_no == '6'
-                    ? '*Project (Machinery)* Closed✅'
-                    : msgContext.pri_no == '07' || msgContext.pri_no == '7'
-                    ? '*Project (Workshop)* Closed✅'
-                    : 'undefined'
-                }`
-                msg += `\n*Machine :* ${msgContext.mch_no} | ${
-                  msgContext?.mch_index?.mch_name
-                } | ${
-                  msgContext.com_no == '01'
-                    ? 'GM1'
-                    : msgContext.com_no == '02'
-                    ? 'GM2'
-                    : msgContext.com_no == '03'
-                    ? 'GM3'
-                    : msgContext.com_no == '06'
-                    ? 'GM5'
-                    : 'undefined'
-                }`
-                msg += `\n*Open :* ${dayjs(msgContext.ymd).format(
-                  'DD/MM/YYYY HH:mm',
-                )}`
-                msg += `\n*Close :* ${dayjs(msgContext.chk_date).format(
-                  'DD/MM/YYYY HH:mm',
-                )}`
-                msg += `\n*Total time :* ${dayjs(msgContext.chk_date)
-                  .diff(dayjs(msgContext.ymd), 'h', true)
-                  .toFixed(1)} hour ⏱`
-                msg += `\n*Problem:* \`${msgContext.s_memo}\` \n*Remarks:* ${msgContext.memo}`
-                sendMsgUser({ number: val.number, msg: msg })
+  async WorkOrderOpen() {
+    newsOpen()
+      .then((data) => {
+        data.forEach((wo, i) => {
+          setTimeout(
+            (i) => {
+              if (wo.msg.length < 1) return log(`no open ${wo.name}`)
+              wo.msg.forEach((context, x) => {
+                setTimeout(
+                  function (x) {
+                    let msg = `${context.sheet_no} \`${context.mch_no}\``
+                    msg += `\nHi Mr. ${wo.name}`
+                    msg += `\n${priOpen(context.pri_no)}`
+                    msg += `\n- *Mch:* ${context.mch_no}`
+                    msg += `\n- *Open:* ${dayjs(context.appe_time).format(
+                      'DD/MM/YYYY HH:mm',
+                    )}`
+                    msg += `\n- *Problem:* ${context.s_memo}`
+                    msg += `\n- *Remarks:* ${context.memo}`
+                    msg += `\n- *Input By:* ${context.appe_user}`
+
+                    sendMsgUser({ number: wo.number, msg: msg })
+                  },
+                  iMsg * x,
+                  x,
+                )
               })
-            } else {
-              console.log('news worderClose not found')
-            }
-          })
+            },
+            iPerson * i,
+            i,
+          )
         })
-        .catch((err) => console.log(err))
-    } catch (error) {
-      console.log(error)
-    }
+      })
+      .catch((err) => console.log(err))
   },
 
-  async getfetchSparepartGM1(props) {
+  async WorkOrderClose() {
+    newsClose()
+      .then((data) => {
+        data.forEach((wo, i) => {
+          setTimeout(
+            (i) => {
+              if (wo.msg.length < 1) return log(`no close ${wo.name}`)
+              wo.msg.forEach((context, x) => {
+                setTimeout(
+                  function (x) {
+                    let msg = `${context.sheet_no} \`${context.mch_no}\``
+                    msg += `\nHi Mr. ${wo.name}`
+                    msg += `\n${priClose(context.pri_no)}`
+                    msg += `\n- *Mch:* ${context.mch_no}`
+                    msg += `\n- *Open:* ${dayjs(context.appe_time).format(
+                      'DD/MM/YYYY HH:mm',
+                    )}`
+                    msg += `\n- *Close:* ${dayjs(context.chk_date).format(
+                      'DD/MM/YYYY HH:mm',
+                    )}`
+                    msg += `\n- *Total:* ${dayjs(context.chk_date)
+                      .diff(dayjs(context.appe_time), 'h', true)
+                      .toFixed(1)} hour ⏱`
+                    msg += `\n- *Problem:* ${context.s_memo}`
+                    msg += `\n- *Remarks:* ${context.memo}`
+                    msg += `\n- *Input By:* ${context.appe_user}`
+
+                    sendMsgUser({ number: wo.number, msg: msg })
+                  },
+                  iMsg * x,
+                  x,
+                )
+              })
+            },
+            iPerson * i,
+            i,
+          )
+        })
+      })
+      .catch((err) => console.log(err))
+  },
+
+  async getfetchSparepartGM(props) {
     try {
       await fetchSparepart(props).then((data) => {
         const category = () => {
@@ -249,7 +248,7 @@ export default {
         const isPo = (pros) => {
           switch (pros) {
             case 'Y':
-              return `_(SUDAH PO)_`
+              return `_(ove mk)_`
 
             default:
               return ''
@@ -276,10 +275,10 @@ export default {
             msg += `\n- Stop : ${dayjs(a.h[0].ymd).format('DD/MM/YYYY HH:mm')}`
             msg += `\n- Status Wo : ${isAudit(a.h[0].chk_mark)}`
             msg += `\n> PERMINTAAN :`
-            msg += `\n- No.Permintaan : ${a.h[0].sheet_no}`
+            // msg += `\n- No.Permintaan : ${a.h[0].sheet_no}`
             msg += `\n- Status Permintaan : NAudit❌`
             _.forEach(a.h, (j, h) => {
-              msg += `\n- \`${j.stock}\` ${j.request_qty} ${j.request_uom} *${j.mre_request}*`
+              msg += `\n- \`${j.stock}\` (${j.request_qty} ${j.request_uom}) *${j.mre_request}*`
             })
             msg += `\n> PUR SHEET NO :`
             if (a.i.length == 0)
@@ -294,7 +293,9 @@ export default {
         sendMsgGroup(props.group, msg)
 
         if (props.com == 'GM1' && props.cat == '01') {
-          sendMsgUser({ number: '08170891399', msg: msg })
+          setTimeout(() => {
+            sendMsgUser({ number: '08170891399', msg: msg })
+          }, iPerson)
         }
       })
     } catch (error) {

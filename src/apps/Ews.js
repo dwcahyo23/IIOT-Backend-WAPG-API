@@ -3,7 +3,6 @@ import { Ews } from '../api/models/Ews'
 import config from 'config'
 import _ from 'lodash'
 import axios from 'axios'
-import { format } from 'date-fns'
 
 const sendMsg = async (params) => {
   if (params.type == 'group') {
@@ -51,43 +50,42 @@ export default {
         message: 'Data ews not found',
       })
     }
-    if (error.length === 0) {
-      _.forEach(User, async (field) => {
-        let msg = `*Hello ${field.gender} ${field.name}*\n`
-        msg += `\nThis is critical info from EWS:\n\n`
-        _.forEach(ews, async (record, i) => {
-          msg += `\n*${i + 1}.Customer: ${record.cst_no}* \nPart_no: ${
-            record.part_no
-          } \nPart_name: ${record.part_name} \nQty Order: ${(
-            record.qty_order * 1
-          ).toLocaleString()} \nQty Wdo: ${(
-            record.wdo_qty * 1
-          ).toLocaleString()} \nQty FG: ${(
-            record.fg_qty * 1
-          ).toLocaleString()} \nQty Transit: ${(
-            record.trs_qty * 1
-          ).toLocaleString()} \nQty PK: ${(
-            record.pk_qty * 1
-          ).toLocaleString()} \nQty Wip3: ${(
-            record.wip3_qty * 1
-          ).toLocaleString()} \nQty Wip: ${(
-            record.wip_qty * 1
-          ).toLocaleString()} \nQty Asrs: ${(
-            record.asrs_qty * 1
-          ).toLocaleString()} \nQty Subcon: ${(
-            record.subcon_qty * 1
-          ).toLocaleString()}${
-            record.length - 1 == i
-              ? '\n'
-              : '\n--------------------------------------------'
-          }`
-        })
-        msg += `\nThank you!`
-        sendMsg({ number: field.number, msg: msg })
-      })
-      return { message: 'message EWS sended successfully' }
-    }
+    let iPerson = 5 * 1000 // 5 seconds;
 
-    return error
+    if (error.length === 0) {
+      User.forEach((field, i) => {
+        setTimeout(
+          function (i) {
+            let msg = `*Hello ${field.gender} ${field.name}*\n`
+            msg += `\n> This is critical info from EWS:`
+            _.forEach(ews, async (record, x) => {
+              msg += `\n*${x + 1}. Cust:* ${record.cst_no}`
+              msg += `\n- *Part No: ${record.part_no}`
+              msg += `\n- *Part Name: ${record.part_name}`
+              msg += `\n- *Qty Order: ${(
+                record.qty_order * 1
+              ).toLocaleString()}`
+              msg += `\n- *Qty WDO: ${(record.wdo_qty * 1).toLocaleString()}`
+              msg += `\n- *Qty FG: ${(record.fg_qty * 1).toLocaleString()}`
+              msg += `\n- *Qty Transit: ${(
+                record.trs_qty * 1
+              ).toLocaleString()}`
+              msg += `\n- *Qty PK: ${(record.pk_qty * 1).toLocaleString()}`
+              msg += `\n- *Qty WIP3: ${(record.wip3_qty * 1).toLocaleString()}`
+              msg += `\n- *Qty WIP: ${(record.wip_qty * 1).toLocaleString()}`
+              msg += `\n- *Qty ASRS: ${(record.asrs_qty * 1).toLocaleString()}`
+              msg += `\n- *Qty Subcon: ${(
+                record.subcon_qty * 1
+              ).toLocaleString()}\n`
+            })
+            sendMsg({ number: field.number, msg: msg })
+          },
+          iPerson * i,
+          i,
+        )
+      })
+      return console.log({ message: 'message EWS sended successfully' })
+    }
+    return console.log(error)
   },
 }

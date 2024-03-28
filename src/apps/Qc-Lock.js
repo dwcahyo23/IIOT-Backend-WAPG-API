@@ -1,42 +1,23 @@
 import db from '../api/config/db'
 import { QueryTypes } from 'sequelize'
 import { Mad_qap_locm } from '../api/models/Mad_qap_locm'
-import config from 'config'
 import _ from 'lodash'
 import axios from 'axios'
-import { format } from 'date-fns'
 import dayjs from 'dayjs'
 
-const sendMsg = async (params) => {
-  if (params.type == 'group') {
-    await axios
-      .post('http://192.168.192.7:5010/send-message-group', {
-        name: params.name,
-        message: params.msg,
-      })
-      .then((res) => console.log(res.status))
-      .catch((e) => console.log(e.message))
-  } else {
-    await axios
-      .post('http://192.168.192.7:5010/send-message', {
-        number: params.number,
-        message: params.msg,
-      })
-      .then((res) => console.log(res.status))
-      .catch((e) => console.log(e.message))
-  }
+const sendMsgUser = async (params) => {
+  await axios
+    .post('http://192.168.192.7:5010/send-message', {
+      number: params.number,
+      message: params.msg,
+    })
+    .then((res) => console.log(res.status))
+    .catch((e) => console.log(e.message))
 }
 
 export default {
-  async getLock(params) {
+  async getLock() {
     const error = []
-    const User = _.filter(config.get('ConfigUsers.UserList'), (el) =>
-      _.includes(el.set, 'qc'),
-    )
-
-    const Group = _.filter(config.get('ConfigGroups.GroupList'), (el) =>
-      _.includes(el.set, 'qc'),
-    )
 
     const Lock = await db.query(
       //where +: date(sch_ot.mad_qap_locm.ymd) = CURRENT_DATE and
@@ -66,64 +47,53 @@ export default {
       )
     }
 
-    // if (User.length < 1) {
-    //   error.push({
-    //     message: 'User qc not found',
-    //   })
-    // }
-
     if (Lock.length < 1) {
       error.push({
         message: 'Data qc-lock not found',
       })
     }
 
+    let iPerson = 5 * 1000 // 5 seconds;
+    let iMsg = 2 * 1000 // 2 seconds;
+
+    const user = [
+      { number: '082124610363' },
+      { number: '08170891399' },
+      { number: '081381159279' },
+      { number: '081387503504' },
+    ]
+
     if (error.length === 0) {
-      // _.forEach(User, async (field) => {
-      //   let msg = `*Hello ${field.gender} ${field.name}*`
-      //   msg += `\nThis is the current state of QC-Lock:\n\n`
-      //   _.forEach(Lock, async (record, i) => {
-      //     msg += `\n*${i + 1}. Sheet_no:* ${record.sheet_no}\n*Product:* ${
-      //       record.pdc_name
-      //     }\n*Travel Card:* ${record.bat_card}\n*Fragment:* ${
-      //       record.bat_card_2
-      //     } | ${record.stk_no_2}\n*Problem:* ${record.problem}\n*Standard:* ${
-      //       record.standard
-      //     }\n*Result:* ${record.result}\n`
-      //     upStsLock({ id: record.sheet_no })
-      //   })
-      //   msg += `\n\nThank you and have a nice day!`
-      //   sendMsg({ number: field.number, msg: msg })
-      // })
-
-      _.forEach(Group, async (field) => {
-        let msg = `*QC-Lock Open*\n`
-        _.forEach(Lock, async (record, i) => {
-          msg += `\n> *${i + 1}. Sheet_no:* ${record.sheet_no} ❌`
-          msg += `\n- *Product:* ${record.pdc_name}`
-          msg += `\n- *Travel Card:* ${record.bat_card}`
-          msg += `\n- *Fragment:* ${record.bat_card_2} || ${record.stk_no_2} `
-          msg += `\n- *Date:* ${dayjs(record.appe_time).format(
-            'DD/MM/YYYY HH:mm',
-          )}`
-
-          msg += `\n\n> *Issue:* `
-          msg += `\n- *Problem:* ${record.problem}`
-          msg += `\n- *Standard:* ${record.standard}`
-          msg += `\n- *Result:* ${record.result}`
-          msg += `\n------------------------------------`
-          upStsLock({ id: record.sheet_no })
-        })
-        // msg += `\n\nThank you!`
-        // sendMsg({ name: field.name, msg: msg, type: 'group' })
-        sendMsg({ number: '082124610363', msg: msg, type: 'msg' })
-        sendMsg({ number: '08170891399', msg: msg, type: 'msg' })
-        sendMsg({ number: '081381159279', msg: msg, type: 'msg' })
-        sendMsg({ number: '081387503504', msg: msg, type: 'msg' })
+      let msg
+      _.forEach(Lock, async (record, i) => {
+        msg = `\n> *${i + 1}. Sheet_no:* ${record.sheet_no} ❌`
+        msg += `\n- *Product:* ${record.pdc_name}`
+        msg += `\n- *Travel Card:* ${record.bat_card}`
+        msg += `\n- *Fragment:* ${record.bat_card_2} || ${record.stk_no_2} `
+        msg += `\n- *Date:* ${dayjs(record.appe_time).format(
+          'DD/MM/YYYY HH:mm',
+        )}`
+        msg += `\n\n> *Issue:* `
+        msg += `\n- *Problem:* ${record.problem}`
+        msg += `\n- *Standard:* ${record.standard}`
+        msg += `\n- *Result:* ${record.result}`
+        msg += `\n------------------------------------`
+        upStsLock({ id: record.sheet_no })
       })
 
-      return { message: 'message qc lock sended successfully' }
+      user.forEach((x, i) => {
+        setTimeout(
+          function (i) {
+            sendMsgUser({ number: x.number, msg: msg })
+          },
+          iPerson * i,
+          i,
+        )
+      })
+
+      return console.log({ message: 'message qc lock sended successfully' })
     }
-    return error
+
+    return console.log(error)
   },
 }

@@ -9,136 +9,88 @@ import workOrder from '../maintenance/workOrder'
 export default {
   async getScheduler() {
     //! Job Scheduler Reguler
-    const openJob = schedule.scheduleJob('1 * * * * *', function () {
+    const OpenWO = schedule.scheduleJob('1 * * * * *', function () {
       // !update from user
-      workOrder
-        .getOpen()
-        .then((res) => console.log(res))
-        .catch((err) => console.log(err))
-
-      workOrder
-        .getClose()
-        .then((res) => console.log(res))
-        .catch((err) => console.log(err))
+      workOrder.WorkOrderOpen()
     })
 
-    const getSprarepart1 = schedule.scheduleJob('1 0 8 * * 1-5', function () {
+    const CloseWo = schedule.scheduleJob('20 * * * * *', function () {
+      // !update from user
+      workOrder.WorkOrderClose()
+    })
+
+    //! Remainder Sparepart
+
+    const getSprarepart1 = schedule.scheduleJob('3 0 8 * * 1-5', function () {
       workOrder
-        .getfetchSparepartGM1({
+        .getfetchSparepartGM({
           cat: '01',
           com: 'GM1',
           group: 'GM1 PENANGANAN SPAREPART',
         })
-        .then(() =>
-          workOrder.getfetchSparepartGM1({
-            cat: '03',
-            com: 'GM1',
-            group: 'GM1 PENANGANAN SPAREPART',
-          }),
-        )
         .catch((err) => console.log(err))
+    })
 
+    const getSprarepart2 = schedule.scheduleJob('5 0 8 * * 1-5', function () {
       workOrder
-        .getfetchSparepartGM1({
+        .getfetchSparepartGM({
           cat: '01',
           com: 'GM2',
           group: 'GM2 PENANGANAN SPAREPART',
         })
-        .then(() =>
-          workOrder.getfetchSparepartGM1({
-            cat: '03',
-            com: 'GM2',
-            group: 'GM2 PENANGANAN SPAREPART',
-          }),
-        )
         .catch((err) => console.log(err))
     })
 
-    // const getSprarepart2 = schedule.scheduleJob('1 0 13 * * 1-5', function () {
-    //   workOrder
-    //     .getfetchSparepartGM1({
-    //       cat: '01',
-    //       com: 'GM1',
-    //       group: 'GM1 PENANGANAN SPAREPART',
-    //     })
-    //     .then(() =>
-    //       workOrder.getfetchSparepartGM1({
-    //         cat: '03',
-    //         com: 'GM1',
-    //         group: 'GM1 PENANGANAN SPAREPART',
-    //       }),
-    //     )
-    //     .catch((err) => console.log(err))
-    // })
+    //! Job Scheduler EWS 2H
 
-    const getSprarepart3 = schedule.scheduleJob('1 0 17 * * 1-5', function () {
-      workOrder
-        .getfetchSparepartGM1({
-          cat: '01',
-          com: 'GM1',
-          group: 'GM1 PENANGANAN SPAREPART',
-        })
-        .then(() =>
-          workOrder.getfetchSparepartGM1({
-            cat: '03',
-            com: 'GM1',
-            group: 'GM1 PENANGANAN SPAREPART',
-          }),
-        )
-        .catch((err) => console.log(err))
+    const ews1 = schedule.scheduleJob('15 0 8 * * *', function () {
+      Ews.getCritical()
     })
 
-    // //! Job Scheduler EWS 2H
-    const ews1 = schedule.scheduleJob('1 0 8 * * *', function () {
-      Ews.getCritical().then((res) => console.log(res))
+    const ews2 = schedule.scheduleJob('15 0 10 * * *', function () {
+      Ews.getCritical()
+    })
 
+    const ews3 = schedule.scheduleJob('15 0 13 * * *', function () {
+      Ews.getCritical()
+    })
+
+    const ews4 = schedule.scheduleJob('15 0 15 * * *', function () {
+      Ews.getCritical()
+    })
+
+    const ews5 = schedule.scheduleJob('15 0 17 * * *', function () {
+      Ews.getCritical()
+    })
+
+    //! Job Scheduler QC Lock
+
+    const qclock1 = schedule.scheduleJob('17 0 8 * * *', function () {
       QcLock.getLock()
-        .then((res) => console.log(res))
-        .catch((err) => console.log(err))
     })
 
-    const ews2 = schedule.scheduleJob('1 0 10 * * *', function () {
-      Ews.getCritical().then((res) => console.log(res))
-
+    const qcLock2 = schedule.scheduleJob('17 0 10 * * *', function () {
       QcLock.getLock()
-        .then((res) => console.log(res))
-        .catch((err) => console.log(err))
     })
 
-    const ews3 = schedule.scheduleJob('1 0 13 * * *', function () {
-      Ews.getCritical().then((res) => console.log(res))
-
+    const qclock3 = schedule.scheduleJob('17 0 13 * * *', function () {
       QcLock.getLock()
-        .then((res) => console.log(res))
-        .catch((err) => console.log(err))
     })
 
-    const ews4 = schedule.scheduleJob('1 0 15 * * *', function () {
-      Ews.getCritical().then((res) => console.log(res))
-
+    const qclock4 = schedule.scheduleJob('17 0 15 * * *', function () {
       QcLock.getLock()
-        .then((res) => console.log(res))
-        .catch((err) => console.log(err))
     })
 
-    const ews5 = schedule.scheduleJob('1 0 17 * * *', function () {
-      Ews.getCritical().then((res) => console.log(res))
-
+    const qclock5 = schedule.scheduleJob('1 0 17 * * *', function () {
       QcLock.getLock()
-        .then((res) => console.log(res))
-        .catch((err) => console.log(err))
     })
 
-    schedule.scheduleJob('1 0 19 * * *', function () {
+    const qclock6 = schedule.scheduleJob('1 0 19 * * *', function () {
       QcLock.getLock()
-        .then((res) => console.log(res))
-        .catch((err) => console.log(err))
     })
 
-    schedule.scheduleJob('1 0 21 * * *', function () {
+    const qclock7 = schedule.scheduleJob('1 0 21 * * *', function () {
       QcLock.getLock()
-        .then((res) => console.log(res))
-        .catch((err) => console.log(err))
     })
   },
 }
