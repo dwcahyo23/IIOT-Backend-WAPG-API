@@ -60,21 +60,21 @@ export default {
             msg += `\n> This is critical info from EWS:`
             _.forEach(ews, async (record, x) => {
               msg += `\n*${x + 1}. Cust:* ${record.cst_no}`
-              msg += `\n- *Part No: ${record.part_no}`
-              msg += `\n- *Part Name: ${record.part_name}`
-              msg += `\n- *Qty Order: ${(
+              msg += `\n- *Part No:* ${record.part_no}`
+              msg += `\n- *Part Name:* ${record.part_name}`
+              msg += `\n- *Qty Order:* ${(
                 record.qty_order * 1
               ).toLocaleString()}`
-              msg += `\n- *Qty WDO: ${(record.wdo_qty * 1).toLocaleString()}`
-              msg += `\n- *Qty FG: ${(record.fg_qty * 1).toLocaleString()}`
-              msg += `\n- *Qty Transit: ${(
+              msg += `\n- *Qty WDO:* ${(record.wdo_qty * 1).toLocaleString()}`
+              msg += `\n- *Qty FG:* ${(record.fg_qty * 1).toLocaleString()}`
+              msg += `\n- *Qty Transit:* ${(
                 record.trs_qty * 1
               ).toLocaleString()}`
-              msg += `\n- *Qty PK: ${(record.pk_qty * 1).toLocaleString()}`
-              msg += `\n- *Qty WIP3: ${(record.wip3_qty * 1).toLocaleString()}`
-              msg += `\n- *Qty WIP: ${(record.wip_qty * 1).toLocaleString()}`
-              msg += `\n- *Qty ASRS: ${(record.asrs_qty * 1).toLocaleString()}`
-              msg += `\n- *Qty Subcon: ${(
+              msg += `\n- *Qty PK:* ${(record.pk_qty * 1).toLocaleString()}`
+              msg += `\n- *Qty WIP3:* ${(record.wip3_qty * 1).toLocaleString()}`
+              msg += `\n- *Qty WIP:* ${(record.wip_qty * 1).toLocaleString()}`
+              msg += `\n- *Qty ASRS:* ${(record.asrs_qty * 1).toLocaleString()}`
+              msg += `\n- *Qty Subcon:* ${(
                 record.subcon_qty * 1
               ).toLocaleString()}\n`
             })
