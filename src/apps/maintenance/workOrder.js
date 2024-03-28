@@ -132,6 +132,22 @@ function priClose(prop) {
   if (prop === '07' || prop === '7') return '✅ Project Workshop (Close)'
 }
 
+function comNo(prop) {
+  switch (prop) {
+    case '01':
+      return 'GM1'
+    case '02':
+      return 'GM12'
+    case '03':
+      return 'GM3'
+    case '06':
+      return 'GM5'
+
+    default:
+      return ''
+  }
+}
+
 export default {
   async testProp() {
     return await priClose('04')
@@ -150,7 +166,8 @@ export default {
                     let msg = `${context.sheet_no} \`${context.mch_no}\``
                     msg += `\nHi Mr. ${wo.name}`
                     msg += `\n${priOpen(context.pri_no)}`
-                    msg += `\n- *Mch:* ${context.mch_no}`
+                    msg += `\n- *Mch:* \`${context.mch_no}\` ${context.mch_index?.mch_name}`
+                    msg += `\n- *Com:* ${comNo(context.pri_no)}`
                     msg += `\n- *Open:* ${dayjs(context.appe_time).format(
                       'DD/MM/YYYY HH:mm',
                     )}`
@@ -186,7 +203,8 @@ export default {
                     let msg = `${context.sheet_no} \`${context.mch_no}\``
                     msg += `\nHi Mr. ${wo.name}`
                     msg += `\n${priClose(context.pri_no)}`
-                    msg += `\n- *Mch:* ${context.mch_no}`
+                    msg += `\n- *Mch:* \`${context.mch_no}\` ${context.mch_index?.mch_name}`
+                    msg += `\n- *Com:* ${comNo(context.pri_no)}`
                     msg += `\n- *Open:* ${dayjs(context.appe_time).format(
                       'DD/MM/YYYY HH:mm',
                     )}`
